@@ -40,6 +40,16 @@ nadia-skills/
     │   └── stocks/                     # Yahoo Finance market data, quotes, and equity resolution
     │       ├── SKILL.md
     │       └── scripts/finance_api.py
+    ├── genealogy/
+    │   ├── family-analysis/            # Kinship calculation, MRCA, shared DNA (cM), and pedigree charts
+    │   │   ├── SKILL.md
+    │   │   └── scripts/family_analyzer.py
+    │   ├── gedcom/                     # GEDCOM 5.5/7.0 tree parser, validation, vitals, and anomaly detection
+    │   │   ├── SKILL.md
+    │   │   └── scripts/gedcom_tool.py
+    │   └── record-matching/            # Historical record matching (Census, SSDI), Soundex, and alias scoring
+    │       ├── SKILL.md
+    │       └── scripts/record_matcher.py
     ├── geo/
     │   ├── alltrails/SKILL.md          # Trailhead routing, elevation profiles, and hiking logistics
     │   ├── aviation/SKILL.md           # Flightradar24 live flight tracking and telemetry
