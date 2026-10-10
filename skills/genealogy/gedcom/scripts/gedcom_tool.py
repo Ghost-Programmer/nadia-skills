@@ -588,6 +588,111 @@ class GedcomDatabase:
 
         return potential_dups
 
+    def generate_memory_facts(self) -> List[Dict[str, Any]]:
+        facts = []
+
+        # 1. Tree summary fact
+        summary = self.get_summary()
+        top_surnames_str = ", ".join([f"{item['surname']} ({item['count']})" for item in summary.get("top_surnames", [])])
+        timeline = summary.get("timeline", {})
+        tree_summary_text = (
+            f"Genealogical Family Tree Overview: Contains {summary['total_individuals']} individuals and {summary['total_families']} family units. "
+            f"Timeline spans from {timeline.get('earliest_birth_year', 'Unknown')} to {timeline.get('latest_death_year', 'Unknown')} "
+            f"(average lifespan: {timeline.get('average_lifespan_years', 'N/A')} years). "
+            f"Primary surnames: {top_surnames_str}."
+        )
+        facts.append({
+            "type": "tree_summary",
+            "category": "genealogy",
+            "tags": f"genealogy, family_tree, summary, {', '.join([s['surname'] for s in summary.get('top_surnames', [])[:5]])}",
+            "content": tree_summary_text
+        })
+
+        # 2. Individual facts
+        for indi_id, indi in self.individuals.items():
+            name = indi["name"]
+            given = indi.get("given_name", "")
+            surn = indi.get("surname", "")
+            sex_str = "Male" if indi.get("sex") == "M" else ("Female" if indi.get("sex") == "F" else "Unknown")
+
+            birth = indi.get("birth")
+            death = indi.get("death")
+            b_str = f"Born: {birth['date']} in {birth['place']}" if birth and (birth.get('date') or birth.get('place')) else "Birth date/place unrecorded"
+            d_str = f"Died: {death['date']} in {death['place']}" if death and (death.get('date') or death.get('place')) else ("Death date/place unrecorded" if death else "Living or death unrecorded")
+
+            parents = self.get_parents(indi_id)
+            parents_str = ", ".join([f"{p['name']} ({p['id']})" for p in parents]) if parents else "None recorded"
+
+            spouses = self.get_spouses(indi_id)
+            spouses_str = ", ".join([f"{s['name']} ({s['id']})" for s in spouses]) if spouses else "None recorded"
+
+            children = self.get_children_of_individual(indi_id)
+            children_str = ", ".join([f"{c['name']} ({c['id']})" for c in children]) if children else "None recorded"
+
+            siblings = self.get_siblings(indi_id)
+            siblings_str = ", ".join([f"{b['name']} ({b['id']})" for b in siblings]) if siblings else "None recorded"
+
+            res_list = [f"{r['date']} at {r['place']}" for r in indi.get("residences", []) if r.get("date") or r.get("place")]
+            res_str = f" Residences: {'; '.join(res_list)}." if res_list else ""
+            occ_str = f" Occupations: {', '.join(indi.get('occupations', []))}." if indi.get("occupations") else ""
+
+            fact_content = (
+                f"Genealogical Individual Record: {name} (ID: {indi_id}, Sex: {sex_str}). "
+                f"{b_str}. {d_str}. "
+                f"Parents: {parents_str}. "
+                f"Spouse(s): {spouses_str}. "
+                f"Children: {children_str}. "
+                f"Siblings: {siblings_str}."
+                f"{occ_str}{res_str}"
+            )
+
+            tags = [t for t in ["genealogy", "individual", surn.lower() if surn else None, given.lower() if given else None, indi_id.lower()] if t]
+
+            facts.append({
+                "type": "individual_record",
+                "individual_id": indi_id,
+                "name": name,
+                "category": "genealogy",
+                "tags": ", ".join(tags),
+                "content": fact_content
+            })
+
+        # 3. Family units facts
+        for fam_id, fam in self.families.items():
+            h = self.get_individual(fam["husband_id"]) if fam.get("husband_id") else None
+            w = self.get_individual(fam["wife_id"]) if fam.get("wife_id") else None
+            h_name = f"{h['name']} ({h['id']})" if h else "Unknown Husband"
+            w_name = f"{w['name']} ({w['id']})" if w else "Unknown Wife"
+
+            marr = fam.get("marriage")
+            m_str = f"Married: {marr['date']} in {marr['place']}" if marr and (marr.get('date') or marr.get('place')) else "Marriage unrecorded"
+
+            children = [self.get_individual(cid) for cid in fam.get("children_ids", []) if self.get_individual(cid)]
+            c_str = ", ".join([f"{c['name']} ({c['id']})" for c in children]) if children else "No children recorded"
+
+            fam_content = (
+                f"Genealogical Family Unit: {fam_id}. Husband: {h_name}. Wife: {w_name}. "
+                f"{m_str}. Children: {c_str}."
+            )
+
+            surnames_in_fam = set()
+            if h and h.get("surname"):
+                surnames_in_fam.add(h["surname"].lower())
+            if w and w.get("surname"):
+                surnames_in_fam.add(w["surname"].lower())
+
+            tags = ["genealogy", "family_unit", fam_id.lower()] + list(surnames_in_fam)
+
+            facts.append({
+                "type": "family_unit",
+                "family_id": fam_id,
+                "category": "genealogy",
+                "tags": ", ".join(tags),
+                "content": fam_content
+            })
+
+        return facts
+
 
 def main():
     parser = argparse.ArgumentParser(description="Nadia GEDCOM Parser & Genealogy Tool")
@@ -597,6 +702,11 @@ def main():
     p_parse = subparsers.add_parser("parse", help="Parse a GEDCOM file and output raw JSON structure")
     p_parse.add_argument("--file", required=True, help="Path to .ged file")
     p_parse.add_argument("--output", help="Optional output JSON file path")
+
+    # memory-facts
+    p_mem = subparsers.add_parser("memory-facts", help="Extract semantically dense RAG memory facts for vector store ingestion")
+    p_mem.add_argument("--file", required=True, help="Path to .ged file")
+    p_mem.add_argument("--output", help="Optional output JSON file path")
 
     # summary
     p_sum = subparsers.add_parser("summary", help="Generate statistical summary of GEDCOM dataset")
@@ -666,6 +776,18 @@ def main():
             with open(args.output, "w", encoding="utf-8") as out:
                 json.dump(result, out, indent=2)
             print(json.dumps({"status": "SUCCESS", "saved_to": args.output, "total_individuals": len(db.individuals)}))
+            return
+
+    elif args.command == "memory-facts":
+        facts = db.generate_memory_facts()
+        result = {
+            "total_facts": len(facts),
+            "facts": facts
+        }
+        if args.output:
+            with open(args.output, "w", encoding="utf-8") as out:
+                json.dump(result, out, indent=2)
+            print(json.dumps({"status": "SUCCESS", "saved_to": args.output, "total_facts": len(facts)}))
             return
 
     elif args.command == "summary":
