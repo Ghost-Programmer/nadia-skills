@@ -18,12 +18,13 @@ This skill guides the agent in authoring, structuring, and formatting new proced
 
 ## 1. Skill Architecture & File Layout
 
-All procedural skills are stored under the `./skills/` root directory:
+All procedural skills are stored under the `~/.nadia/skills/` directory (categorized by domain):
 
 ```
-./skills/
-  └── <skill-name-kebab-case>/
-        └── SKILL.md
+~/.nadia/skills/
+  └── <category>/
+        └── <skill-name-kebab-case>/
+              └── SKILL.md
 ```
 
 - **Folder Naming**: Use lowercase kebab-case naming (e.g. `data-sync`, `cloud-deploy`, `code-review`).
@@ -103,5 +104,5 @@ Overview of the cognitive skill's purpose and scope.
 When the user asks to create, draft, or design a new skill:
 
 1. **Display Complete Markdown in Chat**: Always present the full, production-ready `SKILL.md` content inside a formatted markdown code block (` ```markdown ... ``` `) directly in your chat response.
-2. **Interactive Save Capability**: Inform the user they can copy the content, double-click the message bubble to open the detail viewer and click **Save As**, or instruct you to write it directly into `./skills/<skill-name>/SKILL.md`.
+2. **Interactive Save Capability**: Inform the user they can copy the content, double-click the message bubble to open the detail viewer and click **Save As**, or instruct you to write it directly into `~/.nadia/skills/<category>/<skill-name>/SKILL.md`.
 3. **Verify Compliance**: Ensure the generated skill contains valid YAML frontmatter, non-empty name/description, and structured markdown instructions.
