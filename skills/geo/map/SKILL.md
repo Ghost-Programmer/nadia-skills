@@ -8,6 +8,17 @@ tools: [showMap, plotObject, setFlag, clearMap]
 
 Provides capabilities to view coordinates of objects and flags on an interactive World Map powered by Google Maps roadmap layers.
 
+## Setup Instructions
+
+- **JavaFX Map Component**:
+  - Requires JavaFX WebView and WebEngine components enabled in the runtime.
+- **Network Tile Access**:
+  - Outbound internet access to map tile providers (Google Maps / OpenStreetMap) on port 80/443.
+- **Tool Registrations**:
+  - `showMap`, `plotObject`, `setFlag`, and `clearMap` registered in `ToolRegistry`.
+
+---
+
 ## Guidelines
 
 1. **Viewing the Map**:

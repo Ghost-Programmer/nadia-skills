@@ -114,3 +114,23 @@ gws drive files delete --params '{"fileId": "<DOCUMENT_ID>"}'
 ```bash
 gws drive files delete --params '{"fileId": "doc_id_12345"}'
 ```
+
+## Setup Instructions
+
+### 1. Prerequisites & CLI Installation
+- **gws CLI**: The Google Workspace CLI utility (`gws`) must be installed and accessible on system `PATH`.
+- **Runtime**: Ensure Node.js or the native runtime required by `gws` is available.
+
+### 2. Google Workspace Authentication & Permissions
+- **Google Cloud APIs**: Enable both the **Google Docs API** (`https://www.googleapis.com/auth/documents`) and **Google Drive API** (`https://www.googleapis.com/auth/drive`) in Google Cloud Console.
+- **Authentication**:
+  1. Authenticate `gws` with your Google account:
+     ```bash
+     gws auth login
+     ```
+  2. Verify document creation or retrieval access:
+     ```bash
+     gws docs documents create --json '{"title": "Test Doc"}'
+     ```
+- **Drive Deletion Permissions**: Google Docs files are stored in Google Drive; deletion operations require full Google Drive API write permissions.
+

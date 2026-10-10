@@ -89,3 +89,14 @@ Use the following layout structure to compile multi-domain executive briefs:
 - **Database**: Connected (PostgreSQL, 1.2 ms latency)
 - **Fleet**: 3D Printer Idle (100% Ready)
 ```
+
+## Setup Instructions
+
+### 1. Prerequisites & Storage
+- **Nadia Persistence**: Brief entries are stored in Nadia's internal `brief_entry` relational database table managed automatically by Spring Data JPA / `BriefService`.
+- **Spring AI Tools**: The tools `storeBriefEntry`, `appendBriefEntry`, `getBriefEntries`, `deleteBriefEntry`, and `clearBriefEntries` are registered in the Spring AI tool registry by default.
+
+### 2. Scheduled Briefings (Optional)
+- **Morning Brief Cron**: To automate executive briefs, configure a scheduled cron trigger in Nadia or `application.yml` (e.g., `cron: "0 0 8 * * *"`).
+- **Domain Feed Ingestion**: Ensure peripheral skills (e.g. `blogwatcher`, `weather`, `stocks`, `email`) are configured if aggregated briefings across domains are desired.
+

@@ -8,6 +8,14 @@ tools: [startProject, stopProject, deleteProject, listProjects]
 
 This skill guides the agent in managing multiple project workspaces, sandboxing commands, and switching active directories.
 
+## Setup Instructions
+
+- **Prerequisites**: Ensure `startProject`, `stopProject`, `deleteProject`, and `listProjects` tools are registered in `ToolRegistry`.
+- **Directory Permissions**: Sandbox root directory `./session/projects/` (or `~/.nadia/session/projects/`) must have read, write, and directory creation permissions.
+- **Database Tracking**: Relational database connection active if project metadata persistence is enabled in `application.yml`.
+
+---
+
 ## Project Workspace Sandboxing
 
 Nadia supports sandboxed project workspaces. When a project is started, the workspace context is changed from `./session` to `./session/projects/[Project Name]`.

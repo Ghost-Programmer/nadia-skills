@@ -8,6 +8,12 @@ tools: []
 
 Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.
 
+## Setup Instructions
+
+- **Prerequisites**: Ensure an active Nadia interactive chat session with multi-turn conversation support.
+- **Configuration**: No external binaries, third-party libraries, or API credentials required.
+- **Workflow Mode**: Operates directly through conversational prompts and structured question rounds; uses system chat memory to track the decision frontier.
+
 ---
 
 ## 1. The Design Tree & Round Execution

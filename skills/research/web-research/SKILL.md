@@ -153,3 +153,14 @@ Deliver a polished Markdown report structured as follows:
 2. **Zero Speculation**: Do not invent facts or extrapolate beyond what was retrieved from search and scrape operations.
 3. **No Conversational Filler**: Immediately execute tools without preamble.
 4. **Clean Markdown**: Use standard Markdown headings, lists, tables, and callouts (`> [!NOTE]`, `> [!TIP]`).
+
+## Setup Instructions
+
+### 1. Prerequisites & Tool Configuration
+- **Search Provider**: Ensure search backend connectivity (e.g., SearxNG, DuckDuckGo, Google Custom Search, or Spring AI search tool bindings) is configured in Nadia environment or `application.yml`.
+- **Browser Automation (Optional Fallback)**: For JavaScript-heavy pages requiring DOM snapshots, ensure Playwright / Chromium or Selenium binaries are configured.
+
+### 2. Output Storage
+- **Artifacts Directory**: Research reports saved via `write_to_file` should be placed in `./session/brain/` (e.g. `./session/brain/<topic_report>.md`).
+- **Memory & Briefs**: Requires active PostgreSQL / PGVector connection for long-term fact storage and relational brief tables.
+

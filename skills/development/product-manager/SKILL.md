@@ -8,6 +8,17 @@ tools: [startProject, stopProject, listProjects, storeBriefEntry, appendBriefEnt
 
 This skill guides agents in discovering market trends, conducting deep product teardowns for applications and games, formulating comprehensive **Product Specifications (PRDs / App Specs)** in `doc/spec/`, and orchestrating the software development backlog across the Software Development Group (`@UI Designer`, `@Software Architect`, `@Software Engineer`, `@Quality Engineer`).
 
+## Setup Instructions
+
+- **Project Sandbox & Permissions**:
+  - Project sandbox directory `./session/projects/` writable.
+  - Sub-process execution permissions enabled for `executeSessionCommand`.
+- **Kanban Board & Briefs**:
+  - `KanbanTool` (`createKanbanCard`, `moveKanbanCard`, `getKanbanBoard`) registered in `ToolRegistry`.
+  - `storeBriefEntry` registered for recording project discovery logs and TODOs.
+- **Nightly Cron (Optional)**:
+  - Scheduled job `recurring-4d82e19f` configured in `ScheduledJobManager` for automated trending product discovery sweeps.
+
 ---
 
 ## 1. App & Game Market Trend Analysis Workflow

@@ -21,3 +21,14 @@ The tool saves check state facts inside the episodic (RAG) memory under the `blo
    - Logs the summary as a brief entry under the `news` category.
    - Updates RAG memory with the new latest post ID.
 4. Report the summary of the check results to the user.
+
+## Setup Instructions
+
+### 1. Prerequisites & Outbound Connectivity
+- **Network Access**: Nadia requires outbound HTTP/HTTPS access to probe target websites and fetch RSS/Atom XML feeds.
+- **RAG & Brief Storage**: Ensure episodic memory (PGVector or local vector store) and relational brief tables are initialized.
+
+### 2. Feed State Tracking
+- **Automatic State Storage**: The `watchBlog` tool automatically creates and updates `blog_watcher_state` memory records tracking the latest post GUIDs. No manual configuration is required.
+- **Scheduled Checks**: If recurring monitoring is desired, register a cron trigger in Nadia (e.g., every 6 hours).
+

@@ -10,6 +10,22 @@ This skill instructs the agent on how to look up financial data, retrieve ticker
 
 The finance service is implemented as a Python script located at `./skills/finance/scripts/finance_api.py`.
 
+## Setup Instructions
+
+- **Python Runtime & Dependencies**:
+  - Python 3.10+ installed and on system `PATH`.
+  - Install required Python dependencies:
+    ```bash
+    pip install requests
+    ```
+- **Script Location**:
+  - Script located at `./skills/finance/scripts/finance_api.py`.
+- **API & Network**:
+  - Outbound internet access to Yahoo Finance query APIs (`https://query1.finance.yahoo.com`).
+  - Optional: Set `YAHOO_FINANCE_API_KEY` if using private or proxy finance gateways.
+
+---
+
 ## Operational Workflow
 
 When the user requests stock prices, market quotes, or historical financial charts for a company or fund name (instead of providing a direct ticker symbol like AAPL or MSFT):

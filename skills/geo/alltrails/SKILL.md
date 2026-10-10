@@ -8,6 +8,16 @@ tools: []
 
 This skill provides instructions for the agent when users query outdoor trails, hiking paths, backpacking routes, trail difficulty, elevation profiles, trail reviews, and current route conditions.
 
+## Setup Instructions
+
+- **AllTrails MCP Server Connection**:
+  - Configure the AllTrails MCP server endpoint in `application.yml` or `mcp_config.json` (defaults to `https://www.alltrails.com/mcp` or local MCP sidecar).
+  - Outbound internet access to AllTrails endpoints.
+- **Optional API Credentials**:
+  - Set `ALLTRAILS_API_KEY` or MCP bearer token if using authenticated premium features.
+
+---
+
 ## Model Context Protocol (MCP) Integration
 
 AllTrails is integrated dynamically as a Spring AI MCP Client connected to `https://www.alltrails.com/mcp`.

@@ -8,6 +8,18 @@ tools: [startProject, stopProject, listProjects, switchProjectBranch, executeSes
 
 This skill guides agents in implementing complete, full-stack features, components, and applications across **Android**, **JavaFX**, **Angular**, and **Java / Spring Boot** within Nadia's sandboxed project workspaces, adhering to specifications from `@Product Manager`, wireframes from `@UI Designer`, and architecture contracts from `@Software Architect`.
 
+## Setup Instructions
+
+- **SDK & Build Toolchains**:
+  - JDK 21+ / 23+ configured on system `PATH` with `JAVA_HOME` set.
+  - Gradle (`./gradlew` / `gradlew.bat`) or Maven (`mvn`) available.
+  - Node.js 18+ and npm installed for Angular/TypeScript frontends.
+  - Android SDK (or `android` CLI tool) configured for Android Gradle builds.
+- **Antigravity CLI**:
+  - Antigravity CLI (`agy`) binary available on `PATH` for multi-file generation and refactoring.
+- **Docker Environment (Optional)**:
+  - Docker daemon running if services require containerized databases or backend microservices.
+
 ---
 
 ## 1. Feature Implementation & Build Pipeline

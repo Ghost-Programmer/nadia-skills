@@ -125,3 +125,17 @@ Use `dockerRunContainer` to launch a new container in detached (`-d`) mode:
 │    dockerRestartContainer     │ ──► Restart or fix via dockerRunContainer
 └───────────────────────────────┘
 ```
+
+## Setup Instructions
+
+### 1. Prerequisites & Docker Daemon
+- **Docker Engine / Desktop**: Docker must be installed and running on the host machine.
+- **Daemon Socket / Pipe Configuration**:
+  - **Linux / macOS**: Ensure the Unix socket at `/var/run/docker.sock` is accessible with appropriate read/write permissions for the Nadia process.
+  - **Windows**: Ensure the Windows named pipe `//./pipe/docker_engine` is enabled or TCP daemon listening on `tcp://localhost:2375`.
+- **Nadia Docker Client**: Nadia utilizes standard Docker Java client libraries (`DockerTool`) to communicate with the daemon.
+
+### 2. Permissions & Container Resource Constraints
+- **User Groups**: On Linux environments, ensure the running user is added to the `docker` user group (`sudo usermod -aG docker $USER`).
+- **Resource Allocations**: Ensure Docker Engine has sufficient CPU, memory, and disk space allocated for running development sandboxes, databases, and microservices.
+

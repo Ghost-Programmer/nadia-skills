@@ -10,6 +10,22 @@ This skill instructs the agent on how to retrieve the current weather and hourly
 
 The weather service is implemented as a Python script located at `./skills/weather/scripts/weather.py`. It integrates with the geocoding service at `./skills/location/scripts/geocoding.py` to resolve address queries into coordinates and look up the country code to dynamically select Fahrenheit (°F) or Celsius (°C).
 
+## Setup Instructions
+
+- **Python Runtime & Dependencies**:
+  - Python 3.10+ installed and on system `PATH`.
+  - Install required Python package:
+    ```bash
+    pip install requests
+    ```
+- **Script Location**:
+  - Weather script located at `./skills/weather/scripts/weather.py` (or `./skills/geo/weather/scripts/weather.py`).
+- **Network & API Access**:
+  - Open-Meteo public API (`https://api.open-meteo.com`) requires no API key.
+  - Outbound internet access on port 80/443.
+
+---
+
 ## Temperature and Precipitation Unit Determination
 
 - **Fahrenheit (°F) and Inches (in)**: Used automatically for locations in the United States (`us`), Liberia (`lr`), Myanmar (`mm`), Bahamas (`bs`), Belize (`bz`), Cayman Islands (`ky`), and Palau (`pw`).

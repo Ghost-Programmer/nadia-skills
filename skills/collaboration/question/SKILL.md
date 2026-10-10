@@ -8,6 +8,12 @@ tools: [storeBriefEntry, appendBriefEntry]
 
 Turn something you cannot answer alone into a **discovery questionnaire**: a structured Markdown document to hand to a specific person to fill in asynchronously, or to work through together during a meeting. The recipient holds knowledge the user lacks; the questionnaire extracts it cleanly and efficiently.
 
+## Setup Instructions
+
+- **Prerequisites**: Ensure `storeBriefEntry` and `appendBriefEntry` tools are registered in Nadia's `ToolRegistry`.
+- **Configuration**: Active session workspace folder or project directory with write permissions for storing `to-questionnaire-<slug>.md` files.
+- **Brief Integration**: System Briefing database table or in-memory brief service configured to record pending discovery questionnaires.
+
 ---
 
 ## 1. The Interview Workflow: "Grill the Send, Not the Subject"

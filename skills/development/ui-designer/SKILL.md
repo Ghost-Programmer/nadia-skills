@@ -8,6 +8,16 @@ tools: [generateDiagram, renderMermaidDiagram, getWhiteboardDiagramState, cluste
 
 This skill guides agents in translating product specifications and user requirements into state-of-the-art **User Interface designs** across **Android**, **JavaFX**, and **Angular**, using Nadia's interactive **Whiteboard** (`.whiteboard`) and diagramming tools to generate visual wireframes, component layouts, screen flow mockups, design tokens, and state transition maps.
 
+## Setup Instructions
+
+- **Whiteboard & Diagram Tools**:
+  - `generateDiagram`, `renderMermaidDiagram`, `getWhiteboardDiagramState`, and `clusterWhiteboardNodes` registered in `ToolRegistry`.
+  - JavaFX Whiteboard canvas enabled in the Nadia UI.
+- **Antigravity CLI**:
+  - Antigravity CLI (`agy`) binary installed on `PATH` for programmatic `.whiteboard` JSON wireframe model generation.
+- **Project Sandbox**:
+  - Active project sandbox directory `./session/projects/<projectName>/` writable for `<projectName>-ui-design.whiteboard` files.
+
 ---
 
 ## 1. Interactive Whiteboard Wireframing Workflow

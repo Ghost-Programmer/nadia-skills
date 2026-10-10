@@ -140,3 +140,23 @@ gws drive +upload <local_file_path> [flags]
 ```bash
 gws drive +upload "./data.csv" --parent "folder_id_12345" --name "Q3 Sales Data.csv"
 ```
+
+## Setup Instructions
+
+### 1. Prerequisites & CLI Installation
+- **gws CLI**: The Google Workspace CLI (`gws`) must be installed and executable on system `PATH`.
+- **Runtime**: Node.js or native executable for the `gws` CLI.
+
+### 2. Google Drive API Configuration
+- **Google Cloud Console**: Enable the **Google Drive API** (`https://www.googleapis.com/auth/drive` or `https://www.googleapis.com/auth/drive.file`).
+- **OAuth Authentication**:
+  1. Authenticate with Google Drive scopes:
+     ```bash
+     gws auth login
+     ```
+  2. Verify Drive access by listing recent active files:
+     ```bash
+     gws drive files list --params '{"pageSize": 5, "trashed": false}' --format table
+     ```
+- **Export Formats**: Standard MIME types (`text/plain`, `application/pdf`, `text/csv`, `text/html`) are supported for Google Docs, Sheets, and Slides exports.
+

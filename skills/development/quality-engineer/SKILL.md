@@ -8,6 +8,18 @@ tools: [startProject, listProjects, executeSessionCommand, dockerListContainers,
 
 This skill guides agents in creating comprehensive **Test Plans** in `doc/test/` or `TEST_PLAN.md`, generating automated test suites, running test executions across **Android**, **JavaFX**, **Angular**, and **Java / Spring Boot** within project sandboxes, diagnosing test failures, and managing bug triage.
 
+## Setup Instructions
+
+- **Build Tools & Runtimes**:
+  - JDK 21+ / 23+ configured on system `PATH` with `JAVA_HOME` set.
+  - Gradle (`./gradlew` / `gradlew.bat`) or Maven (`mvn`) available in project repositories.
+  - Node.js 18+ and npm installed for Angular/web projects.
+  - Android SDK (or `android` CLI plugin) configured if running Android instrumented/unit tests.
+- **Docker & Testcontainers (Optional)**:
+  - Docker Desktop / Engine running for Testcontainers integration tests.
+- **Project Sandbox**:
+  - Sandbox directory `./session/projects/` writable for test reports in `doc/test/` and `build/reports/`.
+
 ---
 
 ## 1. Test Planning & Execution Pipeline

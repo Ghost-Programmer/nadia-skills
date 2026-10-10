@@ -10,6 +10,17 @@ This skill provides guidelines and instructions for delegating complex coding, r
 
 All `agy` commands are executed inside the `./session` sandbox directory (or active project folder under `./session/projects/...`) using the `executeSessionCommand` tool.
 
+## Setup Instructions
+
+- **Antigravity CLI Binary**:
+  - Install the Antigravity CLI (`agy`) binary and ensure it is available on system `PATH`.
+  - Typical installation paths: `~/.antigravity/bin/agy` or `C:\Users\<user>\.gemini\antigravity-ide\bin\agy.cmd`.
+- **Permissions & Sandbox**:
+  - Ensure execution permissions for running sub-processes via `executeSessionCommand`.
+  - Target project sandbox directory `./session/` must exist and be writable.
+- **Authentication**:
+  - Verify AGY CLI authentication (`agy auth login` or active Google Cloud / DeepMind credentials profile).
+
 ---
 
 ## Execution Guidelines

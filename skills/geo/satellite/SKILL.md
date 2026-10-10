@@ -8,6 +8,18 @@ tools: [trackSatellites, startContinuousSatelliteTracking, stopContinuousSatelli
 
 Provides capabilities to query live satellite locations, configure automatic orbit tracking loops, and plot satellite trajectories on the World Map.
 
+## Setup Instructions
+
+- **Map Viewer Prerequisite**:
+  - World Map Viewer window must be active (call `showMap()` or open Map tab in Nadia).
+- **N2YO API Integration**:
+  - Outbound internet access to N2YO API (`https://api.n2yo.com/rest/v1/satellite/`).
+  - Configure `N2YO_API_KEY` in `application.yml` under `nadia.satellite.n2yo-api-key` or via system environment variables.
+- **Tracking Rate Limits**:
+  - Continuous tracking intervals should be configured for 30+ seconds to respect N2YO query quotas.
+
+---
+
 ## Guidelines
 
 1. **Prerequisite - Map Open**:

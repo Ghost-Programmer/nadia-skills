@@ -8,6 +8,12 @@ tools: [openHandoffChatWindow]
 
 This skill provides instructions for compacting and summarizing an ongoing conversation or task into a structured handoff document and opening a new chat window with the document attached for a subsequent agent session to continue without loss of context.
 
+## Setup Instructions
+
+- **Prerequisites**: Ensure the `openHandoffChatWindow` tool is registered in Nadia's `ToolRegistry`.
+- **File Permissions**: Write permissions enabled for the OS temporary directory (`%TEMP%` on Windows, `/tmp` on Linux/macOS, or JVM system property `java.io.tmpdir`).
+- **Configuration**: Ensure multi-window or dockable workspace support is enabled in the JavaFX Workspace Canvas (`WorkspaceCanvas`).
+
 ---
 
 ## 1. Storage Location

@@ -66,3 +66,24 @@ When querying or creating posts and pages, the following `status` values are sup
 - `private`: The post is private (visible only to authorized roles).
 - `trash`: The post has been sent to the trash.
 - `any`: Used as a query filter to retrieve posts/pages of any status.
+
+## Setup Instructions
+
+### 1. Prerequisites
+- **Python Runtime**: Python 3.8 or higher installed and accessible on system `PATH`.
+- **Python Dependencies**: Install the required `requests` library:
+  ```bash
+  pip install requests
+  ```
+- **Script Location**: Ensure `wordpress_api.py` exists at `./skills/wordpress/scripts/wordpress_api.py`.
+
+### 2. WordPress Configuration & Authentication
+- **REST API Support**: Standard WordPress 4.7+ with REST API enabled.
+- **Application Password**:
+  1. Log in to the WordPress Admin dashboard.
+  2. Navigate to **Users** -> **Profile** (or **Edit User** for administrator/author accounts).
+  3. Scroll to the **Application Passwords** section.
+  4. Enter a name (e.g., `Nadia-CLI`) and click **Add New Application Password**.
+  5. Copy the generated 24-character token (`xxxx xxxx xxxx xxxx xxxx xxxx`).
+- **Permissions**: The associated WordPress user account must have sufficient capabilities (e.g., `edit_posts`, `publish_posts`, `upload_files`) for the desired actions.
+

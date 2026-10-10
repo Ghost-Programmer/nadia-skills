@@ -8,7 +8,20 @@ tools: [run_command]
 
 This skill provides the capability to resolve addresses to coordinates (geocoding), resolve coordinates to addresses (reverse geocoding), translate unique place IDs, execute structured location matching, decode Open Location Code (OLC) Plus Codes, get landmark context descriptors, and determine map rendering boundaries.
 
-These services are implemented as a self-contained, zero-dependency Python script located at [`geocoding.py`](file:///e:/nadia/skills/location/scripts/geocoding.py).
+These services are implemented as a self-contained, zero-dependency Python script located at `./skills/location/scripts/geocoding.py`.
+
+## Setup Instructions
+
+- **Python Runtime**:
+  - Python 3.10+ installed and on system `PATH`.
+  - Self-contained script using Python standard libraries (optional: `urllib.request` / `json`).
+- **Script Location**:
+  - Ensure `./skills/location/scripts/geocoding.py` (or `./skills/geo/location/scripts/geocoding.py`) exists and is executable.
+- **Network & API Keys**:
+  - Outbound internet access to OpenStreetMap / Nominatim / IP geolocation APIs.
+  - Optional: Set `GEOCODING_API_KEY` or `IPINFO_TOKEN` if using private geocoding providers.
+
+---
 
 ## Execution Guidelines
 

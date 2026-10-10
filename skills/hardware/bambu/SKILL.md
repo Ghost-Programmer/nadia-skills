@@ -8,6 +8,17 @@ tools: [listPrinters, getPrinterStats, startPrinterMonitor, startPrintJob, stopP
 
 This skill guides the agent in listing local Bambu printers, fetching telemetry and print metrics, analyzing HMS diagnostic hardware alerts, controlling active print jobs (start, stop, pause, resume), and initiating live visual dashboard monitor windows in the Nadia workspace.
 
+## Setup Instructions
+
+- **Network & Connectivity**:
+  - Bambu 3D Printer (X1-Carbon, P1P, P1S, A1) powered on and connected to the local LAN.
+  - MQTT port 8883 (TLS) accessible from host to printer IP.
+- **Printer Configuration**:
+  - Configure printer IP Address, Serial Number, and Access Code (available on printer LCD under Settings -> Network).
+  - Set `BAMBU_PRINTER_IP` and `BAMBU_ACCESS_CODE` in `application.yml` or `~/.nadia/config.json`.
+- **LAN Only Mode**:
+  - Optional: Enable "LAN Only Mode" on the printer for 100% cloud-free local control.
+
 ---
 
 ## 1. Listing & Discovering 3D Printers

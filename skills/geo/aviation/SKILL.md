@@ -8,6 +8,18 @@ tools: [trackPlanes, startContinuousPlaneTracking, stopContinuousPlaneTracking, 
 
 Provides capabilities to query live aircraft locations, configure automatic flight tracking loops, and plot plane trajectories on the World Map.
 
+## Setup Instructions
+
+- **Map Viewer Prerequisite**:
+  - World Map Viewer window must be active (call `showMap()` or open Map tab in Nadia).
+- **OpenSky Network Access**:
+  - Outbound internet access to OpenSky Network API (`https://opensky-network.org/api`).
+  - Optional: Set `OPENSKY_USERNAME` and `OPENSKY_PASSWORD` in `application.yml` for higher authenticated rate limits. Anonymous requests are subject to public rate limits.
+- **Recommended Intervals**:
+  - Continuous tracking intervals should be set to 15–30 seconds to avoid HTTP 429 rate limit throttling.
+
+---
+
 ## Guidelines
 
 1. **Prerequisite - Map Open**:

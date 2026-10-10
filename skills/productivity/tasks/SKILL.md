@@ -127,3 +127,23 @@ gws tasks tasks move --params '{"tasklist": "<src_list_id>", "task": "<task_id>"
   ```bash
   gws tasks tasks move --params '{"tasklist": "list123", "task": "task456", "destinationTasklist": "list789"}'
   ```
+
+## Setup Instructions
+
+### 1. Prerequisites & CLI Installation
+- **gws CLI**: The Google Workspace CLI (`gws`) must be installed and executable on system `PATH`.
+- **Runtime**: Ensure Node.js or the required executable for `gws` is installed.
+
+### 2. Google Tasks API Configuration
+- **Google Cloud API**: Enable the **Google Tasks API** (`https://www.googleapis.com/auth/tasks`) in Google Cloud Console.
+- **Authentication**:
+  1. Authenticate `gws` with your Google account:
+     ```bash
+     gws auth login
+     ```
+  2. Verify access by listing task lists:
+     ```bash
+     gws tasks tasklists list --format table
+     ```
+- **Due Date Format**: The Google Tasks API strictly requires RFC 3339 formatted date-time strings (e.g., `2026-08-30T12:00:00Z`).
+

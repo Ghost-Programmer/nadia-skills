@@ -7,6 +7,19 @@ tools: [discoverHueBridges, pairHueBridge, listHueLights, setHueLightState, list
 
 Use this skill when interacting with smart home lighting, managing Philips Hue Bridges, adjusting room illumination, setting scene colors, or triggering visual alert flashes for build notifications, alarms, and focus modes.
 
+## Setup Instructions
+
+- **Bridge Network Connectivity**:
+  - Philips Hue Bridge connected to the same local subnet as Nadia.
+  - HTTP port 80 / HTTPS port 443 open on the Bridge.
+- **Initial Pairing**:
+  - Call `discoverHueBridges` to locate the bridge IP.
+  - Press the physical link button on top of the bridge, then invoke `pairHueBridge(bridgeIp)` within 30 seconds to generate and persist the `HUE_APPLICATION_KEY`.
+- **Configuration**:
+  - Credentials saved in `~/.nadia/config.json` or `application.yml` under `nadia.hue.application-key`.
+
+---
+
 ## Guidelines
 
 1. **Bridge Discovery & Authentication**:

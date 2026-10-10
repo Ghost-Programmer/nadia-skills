@@ -8,6 +8,21 @@ tools: [flashHueAlert, setHueLightState, sendSlackNotification, getSlackNotifica
 
 This skill provides a unified interface for notifying the User of system events, task completions, scheduled job runs, or critical errors across digital channels (Chat, Slack, Briefs) and physical smart environments (Philips Hue Smart Lighting).
 
+## Setup Instructions
+
+- **Slack Integration**:
+  - Set `SLACK_BOT_TOKEN` or `SLACK_WEBHOOK_URL` in your environment or `~/.nadia/config.json`.
+  - Ensure the bot is invited to target notification channels (e.g. `/invite @Nadia`).
+  - Configure default channel in `application.yml` via `nadia.slack.default-channel` (defaults to `#notifications`).
+- **Philips Hue Smart Lighting**:
+  - Configure Hue Bridge IP in `application.yml` under `nadia.hue.bridge-ip` or via discovery.
+  - Set `HUE_APPLICATION_KEY` or pair with the bridge by pressing the physical link button during initial setup.
+  - Verify local LAN connectivity to the bridge on port 80/443.
+- **Briefs & Database**:
+  - Ensure Nadia Brief repository database is initialized (configured in `application.yml`).
+
+---
+
 ## 1. Operational Modalities
 
 ### A. Visual Alerts (Physical Environment)

@@ -8,6 +8,19 @@ tools: [startProject, stopProject, listProjects, cloneRepository, generateDiagra
 
 This skill guides agents in translating technical ideas, system requirements, and feature proposals into formal, fully designed **Architectural Design Documents (ADDs)** stored in `doc/add/` with status `Proposed`, onboarding remote GitHub repositories into isolated project workspaces, and generating rich, interactive Nadia `.whiteboard` architectural diagrams via **Antigravity (`agy`)**, strictly preserving all existing project files and directories.
 
+## Setup Instructions
+
+- **Git & GitHub CLI**:
+  - Git installed and on system `PATH`.
+  - GitHub CLI (`gh`) installed and authenticated (`gh auth status` / `GH_TOKEN`) for private repository creation.
+- **Antigravity CLI**:
+  - Antigravity CLI (`agy`) installed and accessible on `PATH`.
+- **Project Sandbox & Permissions**:
+  - Project sandbox directory `./session/projects/` writable.
+  - Sub-process execution permissions enabled for `executeSessionCommand`.
+- **Whiteboard & Kanban Tools**:
+  - `startProject`, `cloneRepository`, `storeBriefEntry`, and Whiteboard tools registered in `ToolRegistry`.
+
 ---
 
 ## 1. Triggering the Architectural Design Document (ADD) Workflow

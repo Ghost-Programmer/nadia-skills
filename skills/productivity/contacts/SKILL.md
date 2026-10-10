@@ -132,3 +132,23 @@ gws people people deleteContact --params '{"resourceName": "people/<id>"}'
   ```bash
   gws people people deleteContact --params '{"resourceName": "people/c8976543210123456789"}'
   ```
+
+## Setup Instructions
+
+### 1. Prerequisites & CLI Installation
+- **gws CLI**: The Google Workspace CLI utility (`gws`) must be installed and available on system `PATH`.
+- **Runtime**: Ensure Node.js or the native runtime for `gws` is installed.
+
+### 2. Google Workspace Authentication & Permissions
+- **Google Cloud API**: Enable the **People API** (`https://www.googleapis.com/auth/contacts`) in the Google Cloud Console.
+- **Authentication**:
+  1. Authenticate `gws` with your Google account:
+     ```bash
+     gws auth login
+     ```
+  2. Verify contact listing permission:
+     ```bash
+     gws people connections list --params '{"resourceName": "people/me", "personFields": "names"}' --format table
+     ```
+- **ETag Handling**: Contact update operations require querying the latest ETag via `gws people people get` prior to dispatching `updateContact` commands.
+

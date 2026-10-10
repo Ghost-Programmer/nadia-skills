@@ -136,3 +136,23 @@ gws drive files delete --params '{"fileId": "<SPREADSHEET_ID>"}'
 ```bash
 gws drive files delete --params '{"fileId": "1a2b3c4d5e"}'
 ```
+
+## Setup Instructions
+
+### 1. Prerequisites & CLI Installation
+- **gws CLI**: The Google Workspace CLI utility (`gws`) must be installed and available on system `PATH`.
+- **Runtime**: Ensure Node.js or the required executable for `gws` is installed.
+
+### 2. Google Sheets API Configuration
+- **Google Cloud APIs**: Enable the **Google Sheets API** (`https://www.googleapis.com/auth/spreadsheets`) and **Google Drive API** (`https://www.googleapis.com/auth/drive`) in Google Cloud Console.
+- **Authentication**:
+  1. Authenticate `gws` with your Google account:
+     ```bash
+     gws auth login
+     ```
+  2. Verify access by creating or reading a spreadsheet:
+     ```bash
+     gws sheets spreadsheets create --json '{"properties": {"title": "Test Sheet"}}'
+     ```
+- **Formulas vs Raw Strings**: Set `valueInputOption: "USER_ENTERED"` when updating values to ensure formulas (e.g. `=SUM(A1:A10)`) and numeric types are interpreted correctly.
+

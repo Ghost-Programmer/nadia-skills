@@ -121,3 +121,23 @@ gws drive files delete --params '{"fileId": "<PRESENTATION_ID>"}'
 ```bash
 gws drive files delete --params '{"fileId": "1a2b3c4d5e"}'
 ```
+
+## Setup Instructions
+
+### 1. Prerequisites & CLI Installation
+- **gws CLI**: The Google Workspace CLI utility (`gws`) must be installed and executable on system `PATH`.
+- **Runtime**: Ensure Node.js or the required executable for `gws` is available.
+
+### 2. Google Slides API Configuration
+- **Google Cloud APIs**: Enable the **Google Slides API** (`https://www.googleapis.com/auth/presentations`) and **Google Drive API** (`https://www.googleapis.com/auth/drive`) in Google Cloud Console.
+- **Authentication**:
+  1. Authenticate `gws` with your Google account:
+     ```bash
+     gws auth login
+     ```
+  2. Test presentation creation:
+     ```bash
+     gws slides presentations create --json '{"title": "Test Presentation"}'
+     ```
+- **Drive Deletion Permissions**: Google Slides files reside in Google Drive; deleting presentations requires Google Drive write scopes.
+

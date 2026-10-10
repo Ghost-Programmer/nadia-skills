@@ -8,6 +8,23 @@ tools: [executeSessionCommand]
 
 This skill allows the agent to interact with a Plaud voice recorder to retrieve voice recording details, transcripts, and summaries of recorded meetings by executing the Plaud CLI script directly.
 
+## Setup Instructions
+
+- **Python Runtime**:
+  - Python 3.10+ installed and on system `PATH`.
+  - Script located at `./skills/plaud/scripts/plaud_cli.py`.
+- **Authentication**:
+  - Log in to the [Plaud Developer Portal](https://platform-us.plaud.ai/) and create an Embedded SDK Application.
+  - Set `PLAUD_CLIENT_ID` and `PLAUD_API_KEY` in your environment or `.env` file in the workspace root:
+    ```env
+    PLAUD_CLIENT_ID=your_client_id_here
+    PLAUD_API_KEY=your_api_key_here
+    ```
+- **Simulation Fallback**:
+  - If credentials are not configured, the script automatically executes in realistic Simulation Mode.
+
+---
+
 ## Listing Recordings
 
 When the user asks to see their audio files, voice recordings, or Plaud transcript list:
@@ -41,21 +58,3 @@ When the user wants to read a transcript, review meeting notes, or retrieve summ
    - **Overview**: A high-level description of what was discussed.
    - **Key Bullet Points**: Major takeaways, action items, or conclusions.
    - **Detailed Transcript**: The full timestamped transcript text formatted with speakers (e.g., `[00:12] Alice: ...`).
-
-## Authentication Setup
-
-To connect the Plaud CLI script to the live Plaud developer platform instead of running in simulated/mock mode:
-
-1. **Plaud Developer Portal**: Log in to the [Plaud Developer Portal](https://platform-us.plaud.ai/) and create an Embedded SDK Application.
-2. **Obtain Keys**: Go to App Settings > API Keys to generate your Client ID and API Key.
-3. **Configure Environment Variables**:
-   - Save the credentials in a local `.env` file in the workspace root directory:
-
-     ```env
-     PLAUD_CLIENT_ID=your_client_id_here
-     PLAUD_API_KEY=your_api_key_here
-     ```
-
-   - *Note*: The `.env` file is already listed in `.gitignore` to prevent credentials from being committed to source control.
-4. **Database Storage Fallback**: Alternatively, you can save the settings to the SQLite database via setting keys `plaud_client_id` and `plaud_api_key` using layout/system settings.
-5. **Simulation Fallback**: If no credentials are found or configured, the script automatically runs in **Simulation Mode** using local realistic voice recordings to maintain local functionality.

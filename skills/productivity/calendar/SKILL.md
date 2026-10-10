@@ -141,3 +141,24 @@ gws calendar events delete --params '{"calendarId": "primary", "eventId": "<EVEN
   ```bash
   gws calendar events delete --params '{"calendarId": "primary", "eventId": "a1b2c3d4e5"}'
   ```
+
+## Setup Instructions
+
+### 1. Prerequisites & CLI Installation
+- **gws CLI**: The Google Workspace CLI utility (`gws`) must be installed and added to the system `PATH`.
+- **Node.js / Go / Binary Runtime**: Ensure the runtime required by your installed `gws` distribution is present.
+
+### 2. Google Workspace Authentication & API Configuration
+- **Google Cloud Project**: Enable the **Google Calendar API** (`https://www.googleapis.com/auth/calendar`) in the Google Cloud Console.
+- **Credentials Setup**:
+  1. Generate an OAuth 2.0 Client ID or Service Account key with Calendar read/write scopes.
+  2. Authenticate the CLI by running:
+     ```bash
+     gws auth login
+     ```
+  3. Verify authentication status and default calendar access:
+     ```bash
+     gws calendar +agenda --today
+     ```
+- **Timezone**: Ensure the system or CLI timezone is configured (e.g. `America/New_York` or UTC) to ensure accurate event scheduling.
+

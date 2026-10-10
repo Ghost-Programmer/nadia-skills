@@ -103,3 +103,27 @@ When presenting recalled or managed memories to the user, format them clearly in
   > User prefers Gradle with Kotlin DSL and Java 23 for all new Spring Boot modules.
   *(Updated: 2026-09-02T09:20:00Z)*
 ```
+
+## Setup Instructions
+
+### 1. Prerequisites & Vector Database
+- **PostgreSQL with PGVector**: PostgreSQL 15+ with the `vector` extension enabled:
+  ```sql
+  CREATE EXTENSION IF NOT EXISTS vector;
+  ```
+- **Embedding Model**: Active embedding provider (e.g. `text-embedding-3-small` via Spring AI OpenAI, or Ollama `nomic-embed-text`) configured for vector calculations.
+- **Spring AI VectorStore**: Ensure `spring-ai-pgvector-store-spring-boot-starter` or compatible vector store starter is in `build.gradle`.
+
+### 2. Application Configuration
+- Configure PGVector properties in `application.yml`:
+  ```yaml
+  spring:
+    ai:
+      vectorstore:
+        pgvector:
+          index-type: HNSW
+          distance-type: COSINE_DISTANCE
+          dimensions: 1536
+  ```
+- **CRUD Tool Registration**: The `MemoryTool` suite (`saveMemory`, `searchMemory`, `getMemoryById`, `updateMemory`, `deleteMemory`, `listMemories`) is auto-registered into the Spring AI context.
+

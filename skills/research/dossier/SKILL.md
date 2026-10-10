@@ -247,3 +247,16 @@ Present the final intelligence report adhering strictly to this standard Markdow
        "text": "- **Dossier Completed**: Compiled intelligence report for [Name] ([Company]). Profile verified across [Platforms]."
      }
      ```
+
+## Setup Instructions
+
+### 1. Prerequisites & Script Dependencies
+- **Python Runtime**: Python 3.8 or higher installed on system `PATH`.
+- **Dossier Helper CLI**: Ensure `dossier_helper.py` exists at `./skills/research/dossier/scripts/dossier_helper.py`.
+- **Standard Libraries**: Uses Python built-in modules (`hashlib`, `argparse`, `json`, `urllib.request`).
+
+### 2. External API & Integration Configuration
+- **Web Search & Scraping**: Ensure the `web_search` and `web_scrape` tools are configured with valid search provider bindings.
+- **Google Contacts (Optional)**: If querying local address books, ensure the `gws` CLI is authenticated (`gws auth login`).
+- **Memory & Brief Persistence**: Requires initialized PGVector / episodic memory store and brief relational tables.
+

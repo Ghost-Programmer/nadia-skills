@@ -132,3 +132,11 @@ Weigh format tradeoffs out loud with the user rather than defaulting silently:
 - **Do Not Fabricate Extraneous Facts**: Limit factual claims to what is in the pile or what the user provides in the interactive session.
 - **Do Not Add Unsolicited Boilerplate**: Do not add publishing metadata, unprompted frontmatter, or extraneous platform tags unless requested by the user.
 - **Respect User Edits**: Always re-read the target article file before writing changes to avoid overwriting user edits.
+
+## Setup Instructions
+
+### 1. Prerequisites & Environment
+- **Zero External Dependencies**: The Clean-Writing cognitive workflow is a pure procedural reasoning and article-shaping protocol.
+- **File System Permissions**: Ensure the agent has read access to the input source pile (`.md`, `.txt`, `.html`) and write access to the designated output file location.
+- **GFM Formatting**: Target outputs should follow standard GitHub Flavored Markdown (GFM) conventions.
+

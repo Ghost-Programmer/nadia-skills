@@ -8,6 +8,12 @@ tools: []
 
 This skill guides the agent in authoring, structuring, and formatting new procedural skills (`SKILL.md`) for the Nadia cognitive architecture.
 
+## Setup Instructions
+
+- **Prerequisites**: Target skills directory `./skills/` (or `~/.nadia/skills/`) exists and has write permissions.
+- **Skill Reloading**: After writing or modifying a `SKILL.md`, call `SkillRegistry.reloadSkills()` or restart the session to register newly created procedural skills.
+- **Validation**: Ensure YAML frontmatter is valid and separated by triple hyphens (`---`).
+
 ---
 
 ## 1. Skill Architecture & File Layout

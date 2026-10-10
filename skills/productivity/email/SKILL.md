@@ -213,3 +213,33 @@ gws gmail users messages modify --params '{"userId": "me", "id": "<message_id>"}
   gws gmail users messages modify --params '{"userId": "me", "id": "18f1a2b3c4d"}' --json '{"addLabelIds": ["STARRED", "LABEL_PROJECT_ID"]}'
   ```
 
+## Setup Instructions
+
+### 1. Prerequisites & CLI Installation
+- **gws CLI**: The Google Workspace CLI utility (`gws`) must be installed and executable on system `PATH`.
+- **Runtime**: Ensure Node.js or the required executable for `gws` is installed.
+
+### 2. Gmail API & IMAP Configuration
+- **Google Cloud API**: Enable the **Gmail API** (`https://mail.google.com/`) in the Google Cloud Console.
+- **Authentication**:
+  1. Authenticate `gws` with your Google account:
+     ```bash
+     gws auth login
+     ```
+  2. Verify triage listing access:
+     ```bash
+     gws gmail +triage --max 5 --format table
+     ```
+- **Optional Direct IMAP/SMTP Push (Nadia IMAP Push Listener)**:
+  - If using direct background IMAP IDLE push intake, configure `application.yml`:
+    ```yaml
+    nadia:
+      mail:
+        imap-host: imap.gmail.com
+        imap-port: 993
+        username: ${GMAIL_USER}
+        password: ${GMAIL_APP_PASSWORD}
+    ```
+  - App Passwords can be generated from **Google Account -> Security -> 2-Step Verification -> App Passwords**.
+
+

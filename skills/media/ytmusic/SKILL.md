@@ -84,3 +84,26 @@ python ../skills/ytmusic/scripts/ytmusic_cli.py --action pause
 ```bash
 python ../skills/ytmusic/scripts/ytmusic_cli.py --auth ./skills/ytmusic/oauth.json --action get_playlists
 ```
+
+## Setup Instructions
+
+### 1. Prerequisites
+- **Python Runtime**: Python 3.10 or higher installed and on `PATH`.
+- **Dependencies**: Install `ytmusicapi`:
+  ```bash
+  pip install ytmusicapi
+  ```
+- **OS Support**: Windows is required for media key simulation actions (`pause`, `stop`, `next`, `prev` using Windows Virtual-Key codes). Public and authenticated API queries work cross-platform.
+- **Script Location**: Ensure `ytmusic_cli.py` is present at `./skills/ytmusic/scripts/ytmusic_cli.py`.
+
+### 2. Authentication Setup (Private Library Access)
+Public actions (searching tracks, getting song info, viewing public playlists/artists, fetching lyrics) do not require authentication.
+For private library actions (user playlists, liked songs):
+1. In the terminal, run the interactive OAuth setup utility:
+   ```bash
+   ytmusicapi oauth
+   ```
+2. Follow the browser prompt to log in to YouTube Music with your Google account.
+3. Save the resulting OAuth token JSON file as `oauth.json` in `./skills/ytmusic/oauth.json`.
+4. Ensure the file path is provided via the `--auth` argument during CLI calls.
+

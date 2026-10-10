@@ -26,3 +26,10 @@ When creating a note report, use the following template format:
 #### 💡 Considerations & Risks
 - **Consideration 1**: Details...
 - **Consideration 2**: Details...
+
+## Setup Instructions
+
+### 1. Prerequisites & Storage
+- **No External Services Required**: The Note formatting skill operates entirely in-memory as a markdown formatting and synthesis pattern.
+- **Renderer**: Rendered note outputs are formatted in GitHub-Flavored Markdown (GFM) compatible with the JavaFX chat stream and markdown viewers.
+

@@ -63,3 +63,14 @@ Use this skill when you need to resolve hostnames, query DNS records, run WHOIS 
 
 15. **Printer Live Telemetry & Status Query (`getPrinterLiveStats`)**:
     - Use `getPrinterLiveStats` with a specific printer IP to check if it is currently printing, view ink/toner levels, check queued job counts, or monitor extruder temperatures.
+
+## Setup Instructions
+
+### 1. Prerequisites & Network Capabilities
+- **Local Network Interfaces**: Host machine must have an active local network interface (Ethernet/Wi-Fi) connected to target subnets.
+- **Port Permissions**: Banner grabbing, printer discovery (IPP 631, JetDirect 9100, LPD 515), WHOIS (port 43), and port scanning require unobstructed socket access.
+
+### 2. MAC Vendor Database & External APIs
+- **Nmap MAC Database**: The MAC vendor lookup tool references the local IEEE/Nmap prefix registry. Run `syncMacVendors` to refresh the local definitions file from upstream sources.
+- **Geolocation API**: IP Geolocation utilizes public IP-API endpoints. Ensure outbound HTTP/HTTPS traffic is allowed.
+

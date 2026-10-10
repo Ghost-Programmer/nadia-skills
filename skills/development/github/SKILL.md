@@ -10,6 +10,16 @@ This skill provides references and instructions for managing GitHub repositories
 
 All commands are executed inside the `./session` sandbox environment using the `executeSessionCommand` tool (running via Windows `cmd.exe`).
 
+## Setup Instructions
+
+- **GitHub CLI Installation**:
+  - GitHub CLI (`gh`) must be installed and accessible on system `PATH`.
+- **Authentication**:
+  - Authenticate using `gh auth login` or export `GITHUB_TOKEN` / `GH_TOKEN` with `repo`, `workflow`, and `read:org` scopes.
+  - Verify auth state with `gh auth status`.
+- **Git Config**:
+  - Ensure standard Git user email and name are configured (`git config --global user.name "..."`, `git config --global user.email "..."`).
+
 ---
 
 ## Execution Guidelines
