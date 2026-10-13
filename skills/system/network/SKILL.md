@@ -10,10 +10,11 @@ Use this skill when you need to check network scanning authorization, approve lo
 ## Guidelines
 
 1. **Zero-Trust Network Authorization Protocol (`checkNetworkApproval`, `approveCurrentNetwork`, `listApprovedNetworks`)**:
-   - Nadia enforces a strict zero-trust network safety model. Local subnet ping sweeps (`getNetworkTopology`) and ARP-based printer discovery (`scanForPrinters`) will **abort and return only the baseline gateway/local PC** unless the current subnet or gateway MAC address is approved in the database.
+   - Nadia enforces a strict zero-trust network safety model. Unapproved networks block active subnet discovery ping sweeps (`getNetworkTopology`), ARP-based printer discovery (`scanForPrinters`), and device integrations including **Bambu Lab 3D printers** (no MQTT connections on port 8883, no UDP SSDP discovery broadcasts, no TLS video streams, and no print job commands).
    - **Check Authorization**: Before initiating a full subnet sweep, or if `getNetworkTopology` returns only 1 or 2 devices (gateway and localhost), call `checkNetworkApproval`. This returns the active connection details: `subnetPrefix`, `gatewayIp`, `gatewayMac`, `interfaceName`, `isApproved`, `hasHueBridge`, `hueBridgeIp`, and `hueBridgeId`.
    - **Review Approved Networks**: Call `listApprovedNetworks` to inspect previously authorized networks, gateway MAC addresses, and authorizer notes stored in the database.
    - **Grant Approval**: If the network is trusted and authorized by the user/admin, call `approveCurrentNetwork(networkName, approvedBy, notes)` to whitelist the subnet prefix and gateway MAC into the database (`ApprovedNetworkEntity`). This persists approval, publishes the `network_approved` staff event, and auto-detects/associates any local Philips Hue Bridge.
+   - **No-Network Approval Guard**: Network approval **strictly requires an active local network connection**. If the host machine is disconnected/offline, limited to loopback (`127.0.0.1`), or missing a default gateway/subnet, approval will fail immediately with `{"error": "Cannot approve network: No active network connection detected."}`. Never attempt to approve an offline or non-existent network.
 
 2. **Local Network Topology Discovery (`getNetworkTopology`)**:
    - Invoke this tool when asked to list active hosts on the subnet, check local adapter configurations, default gateway, or local DNS servers.
