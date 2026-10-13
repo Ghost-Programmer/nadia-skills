@@ -9,9 +9,10 @@ Use this skill when interacting with smart home lighting, managing Philips Hue B
 
 ## Setup Instructions
 
-- **Bridge Network Connectivity**:
+- **Bridge Network Connectivity & Approval**:
   - Philips Hue Bridge connected to the same local subnet as Nadia.
   - HTTP port 80 / HTTPS port 443 open on the Bridge.
+  - **Zero-Trust Network Approval**: Local subnet ARP sweeps for discovering Hue Bridges require the active network to be approved in Nadia's zero-trust database. When approving a network via `approveCurrentNetwork` (from `NetworkSkill`), Nadia automatically detects and persists the Hue Bridge IP and hardware ID (`hasHueBridge`, `hueBridgeIp`, `hueBridgeId`).
 - **Initial Pairing**:
   - Call `discoverHueBridges` to locate the bridge IP.
   - Press the physical link button on top of the bridge, then invoke `pairHueBridge(bridgeIp)` within 30 seconds to generate and persist the `HUE_APPLICATION_KEY`.
@@ -23,7 +24,8 @@ Use this skill when interacting with smart home lighting, managing Philips Hue B
 ## Guidelines
 
 1. **Bridge Discovery & Authentication**:
-   - Call `discoverHueBridges` to locate local Hue hubs on the subnet.
+   - Call `discoverHueBridges` to locate local Hue hubs on the subnet via cloud broker discovery and local ARP inspection.
+   - **Troubleshooting Local Discovery**: If `discoverHueBridges` reports no bridges on the local LAN, check if the subnet is authorized using `checkNetworkApproval` or view saved bridge records using `listApprovedNetworks` from `NetworkSkill`. If unapproved, approve the subnet via `approveCurrentNetwork`.
    - If the bridge is not yet paired, instruct the user to press the large round button on top of their Philips Hue Bridge, then immediately invoke `pairHueBridge(bridgeIp)` within 30 seconds.
    - Once paired, credentials are permanently saved and used for all future operations.
 

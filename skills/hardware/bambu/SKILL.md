@@ -13,6 +13,7 @@ This skill guides the agent in listing local Bambu printers, fetching telemetry 
 - **Network & Connectivity**:
   - Bambu 3D Printer (X1-Carbon, P1P, P1S, A1) powered on and connected to the local LAN.
   - MQTT port 8883 (TLS) accessible from host to printer IP.
+  - Native discovery uses direct SSDP broadcast (`239.255.255.250`). Note that comprehensive fleet discovery via `scanForPrinters` (from `NetworkSkill`) requires the local subnet to be authorized under Nadia's zero-trust network policy.
 - **Printer Configuration**:
   - Configure printer IP Address, Serial Number, and Access Code (available on printer LCD under Settings -> Network).
   - Set `BAMBU_PRINTER_IP` and `BAMBU_ACCESS_CODE` in `application.yml` or `~/.nadia/config.json`.
@@ -25,7 +26,8 @@ This skill guides the agent in listing local Bambu printers, fetching telemetry 
 
 When the user asks to find, list, or discover 3D printers on the network:
 
-1. Call `listPrinters` (requires no arguments).
+1. Call `listPrinters` (requires no arguments). Native discovery sends UDP SSDP broadcasts on ports 1900 and 2021.
+   - *Note*: If discovering printers across mixed 2D/3D fleets using `scanForPrinters` (`NetworkSkill`), verify that the network is authorized via `checkNetworkApproval` or approved via `approveCurrentNetwork`.
 2. Present the returned list of printers (their IP addresses, models, serial numbers, and online states) in a clean Markdown table.
 
 ---
