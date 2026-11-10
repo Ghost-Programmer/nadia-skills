@@ -8,8 +8,8 @@ metadata:
   version: "1.0"
   category: development
   display-name: CreateSkillSkill
-allowed-tools: executeSessionCommand
-tools: [executeSessionCommand]
+allowed-tools: createSelfGeneratedSkill synthesizeSkillFromProblemSolution listSelfGeneratedSkills executeSessionCommand
+tools: [createSelfGeneratedSkill, synthesizeSkillFromProblemSolution, listSelfGeneratedSkills, executeSessionCommand]
 ---
 
 # Procedural Skill Creation Guide (`agentskills.io` Open Standard)
