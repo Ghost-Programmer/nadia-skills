@@ -1,6 +1,14 @@
 ---
-name: ResearchSkill
+name: web-research
 description: Conduct comprehensive internet research, investigative fact-finding, and information gathering by utilizing the Researcher staff member and tools (web_search, web_scrape). Use when the user asks to research a topic, look up information online, find data, verify claims, or summarize and format web findings.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: research
+  display-name: ResearchSkill
+allowed-tools: web_search web_scrape browser_navigate browser_snapshot storeBriefEntry appendBriefEntry getBriefEntries searchMemory saveMemory updateMemory getCurrentDateTime
 tools: [web_search, web_scrape, browser_navigate, browser_snapshot, storeBriefEntry, appendBriefEntry, getBriefEntries, searchMemory, saveMemory, updateMemory, getCurrentDateTime]
 ---
 
@@ -163,4 +171,3 @@ Deliver a polished Markdown report structured as follows:
 ### 2. Output Storage
 - **Artifacts Directory**: Research reports saved via `write_to_file` should be placed in `./session/brain/` (e.g. `./session/brain/<topic_report>.md`).
 - **Memory & Briefs**: Requires active PostgreSQL / PGVector connection for long-term fact storage and relational brief tables.
-

@@ -1,14 +1,17 @@
-# Nadia Skills Repository
+# Nadia Skills Repository (`agentskills.io` Open Standard)
 
-Official public repository of procedural agent skills and operational directives for the **Nadia AI** assistant platform.
+Official public repository of procedural agent skills and operational directives for the **Nadia AI** assistant platform, fully compliant with the open **[agentskills.io](https://agentskills.io)** standard.
 
 ---
 
 ## 📋 Overview
 
-Skills in Nadia are modular, procedural capability definitions that instruct cognitive AI agents and specialized staff personas on how to execute domain tasks, invoke specific tools, interface with Python scripts, and coordinate workflows.
+Skills in Nadia are modular, procedural capability definitions that instruct cognitive AI agents and specialized staff personas on how to execute domain tasks, invoke specific tools, interface with bundled scripts, and coordinate workflows.
 
-This repository serves as the central distribution registry for procedural skills that can be browsed, searched, downloaded, and synchronized directly inside Nadia's **Procedural Skills** panel UI.
+All skills in this repository adhere to the **open `agentskills.io` specification**, enabling:
+- **Community Interoperability**: Seamless import of community-built `agentskills.io` skills from GitHub repositories, local directories, or `.zip` packages.
+- **Agent-Generated Skill Sharing**: Exporting skills authored by Nadia or users into portable `agentskills.io` packages (`<skill-name>/SKILL.md`, `scripts/`, `references/`, `assets/`).
+- **Progressive Disclosure**: Bundled `scripts/`, `references/`, and `assets/` are discovered and exposed on demand without bloating the agent's base context window.
 
 ---
 
@@ -29,7 +32,7 @@ nadia-skills/
     ├── development/
     │   ├── antigravity/SKILL.md        # Antigravity (agy) multi-file code generation CLI
     │   ├── architect/SKILL.md          # Architectural Design Documents (ADD) & whiteboards
-    │   ├── create-a-skill/SKILL.md     # Procedural skill authoring and packaging guidelines
+    │   ├── create-a-skill/SKILL.md     # Procedural skill authoring and agentskills.io packaging guide
     │   ├── github/SKILL.md             # Git version control, branch management, and PR triage
     │   ├── product-manager/SKILL.md    # Product Specifications (PRDs) and user stories
     │   ├── project/SKILL.md            # Sandbox workspace switching and build lifecycle
@@ -52,7 +55,7 @@ nadia-skills/
     │       └── scripts/record_matcher.py
     ├── geo/
     │   ├── alltrails/SKILL.md          # Trailhead routing, elevation profiles, and hiking logistics
-    │   ├── aviation/SKILL.md           # Flightradar24 live flight tracking and telemetry
+    │   ├── aviation/SKILL.md           # OpenSky live flight tracking and telemetry
     │   ├── location/SKILL.md           # Coordinates and geocoding resolution
     │   ├── map/SKILL.md                # Map markers, route plotting, and geospatial visualization
     │   ├── satellite/SKILL.md          # N2YO satellite passes and orbit predictions
@@ -61,8 +64,6 @@ nadia-skills/
     │   ├── bambu/SKILL.md              # Bambu 3D printer MQTT monitoring and HMS error analysis
     │   ├── hue/SKILL.md                # Philips Hue smart lighting control
     │   └── plaud/SKILL.md              # Plaud Note audio transcription and AI summaries
-    ├── location/
-    │   └── location/SKILL.md           # Geospatial coordinate mapping
     ├── media/
     │   ├── wordpress/SKILL.md          # Multi-site WordPress publishing and REST API
     │   └── ytmusic/SKILL.md            # YouTube Music playback and playlist management
@@ -90,23 +91,29 @@ nadia-skills/
     │   ├── general/SKILL.md            # General system directives and shell execution
     │   ├── memory/SKILL.md             # Semantic RAG memory recall and episodic facts
     │   └── network/SKILL.md            # Nmap LAN sweeps, MAC vendor resolution, and IoT topology
-    ├── wordpress/
-    │   └── wordpress/SKILL.md          # WordPress content management
     └── writing/
         └── clean-writing/SKILL.md      # AP-style prose, tone constraints, and technical editing
 ```
 
 ---
 
-## 🛠️ SKILL.md Format Specification
+## 🛠️ `SKILL.md` Format Specification (`agentskills.io` Open Standard)
 
-Every skill directory MUST contain a `SKILL.md` file featuring a YAML frontmatter header followed by structured markdown instructions.
+Every skill directory contains a required `SKILL.md` file with YAML frontmatter compliant with the [agentskills.io specification](https://agentskills.io), followed by procedural Markdown instructions and optional `scripts/`, `references/`, and `assets/` subdirectories:
 
 ```yaml
 ---
-name: NameOfSkill
-description: Summary description of the skill's purpose and guidelines.
-tools: [toolName1, toolName2, toolName3]
+name: skill-name
+description: Concise summary of what the skill does and when the agent should use it (max 1024 chars).
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: development
+  display-name: SkillNameSkill
+allowed-tools: toolName1 toolName2
+tools: [toolName1, toolName2]
 ---
 
 # Skill Title
@@ -117,22 +124,23 @@ Overview and high-level directives explaining when and how the agent should util
 
 1. **Step 1**: First action step...
 2. **Step 2**: Tool execution step...
-
 ```
 
 ---
 
-## 📥 Installing Skills into Nadia
+## 📥 Importing & Sharing Skills in Nadia
 
-In the **Nadia** desktop client:
-1. Open the **Procedural Skills** panel on the left sidebar.
-2. Click **📥 Install Skills from GitHub**.
-3. Point to this repository (`https://github.com/Ghost-Programmer/nadia-skills`) or any compatible fork.
-4. Filter by category or search term, select the desired skills, and click **Install Selected**.
-5. Nadia will download the markdown directives and companion scripts into `./skills/<category>/<skill-name>/` and dynamically recompile the active cognitive agents without requiring a restart.
+1. **Install from GitHub (`agentskills.io` Repositories)**:
+   - Open **Tools ➔ 🧩 Download & Install Skills...** (or click **📥 Install Skills** in the left **Procedural Skills** panel).
+   - Enter `https://github.com/Ghost-Programmer/nadia-skills` or any community `agentskills.io` GitHub repository URL and click **🔍 Scan Repository**.
+2. **Import Local Folder or `.zip` Package**:
+   - In the Skill Installer dialog, click **📂 Import Folder...** or **📦 Import ZIP...** to import community-built `agentskills.io` skills directly from disk.
+3. **Share / Export Agent-Generated Skills**:
+   - Open any skill in the **Skill Editor** and click **📦 Share / Export (.zip)** (or **✓ Normalize (agentskills.io)**) to bundle `SKILL.md` along with `scripts/`, `references/`, and `assets/` into a standard `agentskills.io` `.zip` package.
 
 ---
 
 ## 📄 License & Credits
 
+Licensed under the Apache License, Version 2.0 (`Apache-2.0`).  
 Copyright (c) 2026 Miller Software Solutions LLC. All rights reserved.

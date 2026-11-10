@@ -1,6 +1,14 @@
 ---
-name: ContactsSkill
+name: contacts
 description: Instruction guidelines and syntax examples for managing Google Contacts (listing, searching, reading, creating, updating, and deleting) using the gws CLI.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: productivity
+  display-name: ContactsSkill
+allowed-tools: executeSessionCommand
 tools: [executeSessionCommand]
 ---
 
@@ -151,4 +159,3 @@ gws people people deleteContact --params '{"resourceName": "people/<id>"}'
      gws people connections list --params '{"resourceName": "people/me", "personFields": "names"}' --format table
      ```
 - **ETag Handling**: Contact update operations require querying the latest ETag via `gws people people get` prior to dispatching `updateContact` commands.
-

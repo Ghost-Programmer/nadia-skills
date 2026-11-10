@@ -1,6 +1,14 @@
 ---
-name: CalendarSkill
+name: calendar
 description: Instruction guidelines and syntax examples for managing Google Calendar events, creating agendas, and performing read, insert, patch, and delete actions using the gws CLI.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: productivity
+  display-name: CalendarSkill
+allowed-tools: executeSessionCommand
 tools: [executeSessionCommand]
 ---
 
@@ -161,4 +169,3 @@ gws calendar events delete --params '{"calendarId": "primary", "eventId": "<EVEN
      gws calendar +agenda --today
      ```
 - **Timezone**: Ensure the system or CLI timezone is configured (e.g. `America/New_York` or UTC) to ensure accurate event scheduling.
-

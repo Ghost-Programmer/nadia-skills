@@ -1,6 +1,14 @@
 ---
-name: HandoffSkill
+name: handoff
 description: Compact the current conversation into a structured handoff document for another agent or session to pick up seamlessly, and open a new chat window with the handoff file attached. Use when transitioning tasks, preserving context across sessions, or when requested to hand off or summarize ongoing work.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: collaboration
+  display-name: HandoffSkill
+allowed-tools: openHandoffChatWindow
 tools: [openHandoffChatWindow]
 ---
 

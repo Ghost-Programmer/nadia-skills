@@ -1,6 +1,13 @@
 ---
-name: NoteSkill
+name: note
 description: Formats input text into a structured, professional markdown report featuring a generated name, detailed text description, list of actions needed, and possible considerations.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: productivity
+  display-name: NoteSkill
 tools: []
 ---
 
@@ -32,4 +39,3 @@ When creating a note report, use the following template format:
 ### 1. Prerequisites & Storage
 - **No External Services Required**: The Note formatting skill operates entirely in-memory as a markdown formatting and synthesis pattern.
 - **Renderer**: Rendered note outputs are formatted in GitHub-Flavored Markdown (GFM) compatible with the JavaFX chat stream and markdown viewers.
-

@@ -1,8 +1,17 @@
 ---
-name: PhilipsHueSmartLightingSkill
+name: hue
 description: Instructions on how to discover Philips Hue Bridges, pair via the link button, list and control connected smart lights, manage room groups, set colors/brightness, and trigger visual ambient alert notifications.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: hardware
+  display-name: PhilipsHueSmartLightingSkill
+allowed-tools: discoverHueBridges pairHueBridge listHueLights setHueLightState listHueRooms setHueRoomState flashHueAlert
 tools: [discoverHueBridges, pairHueBridge, listHueLights, setHueLightState, listHueRooms, setHueRoomState, flashHueAlert]
 ---
+
 # Philips Hue Smart Lighting & Ambient Control Guidelines
 
 Use this skill when interacting with smart home lighting, managing Philips Hue Bridges, adjusting room illumination, setting scene colors, or triggering visual alert flashes for build notifications, alarms, and focus modes.

@@ -1,6 +1,14 @@
 ---
-name: SpreadsheetsSkill
+name: spreadsheets
 description: Instruction guidelines and syntax examples for managing Google Sheets (reading values, creating sheets, appending rows, updating cell ranges, clearing values, and deleting files) using the gws CLI.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: productivity
+  display-name: SpreadsheetsSkill
+allowed-tools: executeSessionCommand
 tools: [executeSessionCommand]
 ---
 
@@ -155,4 +163,3 @@ gws drive files delete --params '{"fileId": "1a2b3c4d5e"}'
      gws sheets spreadsheets create --json '{"properties": {"title": "Test Sheet"}}'
      ```
 - **Formulas vs Raw Strings**: Set `valueInputOption: "USER_ENTERED"` when updating values to ensure formulas (e.g. `=SUM(A1:A10)`) and numeric types are interpreted correctly.
-

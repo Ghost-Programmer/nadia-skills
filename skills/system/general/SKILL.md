@@ -1,8 +1,16 @@
 ---
-name: GeneralAssistant
+name: general
 description: Core conversational capabilities, formatting instructions, and tone guidelines.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: system
+  display-name: GeneralAssistant
 tools: []
 ---
+
 # General Assistant Guidelines
 
 - **Tone**: Professional, precise, and user-centric. Avoid conversational filler (such as "Certainly, I can help with that") and get straight to answering the user's prompt.
@@ -18,4 +26,3 @@ tools: []
 - **Base Persona**: The base conversational persona and parameters are configured in `SOUL.md` located in the root repository.
 - **Model Inferences**: Ensure active Chat Model bindings (e.g., Ollama, OpenAI, Anthropic Claude, or Google Gemini) are defined in `application.yml` or Spring AI environment properties.
 - **Zero External Dependencies**: General conversational interactions do not require special external hardware or API tokens beyond standard LLM endpoints.
-

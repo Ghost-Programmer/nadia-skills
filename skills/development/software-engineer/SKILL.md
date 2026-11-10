@@ -1,6 +1,14 @@
 ---
-name: SoftwareEngineerSkill
+name: software-engineer
 description: Guidelines and workflows for full-stack application development across Android, JavaFX, Angular, and Java/Spring, managing project builds, sandboxed executions, and Antigravity (agy) code generation.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: development
+  display-name: SoftwareEngineerSkill
+allowed-tools: startProject stopProject listProjects switchProjectBranch executeSessionCommand dockerListContainers dockerContainerLogs dockerStartContainer dockerStopContainer dockerRestartContainer dockerRunContainer dockerCheckContainers storeBriefEntry appendBriefEntry getBriefEntries searchMemory saveMemory updateMemory getCurrentDateTime getKanbanBoard createKanbanCard moveKanbanCard updateKanbanCard
 tools: [startProject, stopProject, listProjects, switchProjectBranch, executeSessionCommand, dockerListContainers, dockerContainerLogs, dockerStartContainer, dockerStopContainer, dockerRestartContainer, dockerRunContainer, dockerCheckContainers, storeBriefEntry, appendBriefEntry, getBriefEntries, searchMemory, saveMemory, updateMemory, getCurrentDateTime, getKanbanBoard, createKanbanCard, moveKanbanCard, updateKanbanCard]
 ---
 
@@ -94,4 +102,3 @@ When executing an approved card in the `Software Development` Kanban swimlane un
 2. **Build Verification**: Always run compilation and build checks before concluding.
 3. **Preserve Documentation Trees**: Never delete or wipe `doc/add/`, `doc/spec/`, or existing project configurations.
 4. **Package Naming Standard**: All Java, Kotlin, Android, and Spring Boot packages and class namespaces must start with `ai.nadia` as the root path (e.g., `ai.nadia.<projectName>.<layer>`).
-

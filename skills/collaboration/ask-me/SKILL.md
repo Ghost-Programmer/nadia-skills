@@ -1,6 +1,13 @@
 ---
-name: AskMeSkill
+name: ask-me
 description: Relentlessly interview and grill the user about a plan, decision, or idea to stress-test their thinking and map out a comprehensive design tree. Use when the user asks to be grilled, stress-tested, or uses trigger phrases like 'ask me', 'grill me', 'stress test', or wants deep interactive requirement probing.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: collaboration
+  display-name: AskMeSkill
 tools: []
 ---
 

@@ -1,6 +1,14 @@
 ---
-name: ProjectSkill
+name: project
 description: Guidelines and instructions for starting, switching, deleting, and managing sandbox workspaces.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: development
+  display-name: ProjectSkill
+allowed-tools: startProject stopProject deleteProject listProjects
 tools: [startProject, stopProject, deleteProject, listProjects]
 ---
 

@@ -1,6 +1,14 @@
 ---
-name: QuestionnaireSkill
+name: question
 description: Turn a decision, requirement, or topic you can't fully resolve alone into a targeted discovery questionnaire for a stakeholder, domain expert, or team member to fill out, and record it in the system brief as an actionable TODO item.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: collaboration
+  display-name: QuestionnaireSkill
+allowed-tools: storeBriefEntry appendBriefEntry
 tools: [storeBriefEntry, appendBriefEntry]
 ---
 

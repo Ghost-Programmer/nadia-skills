@@ -1,6 +1,14 @@
 ---
-name: GedcomSkill
+name: gedcom
 description: Guidelines and Python CLI references for parsing, validating, inspecting, and querying GEDCOM family tree files (5.5, 5.5.1, 7.0 standard formats), extracting individual vitals, pedigree trees, descendant lines, and detecting logical tree anomalies.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: genealogy
+  display-name: GedcomSkill
+allowed-tools: executeSessionCommand searchMemory saveMemory
 tools: [executeSessionCommand, searchMemory, saveMemory]
 ---
 

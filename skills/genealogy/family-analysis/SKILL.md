@@ -1,6 +1,14 @@
 ---
-name: FamilyAnalysisSkill
+name: family-analysis
 description: Guidelines and Python CLI references for kinship calculation, Most Recent Common Ancestor (MRCA) discovery, shared autosomal DNA centiMorgan (cM) estimation, ASCII pedigree charts, and chronological family life timelines.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: genealogy
+  display-name: FamilyAnalysisSkill
+allowed-tools: executeSessionCommand searchMemory saveMemory
 tools: [executeSessionCommand, searchMemory, saveMemory]
 ---
 

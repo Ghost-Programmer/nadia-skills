@@ -1,6 +1,14 @@
 ---
-name: GitHubCLI
+name: github
 description: Guidelines and command-line references for Git and GitHub operations using the GitHub CLI (gh) tool, including issue management, pull requests, repository operations, direct API calls, and action workflow runs.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: development
+  display-name: GitHubCLI
+allowed-tools: executeSessionCommand
 tools: [executeSessionCommand]
 ---
 

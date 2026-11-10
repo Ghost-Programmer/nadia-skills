@@ -1,6 +1,14 @@
 ---
-name: BambuSkill
+name: bambu
 description: Guidelines and instructions for discovering, monitoring, controlling, and running 3D print jobs, analyzing HMS hardware errors, and tracking AMS multi-color filaments on Bambu 3D printers on the network.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: hardware
+  display-name: BambuSkill
+allowed-tools: listPrinters getPrinterStats startPrinterMonitor startPrintJob stopPrintJob pausePrintJob resumePrintJob
 tools: [listPrinters, getPrinterStats, startPrinterMonitor, startPrintJob, stopPrintJob, pausePrintJob, resumePrintJob]
 ---
 

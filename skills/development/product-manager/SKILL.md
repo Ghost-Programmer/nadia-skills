@@ -1,6 +1,14 @@
 ---
-name: ProductManagerSkill
+name: product-manager
 description: Guidelines and workflows for trend identification, competitive teardowns of mobile/desktop applications and games, authoring structured Product Specifications (PRD/App Spec) in doc/spec/ or PRODUCT_SPEC.md, defining user stories, acceptance criteria, and organizing Kanban development backlogs.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: development
+  display-name: ProductManagerSkill
+allowed-tools: startProject stopProject listProjects storeBriefEntry appendBriefEntry getBriefEntries searchMemory saveMemory updateMemory getCurrentDateTime executeSessionCommand getKanbanBoard createKanbanCard updateKanbanCard moveKanbanCard generateDiagram renderMermaidDiagram
 tools: [startProject, stopProject, listProjects, storeBriefEntry, appendBriefEntry, getBriefEntries, searchMemory, saveMemory, updateMemory, getCurrentDateTime, executeSessionCommand, getKanbanBoard, createKanbanCard, updateKanbanCard, moveKanbanCard, generateDiagram, renderMermaidDiagram]
 ---
 

@@ -1,8 +1,17 @@
 ---
-name: NetworkSkill
+name: network
 description: Instructions on how to verify approved network authorization, whitelist subnets, scan local subnets, resolve DNS hosts, trace routing hops, geolocate hosts, resolve MAC addresses and vendors, discover 2D and 3D network printers, check live printing status, and perform WHOIS lookups.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: system
+  display-name: NetworkSkill
+allowed-tools: checkNetworkApproval approveCurrentNetwork listApprovedNetworks getNetworkTopology traceRoute getNodeDetails scanPorts grabBanner getGeoLocation whoisLookup dnsLookup dnsResolve dnsReverseLookup getMacAddress getMacVendor syncMacVendors scanForPrinters getPrinterLiveStats
 tools: [checkNetworkApproval, approveCurrentNetwork, listApprovedNetworks, getNetworkTopology, traceRoute, getNodeDetails, scanPorts, grabBanner, getGeoLocation, whoisLookup, dnsLookup, dnsResolve, dnsReverseLookup, getMacAddress, getMacVendor, syncMacVendors, scanForPrinters, getPrinterLiveStats]
 ---
+
 # Network Diagnostics, DNS, and Scanning Guidelines
 
 Use this skill when you need to check network scanning authorization, approve local subnets, resolve hostnames, query DNS records, run WHOIS domain ownership diagnostics, perform network scans, port scanning, trace routing hops, grab service banners, look up or synchronize MAC vendor hardware databases, scan for 2D and 3D network printers, inspect real-time printing jobs and toner levels, or determine the physical location of public IP addresses.

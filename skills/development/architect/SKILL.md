@@ -1,6 +1,14 @@
 ---
-name: ArchitectSkill
+name: architect
 description: Guidelines and instructions for sending ideas and architectural proposals to the Software Architect, creating Architectural Design Documents (ADDs) with status Proposed in doc/add/ via Antigravity (agy), fully designing technical architectures, preserving project documentation, and managing Git/GitHub private repository synchronization.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: development
+  display-name: ArchitectSkill
+allowed-tools: startProject stopProject listProjects cloneRepository generateDiagram renderMermaidDiagram getWhiteboardDiagramState executeSessionCommand storeBriefEntry getBriefEntries getCurrentDateTime searchMemory saveMemory dockerListContainers dockerContainerLogs dockerStartContainer dockerStopContainer dockerRestartContainer dockerRemoveContainer dockerListImages dockerInspectContainer dockerRunContainer dockerCheckContainers
 tools: [startProject, stopProject, listProjects, cloneRepository, generateDiagram, renderMermaidDiagram, getWhiteboardDiagramState, executeSessionCommand, storeBriefEntry, getBriefEntries, getCurrentDateTime, searchMemory, saveMemory, dockerListContainers, dockerContainerLogs, dockerStartContainer, dockerStopContainer, dockerRestartContainer, dockerRemoveContainer, dockerListImages, dockerInspectContainer, dockerRunContainer, dockerCheckContainers]
 ---
 
@@ -146,5 +154,3 @@ When executing an approved card in the `Software Development` Kanban row under `
 4. **Status Always Proposed**: When creating new architectural ideas/proposals, the status must strictly be `Proposed`.
 5. **Private Repositories**: Always use `--private` when creating GitHub repositories.
 6. **Package Naming Standard**: All Java, Kotlin, Android, and Spring Boot package namespaces and module structures must use `ai.nadia` as the starting package path (e.g., `ai.nadia.<projectName>.*`).
-
-

@@ -1,6 +1,14 @@
 ---
-name: NotificationSkill
+name: notification
 description: Orchestrates multi-modal notifications including text-based chat reports, Slack channel alerts, visual Philips Hue pulses, and persistent system briefs.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: communication
+  display-name: NotificationSkill
+allowed-tools: flashHueAlert setHueLightState sendSlackNotification getSlackNotificationChannel storeBriefEntry appendBriefEntry
 tools: [flashHueAlert, setHueLightState, sendSlackNotification, getSlackNotificationChannel, storeBriefEntry, appendBriefEntry]
 ---
 

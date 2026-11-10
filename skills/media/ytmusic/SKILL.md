@@ -1,6 +1,14 @@
 ---
-name: YouTubeMusicSkill
+name: ytmusic
 description: Guidelines and CLI commands for searching, retrieving lyrics, managing library playlists, and controlling media playback (play, pause, stop, skip) on YouTube Music using the python helper script.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: media
+  display-name: YouTubeMusicSkill
+allowed-tools: executeSessionCommand
 tools: [executeSessionCommand]
 ---
 
@@ -106,4 +114,3 @@ For private library actions (user playlists, liked songs):
 2. Follow the browser prompt to log in to YouTube Music with your Google account.
 3. Save the resulting OAuth token JSON file as `oauth.json` in `./skills/ytmusic/oauth.json`.
 4. Ensure the file path is provided via the `--auth` argument during CLI calls.
-

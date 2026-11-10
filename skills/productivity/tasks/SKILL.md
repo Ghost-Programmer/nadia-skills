@@ -1,6 +1,14 @@
 ---
-name: TasksSkill
+name: tasks
 description: Instruction guidelines and syntax examples for managing Google Tasks and Task Lists (listing, searching, creating, updating/patching, moving, and deleting) using the gws CLI.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: productivity
+  display-name: TasksSkill
+allowed-tools: executeSessionCommand
 tools: [executeSessionCommand]
 ---
 
@@ -146,4 +154,3 @@ gws tasks tasks move --params '{"tasklist": "<src_list_id>", "task": "<task_id>"
      gws tasks tasklists list --format table
      ```
 - **Due Date Format**: The Google Tasks API strictly requires RFC 3339 formatted date-time strings (e.g., `2026-08-30T12:00:00Z`).
-

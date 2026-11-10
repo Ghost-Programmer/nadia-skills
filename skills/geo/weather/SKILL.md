@@ -1,6 +1,14 @@
 ---
-name: WeatherSkill
+name: weather
 description: Guidelines and Python CLI references for fetching current weather forecasts for a location, automatically resolving coordinates via the location service and selecting Fahrenheit or Celsius based on country rules. Retrieves current precipitation and hourly forecasts.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: geo
+  display-name: WeatherSkill
+allowed-tools: run_command
 tools: [run_command]
 ---
 

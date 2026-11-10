@@ -1,6 +1,14 @@
 ---
-name: DatabaseQuerySkill
+name: database
 description: Guidelines and tool references for listing database connections, inspecting database schemas, and executing SQL queries against user connections by name.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: research
+  display-name: DatabaseQuerySkill
+allowed-tools: getDatabaseConnectionsList getDatabaseSchema executeDatabaseQuery
 tools: [getDatabaseConnectionsList, getDatabaseSchema, executeDatabaseQuery]
 ---
 
@@ -41,4 +49,3 @@ This skill allows the agent to discover configured database connections and exec
           description: "Local read-only analytics snapshot"
   ```
 - **Permission Scopes**: For security, configure dedicated read-only database credentials when only schema inspection and analytics queries are required.
-

@@ -1,6 +1,14 @@
 ---
-name: BlogWatcherSkill
+name: blogwatcher
 description: Guidelines and instructions for automatically discovering blog feeds, checking for new articles, generating summaries, and logging them as briefs.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: research
+  display-name: BlogWatcherSkill
+allowed-tools: watchBlog
 tools: [watchBlog]
 ---
 
@@ -31,4 +39,3 @@ The tool saves check state facts inside the episodic (RAG) memory under the `blo
 ### 2. Feed State Tracking
 - **Automatic State Storage**: The `watchBlog` tool automatically creates and updates `blog_watcher_state` memory records tracking the latest post GUIDs. No manual configuration is required.
 - **Scheduled Checks**: If recurring monitoring is desired, register a cron trigger in Nadia (e.g., every 6 hours).
-

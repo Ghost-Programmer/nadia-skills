@@ -1,6 +1,14 @@
 ---
-name: DossierSkill
+name: dossier
 description: Build a comprehensive background dossier and biographical intelligence report on an individual using email, username, full name, contacts, RAG memory, social profile lookups (Facebook, GitHub, LinkedIn, X, Gravatar), web scraping, and interactive disambiguation via the Ask-Me skill. Use when asked to research a person, look up background details, build a dossier, or compile biographical profiles.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: research
+  display-name: DossierSkill
+allowed-tools: web_search web_scrape searchMemory saveMemory storeBriefEntry appendBriefEntry executeSessionCommand getCurrentDateTime
 tools: [web_search, web_scrape, searchMemory, saveMemory, storeBriefEntry, appendBriefEntry, executeSessionCommand, getCurrentDateTime]
 ---
 
@@ -259,4 +267,3 @@ Present the final intelligence report adhering strictly to this standard Markdow
 - **Web Search & Scraping**: Ensure the `web_search` and `web_scrape` tools are configured with valid search provider bindings.
 - **Google Contacts (Optional)**: If querying local address books, ensure the `gws` CLI is authenticated (`gws auth login`).
 - **Memory & Brief Persistence**: Requires initialized PGVector / episodic memory store and brief relational tables.
-

@@ -1,6 +1,14 @@
 ---
-name: EmailSkill
+name: email
 description: Instruction guidelines and syntax examples for managing Gmail messages (listing/triaging, reading, sending, replying, replying-all, and forwarding) using the gws CLI.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: productivity
+  display-name: EmailSkill
+allowed-tools: executeSessionCommand
 tools: [executeSessionCommand]
 ---
 
@@ -241,5 +249,3 @@ gws gmail users messages modify --params '{"userId": "me", "id": "<message_id>"}
         password: ${GMAIL_APP_PASSWORD}
     ```
   - App Passwords can be generated from **Google Account -> Security -> 2-Step Verification -> App Passwords**.
-
-

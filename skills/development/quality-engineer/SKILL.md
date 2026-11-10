@@ -1,6 +1,14 @@
 ---
-name: QualityEngineerSkill
+name: quality-engineer
 description: Guidelines and workflows for test plan authoring (doc/test/ or TEST_PLAN.md), automated test suite execution across Android, JavaFX, Angular, and Java/Spring, defect tracking, Kanban triage, and code quality verification.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: development
+  display-name: QualityEngineerSkill
+allowed-tools: startProject listProjects executeSessionCommand dockerListContainers dockerContainerLogs dockerCheckContainers storeBriefEntry appendBriefEntry getBriefEntries searchMemory saveMemory updateMemory getCurrentDateTime getKanbanBoard createKanbanCard updateKanbanCard moveKanbanCard
 tools: [startProject, listProjects, executeSessionCommand, dockerListContainers, dockerContainerLogs, dockerCheckContainers, storeBriefEntry, appendBriefEntry, getBriefEntries, searchMemory, saveMemory, updateMemory, getCurrentDateTime, getKanbanBoard, createKanbanCard, updateKanbanCard, moveKanbanCard]
 ---
 
@@ -94,4 +102,3 @@ When executing an approved card in the `Software Development` Kanban swimlane un
 1. **Empirical Execution**: Always execute real test suites; never report test results without running them.
 2. **Defect Detail**: Always include reproduction steps, input data, and stack traces when logging defects.
 3. **Preserve Documentation Trees**: Never delete existing test files or documentation folders.
-

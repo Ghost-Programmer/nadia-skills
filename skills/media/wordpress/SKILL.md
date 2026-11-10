@@ -1,6 +1,14 @@
 ---
-name: WordPressSkill
+name: wordpress
 description: Guidelines and CLI commands for managing WordPress content, media, menus, comments, settings, plugins, and custom fields using the standalone wordpress_api.py script.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: media
+  display-name: WordPressSkill
+allowed-tools: executeSessionCommand
 tools: [executeSessionCommand]
 ---
 
@@ -86,4 +94,3 @@ When querying or creating posts and pages, the following `status` values are sup
   4. Enter a name (e.g., `Nadia-CLI`) and click **Add New Application Password**.
   5. Copy the generated 24-character token (`xxxx xxxx xxxx xxxx xxxx xxxx`).
 - **Permissions**: The associated WordPress user account must have sufficient capabilities (e.g., `edit_posts`, `publish_posts`, `upload_files`) for the desired actions.
-

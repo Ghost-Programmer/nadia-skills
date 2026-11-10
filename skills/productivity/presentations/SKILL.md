@@ -1,6 +1,14 @@
 ---
-name: PresentationsSkill
+name: presentations
 description: Instruction guidelines and syntax examples for managing Google Slides presentations (creating, reading structures, adding/deleting slides, modifying elements, and deleting files) using the gws CLI.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: productivity
+  display-name: PresentationsSkill
+allowed-tools: executeSessionCommand
 tools: [executeSessionCommand]
 ---
 
@@ -140,4 +148,3 @@ gws drive files delete --params '{"fileId": "1a2b3c4d5e"}'
      gws slides presentations create --json '{"title": "Test Presentation"}'
      ```
 - **Drive Deletion Permissions**: Google Slides files reside in Google Drive; deleting presentations requires Google Drive write scopes.
-

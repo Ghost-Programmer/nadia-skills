@@ -1,6 +1,14 @@
 ---
-name: DocumentsSkill
+name: documents
 description: Instruction guidelines and syntax examples for managing Google Docs (creating documents, reading content, appending text, applying batch updates, and deleting files) using the gws CLI.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: productivity
+  display-name: DocumentsSkill
+allowed-tools: executeSessionCommand
 tools: [executeSessionCommand]
 ---
 
@@ -133,4 +141,3 @@ gws drive files delete --params '{"fileId": "doc_id_12345"}'
      gws docs documents create --json '{"title": "Test Doc"}'
      ```
 - **Drive Deletion Permissions**: Google Docs files are stored in Google Drive; deletion operations require full Google Drive API write permissions.
-

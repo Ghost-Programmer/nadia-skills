@@ -1,6 +1,14 @@
 ---
-name: SatelliteSkill
+name: satellite
 description: Tracks live satellite positions, schedules continuous orbit tracking, and updates satellite positions on the World Map using N2YO.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: geo
+  display-name: SatelliteSkill
+allowed-tools: trackSatellites startContinuousSatelliteTracking stopContinuousSatelliteTracking getSatelliteTrackingStatus getSatelliteCategories showMap clearMap
 tools: [trackSatellites, startContinuousSatelliteTracking, stopContinuousSatelliteTracking, getSatelliteTrackingStatus, getSatelliteCategories, showMap, clearMap]
 ---
 

@@ -1,6 +1,13 @@
 ---
-name: AllTrailsSkill
+name: alltrails
 description: Guidelines for searching trails, looking up hiking routes, difficulty levels, elevation gains, reviews, and trail conditions using the AllTrails MCP Client.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: geo
+  display-name: AllTrailsSkill
 tools: []
 ---
 

@@ -1,6 +1,14 @@
 ---
-name: AviationSkill
+name: aviation
 description: Tracks live aircraft positions, schedules continuous flight tracking, and updates flight paths on the World Map using OpenSky Network.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: geo
+  display-name: AviationSkill
+allowed-tools: trackPlanes startContinuousPlaneTracking stopContinuousPlaneTracking getPlaneTrackingStatus showMap clearMap
 tools: [trackPlanes, startContinuousPlaneTracking, stopContinuousPlaneTracking, getPlaneTrackingStatus, showMap, clearMap]
 ---
 

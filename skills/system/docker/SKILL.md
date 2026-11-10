@@ -1,6 +1,14 @@
 ---
-name: DockerSkill
+name: docker
 description: Guidelines and tool instructions for discovering, inspecting, monitoring, starting, stopping, restarting, running, and diagnosing Docker containers, container images, and container logs using DockerTool.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: system
+  display-name: DockerSkill
+allowed-tools: dockerListContainers dockerContainerLogs dockerStartContainer dockerStopContainer dockerRestartContainer dockerRemoveContainer dockerListImages dockerInspectContainer dockerRunContainer dockerCheckContainers
 tools: [dockerListContainers, dockerContainerLogs, dockerStartContainer, dockerStopContainer, dockerRestartContainer, dockerRemoveContainer, dockerListImages, dockerInspectContainer, dockerRunContainer, dockerCheckContainers]
 ---
 
@@ -138,4 +146,3 @@ Use `dockerRunContainer` to launch a new container in detached (`-d`) mode:
 ### 2. Permissions & Container Resource Constraints
 - **User Groups**: On Linux environments, ensure the running user is added to the `docker` user group (`sudo usermod -aG docker $USER`).
 - **Resource Allocations**: Ensure Docker Engine has sufficient CPU, memory, and disk space allocated for running development sandboxes, databases, and microservices.
-

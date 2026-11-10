@@ -1,6 +1,14 @@
 ---
-name: AntigravitySkill
+name: antigravity
 description: Guidelines and command references for delegating complex coding, refactoring, and execution tasks to the Antigravity CLI (agy) under the `./session` sandbox directory.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: development
+  display-name: AntigravitySkill
+allowed-tools: executeSessionCommand
 tools: [executeSessionCommand]
 ---
 

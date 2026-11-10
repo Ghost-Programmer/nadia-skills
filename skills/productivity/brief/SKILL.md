@@ -1,6 +1,14 @@
 ---
-name: BriefSkill
+name: brief
 description: Guidelines and instructions for storing, appending, retrieving, and compiling brief entries into nicely formatted markdown report summaries including Blog Watch news.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: productivity
+  display-name: BriefSkill
+allowed-tools: storeBriefEntry appendBriefEntry getBriefEntries deleteBriefEntry clearBriefEntries
 tools: [storeBriefEntry, appendBriefEntry, getBriefEntries, deleteBriefEntry, clearBriefEntries]
 ---
 
@@ -99,4 +107,3 @@ Use the following layout structure to compile multi-domain executive briefs:
 ### 2. Scheduled Briefings (Optional)
 - **Morning Brief Cron**: To automate executive briefs, configure a scheduled cron trigger in Nadia or `application.yml` (e.g., `cron: "0 0 8 * * *"`).
 - **Domain Feed Ingestion**: Ensure peripheral skills (e.g. `blogwatcher`, `weather`, `stocks`, `email`) are configured if aggregated briefings across domains are desired.
-

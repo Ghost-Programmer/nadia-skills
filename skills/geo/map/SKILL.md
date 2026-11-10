@@ -1,6 +1,14 @@
 ---
-name: MapSkill
+name: map
 description: Renders interactive map and tracks coordinates of objects and sets color flags.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: geo
+  display-name: MapSkill
+allowed-tools: showMap plotObject setFlag clearMap
 tools: [showMap, plotObject, setFlag, clearMap]
 ---
 

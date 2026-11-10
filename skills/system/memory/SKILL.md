@@ -1,6 +1,14 @@
 ---
-name: MemorySkill
+name: memory
 description: Guidelines and instructions for creating, retrieving, updating, and deleting structured knowledge, facts, project context, and long-term preferences in Nadia's vector RAG database.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: system
+  display-name: MemorySkill
+allowed-tools: saveMemory searchMemory getMemoryById updateMemory deleteMemory listMemories
 tools: [saveMemory, searchMemory, getMemoryById, updateMemory, deleteMemory, listMemories]
 ---
 
@@ -126,4 +134,3 @@ When presenting recalled or managed memories to the user, format them clearly in
           dimensions: 1536
   ```
 - **CRUD Tool Registration**: The `MemoryTool` suite (`saveMemory`, `searchMemory`, `getMemoryById`, `updateMemory`, `deleteMemory`, `listMemories`) is auto-registered into the Spring AI context.
-

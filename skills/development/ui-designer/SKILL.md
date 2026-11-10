@@ -1,6 +1,14 @@
 ---
-name: UIDesignerSkill
+name: ui-designer
 description: Guidelines and workflows for synthesizing modern User Interfaces for Android, JavaFX, and Angular, creating interactive Whiteboard (.whiteboard) wireframe models, Mermaid screen transition diagrams, and establishing multi-platform design tokens.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: development
+  display-name: UIDesignerSkill
+allowed-tools: generateDiagram renderMermaidDiagram getWhiteboardDiagramState clusterWhiteboardNodes createSpikeBranch startProject listProjects executeSessionCommand storeBriefEntry appendBriefEntry getBriefEntries searchMemory saveMemory updateMemory getCurrentDateTime getKanbanBoard createKanbanCard updateKanbanCard
 tools: [generateDiagram, renderMermaidDiagram, getWhiteboardDiagramState, clusterWhiteboardNodes, createSpikeBranch, startProject, listProjects, executeSessionCommand, storeBriefEntry, appendBriefEntry, getBriefEntries, searchMemory, saveMemory, updateMemory, getCurrentDateTime, getKanbanBoard, createKanbanCard, updateKanbanCard]
 ---
 
@@ -87,4 +95,3 @@ When executing an approved card in the `Software Development` Kanban swimlane un
 2. **Aesthetic Excellence**: Never produce basic or dated UI mockups. Champion vibrant modern palettes, clean typography, and spacious layouts.
 3. **Interactive Whiteboard Output**: Always deliver a `.whiteboard` model for visual layout requests.
 4. **Preserve Workspace Files**: Never delete or overwrite existing project files or documentation.
-

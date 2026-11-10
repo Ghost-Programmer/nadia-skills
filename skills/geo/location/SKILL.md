@@ -1,6 +1,14 @@
 ---
-name: LocationSkill
+name: location
 description: Guidelines and Python CLI references for geocoding addresses, reverse geocoding, resolving place IDs, structured administrative queries, Plus Codes, boundary mapping, and IP geolocation.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: geo
+  display-name: LocationSkill
+allowed-tools: run_command
 tools: [run_command]
 ---
 

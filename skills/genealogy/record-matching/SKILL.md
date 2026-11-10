@@ -1,6 +1,14 @@
 ---
-name: RecordMatchingSkill
+name: record-matching
 description: Guidelines and Python CLI references for comparing family historical records (Census, Vital Statistics, Find A Grave, SSDI, Parish Registers) against GEDCOM tree individuals using multi-factor probabilistic scoring, Soundex phonetics, nickname aliasing, and household relational reinforcement.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: genealogy
+  display-name: RecordMatchingSkill
+allowed-tools: executeSessionCommand searchMemory saveMemory
 tools: [executeSessionCommand, searchMemory, saveMemory]
 ---
 

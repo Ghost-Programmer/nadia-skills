@@ -1,6 +1,14 @@
 ---
-name: DriveSkill
+name: drive
 description: Instruction guidelines and syntax examples for reading Google Drive metadata, listing folders, searching files, downloading content, and exporting documents using the gws CLI.
+license: Apache-2.0
+compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
+metadata:
+  author: Miller Software Solutions LLC
+  version: "1.0"
+  category: productivity
+  display-name: DriveSkill
+allowed-tools: executeSessionCommand
 tools: [executeSessionCommand]
 ---
 
@@ -159,4 +167,3 @@ gws drive +upload "./data.csv" --parent "folder_id_12345" --name "Q3 Sales Data.
      gws drive files list --params '{"pageSize": 5, "trashed": false}' --format table
      ```
 - **Export Formats**: Standard MIME types (`text/plain`, `application/pdf`, `text/csv`, `text/html`) are supported for Google Docs, Sheets, and Slides exports.
-
