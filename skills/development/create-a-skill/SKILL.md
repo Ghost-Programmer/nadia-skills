@@ -8,16 +8,18 @@ metadata:
   version: "1.0"
   category: development
   display-name: CreateSkillSkill
-tools: []
+allowed-tools: executeSessionCommand
+tools: [executeSessionCommand]
 ---
 
-# Procedural Skill Creation Guide (agentskills.io Open Standard)
+# Procedural Skill Creation Guide (`agentskills.io` Open Standard)
 
-This skill guides the agent in authoring, structuring, validating, and packaging procedural skills (`SKILL.md`) compliant with the open **agentskills.io** standard for the Nadia cognitive architecture.
+This skill guides the agent in authoring, structuring, validating, and packaging procedural skills (`SKILL.md`) compliant with the open **[agentskills.io](https://agentskills.io)** standard for the Nadia cognitive architecture.
 
 ## Setup Instructions
 
-- **Prerequisites**: Target skills directory `./skills/` (or `~/.nadia/skills/`) exists and has write permissions.
+- **Prerequisites**: Target skills directory `~/.nadia/skills/` exists and has write permissions.
+- **Official Base Template**: A starter template is maintained at [`skills/TEMPLATE.md`](file:///c:/Users/jeff/Source/nadia-skills/skills/TEMPLATE.md) (and `~/.nadia/skills/TEMPLATE.md`).
 - **Open Standard Compliance**: Every skill authored or exported by Nadia follows the [agentskills.io](https://agentskills.io) specification so community-built skills can be imported directly and agent-generated skills can be shared across compatible platforms.
 - **Skill Reloading**: After writing or modifying a `SKILL.md`, call `SkillRegistry.reloadSkills()` or save in the Skill Editor to re-index active skills.
 
@@ -25,7 +27,7 @@ This skill guides the agent in authoring, structuring, validating, and packaging
 
 ## 1. Skill Directory Architecture & Progressive Disclosure (`agentskills.io`)
 
-Skills are stored in self-contained directories under `~/.nadia/skills/<category>/<skill-name>/` (or flat `<skill-name>/` when packaged for sharing):
+Skills are stored in self-contained directories under `~/.nadia/skills/<category>/<skill-name>/` (or flat `<skill-name>/` when packaged as a `.zip` for sharing):
 
 ```text
 <skill-name>/
@@ -35,7 +37,7 @@ Skills are stored in self-contained directories under `~/.nadia/skills/<category
 └── assets/        # Optional: Static templates, schemas, or boilerplate files
 ```
 
-- **Directory & `name` Matching**: The directory name and the frontmatter `name` field MUST use lowercase alphanumeric characters and single hyphens (`a-z`, `0-9`, `-`), 1–64 characters, with no leading, trailing, or consecutive hyphens (e.g. `create-a-skill`, `clean-writing`, `web-research`).
+- **Directory & `name` Matching**: The directory name and the frontmatter `name` field MUST use lowercase alphanumeric characters and single hyphens (`^[a-z0-9]+(-[a-z0-9]+)*$`), 1–64 characters, with no leading, trailing, or consecutive hyphens (e.g. `create-a-skill`, `clean-writing`, `web-research`, `flight-tracker`).
 
 ---
 
@@ -55,12 +57,12 @@ Every `SKILL.md` file begins with YAML frontmatter enclosed in triple hyphens (`
 
 ---
 
-## 3. Standard `agentskills.io` Skill Template
+## 3. Standard `agentskills.io` Skill Template (`skills/TEMPLATE.md`)
 
 ```markdown
 ---
 name: example-skill
-description: Clear, actionable description of what this skill does and specific trigger conditions when the agent should use it.
+description: Concise, actionable summary of what this skill does and the specific trigger conditions when the agent should use it (1-1024 characters).
 license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
@@ -68,43 +70,59 @@ metadata:
   version: "1.0"
   category: general
   display-name: ExampleSkill
-allowed-tools: toolName1 toolName2
-tools: [toolName1, toolName2]
+allowed-tools: toolName1 toolName2 executeSessionCommand storeBriefEntry searchMemory saveMemory
+tools: [toolName1, toolName2, executeSessionCommand, storeBriefEntry, searchMemory, saveMemory]
 ---
 
 # Example Skill Title
 
-Overview of the cognitive skill's purpose and scope.
+Provide a concise overview of this procedural skill's purpose, domain scope, and when the cognitive agent or staff specialist should activate it.
 
 ---
 
-## 1. Workflow & Execution Steps
+## 1. Prerequisites & Progressive Disclosure Resources (`agentskills.io`)
 
-1. **Step 1 Name**: Detailed instructions on what to analyze or evaluate.
-2. **Step 2 Name**: Guidelines on calling tools or executing bundled scripts in `scripts/`.
-3. **Step 3 Name**: How to formulate the final result or update state.
-
----
-
-## 2. Tool & Script Reference
-
-- **`toolName1`**: When and how to call this tool.
-  - Parameters: `param1`, `param2`
-  - Example payload:
-    ```json
-    {
-      "param1": "value",
-      "param2": 123
-    }
-    ```
+- **Required Environment / Tools**: List any required Spring AI `@NadiaTool` bindings, CLI utilities, or environment variables.
+- **Bundled Skill Resources (Optional)**:
+  - `scripts/`: Deterministic helper scripts (e.g., Python, Bash) executed via `executeSessionCommand`.
+  - `references/`: Detailed API schemas or reference documentation loaded on demand.
+  - `assets/`: Static templates, configuration files, or boilerplate payloads.
 
 ---
 
-## 3. Safety, Edge Cases & Completion Criteria
+## 2. Core Operational Workflows
 
-- Guardrails and redaction rules.
-- What to do on failure or missing prerequisites.
-- Definition of done: when the workflow terminates.
+### 2.1 Primary Execution Workflow
+
+1. **Step 1 - Context & Parameter Validation**:
+   - Validate input parameters and query `<episodic_memory>` via `searchMemory` for relevant user preferences or prior state.
+2. **Step 2 - Tool / Script Invocation**:
+   - Invoke the appropriate registered tool(s) (`toolName1`, `toolName2`) or execute bundled scripts under `scripts/`.
+3. **Step 3 - Verification & Persistence**:
+   - Verify tool outputs, persist durable facts with `saveMemory` or brief summaries with `storeBriefEntry` when applicable, and present structured Markdown results.
+
+### 2.2 Secondary / Fallback Workflow
+
+1. **Error & Edge-Case Handling**:
+   - Detail fallback actions if an external API, hardware device, or network resource is unavailable or unapproved under Zero-Trust policy.
+
+---
+
+## 3. Tool & Script Reference
+
+| Tool / Script | Parameters | Operational Purpose |
+| :--- | :--- | :--- |
+| `toolName1` | `paramA` (`String`), `paramB` (`int`) | Primary domain operation and expected JSON output. |
+| `toolName2` | `id` (`String`) | Secondary inspection or state update action. |
+| `scripts/helper.py` | `--input <path> --format json` | Optional bundled CLI helper script invoked via `executeSessionCommand`. |
+
+---
+
+## 4. Safety, Guardrails & Completion Criteria
+
+1. **Tool-Driven Execution**: Always invoke registered tools or bundled scripts rather than fabricating outputs.
+2. **Zero-Trust & Sandbox Compliance**: Respect workspace boundaries and zero-trust network authorization checks.
+3. **Definition of Done**: The workflow completes once all requested actions are verified and a clean Markdown summary is returned.
 ```
 
 ---
