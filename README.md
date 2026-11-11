@@ -39,8 +39,17 @@ nadia-skills/
     │   ├── project/SKILL.md                    # Sandbox workspace switching (startProject / stopProject) & lifecycle
     │   ├── quality-engineer/SKILL.md           # Test strategies (doc/test/), automated suites & defect triage
     │   ├── software-engineer/SKILL.md          # Full-stack implementation (Android, JavaFX, Angular, Spring Boot)
-    │   └── ui-designer/SKILL.md                # Material 3 design tokens, JavaFX CSS & .whiteboard wireframes
+    │   ├── ui-designer/SKILL.md                # Material 3 design tokens, JavaFX CSS & .whiteboard wireframes
+    │   └── vulnerability-audit/                # OSV.dev & CISA KEV dependency & CVE vulnerability auditing
+    │       ├── SKILL.md
+    │       └── scripts/vuln_audit.py
     ├── finance/
+    │   ├── crypto/                             # CoinGecko cryptocurrency spot prices, rankings & market charts
+    │   │   ├── SKILL.md
+    │   │   └── scripts/crypto_api.py
+    │   ├── forex/                              # Currency-API foreign exchange rates & conversions (150+ currencies)
+    │   │   ├── SKILL.md
+    │   │   └── scripts/forex_api.py
     │   └── stocks/                             # Yahoo Finance market data, quotes, fundamentals & watchlists
     │       ├── SKILL.md
     │       └── scripts/finance_api.py
@@ -57,6 +66,9 @@ nadia-skills/
     ├── geo/
     │   ├── alltrails/SKILL.md                  # Trailhead routing, elevation profiles, and hiking logistics
     │   ├── aviation/SKILL.md                   # OpenSky Network live regional aircraft tracking and telemetry
+    │   ├── earthquakes-hazards/                # USGS real-time global earthquakes & river/stream water gauges
+    │   │   ├── SKILL.md
+    │   │   └── scripts/usgs_hazards.py
     │   ├── flight-tracker/SKILL.md             # Single-target aircraft/satellite tracking with auto-pan World Map
     │   ├── location/                           # Coordinates, reverse geocoding, and place resolution
     │   │   ├── SKILL.md
@@ -94,10 +106,16 @@ nadia-skills/
     │   └── tasks/SKILL.md                      # Google Tasks and action item management
     ├── research/
     │   ├── blogwatcher/SKILL.md                # Competitor & tech blog RSS/Atom monitoring (watchBlog)
+    │   ├── chronicling-america/                # Library of Congress Chronicling America newspapers & Internet Archive
+    │   │   ├── SKILL.md
+    │   │   └── scripts/historical_archive.py
     │   ├── database/SKILL.md                   # Dynamic SQL query execution and schema inspection
     │   ├── dossier/                            # Comprehensive subject investigations & dossier compilation
     │   │   ├── SKILL.md
     │   │   └── scripts/dossier_helper.py
+    │   ├── news-wire/                          # HackerNews, NewsData.io & GNews breaking news & tech wire search
+    │   │   ├── SKILL.md
+    │   │   └── scripts/news_wire.py
     │   └── web-research/SKILL.md               # Multi-source web research, fact verification & citation synthesis
     ├── system/
     │   ├── datetime/SKILL.md                   # System clock, timezone awareness, and ISO-8601 timestamping
@@ -128,12 +146,16 @@ nadia-skills/
 | **development** | `quality-engineer` | `QualityEngineerSkill` | `startProject`, `stopProject`, `createCard`, `moveCard`, `executeSessionCommand` | Test plans (`doc/test/`), automated test execution, and Kanban bug triage. |
 | **development** | `software-engineer` | `SoftwareEngineerSkill` | `startProject`, `stopProject`, `moveCard`, `dockerListContainers`, `dockerStartContainer`, `executeSessionCommand` | Full-stack Android, JavaFX, Angular, and Spring Boot implementation (`ai.nadia`). |
 | **development** | `ui-designer` | `UiDesignerSkill` | `startProject`, `stopProject`, `generateDiagram`, `getWhiteboardDiagramState`, `executeSessionCommand` | Material 3 tokens, splash screen credits, JavaFX CSS, and `.whiteboard` wireframes. |
+| **development** | `vulnerability-audit` | `VulnerabilityAuditSkill` | `executeSessionCommand`, `scripts/vuln_audit.py` | Open-source dependency and CVE auditing via OSV.dev and CISA KEV catalog. |
+| **finance** | `crypto` | `CryptoSkill` | `executeSessionCommand`, `scripts/crypto_api.py` (`nadia.prop.coingecko.apiKey`) | Real-time CoinGecko cryptocurrency spot prices, rankings, trending coins, and charts. |
+| **finance** | `forex` | `ForexSkill` | `executeSessionCommand`, `scripts/forex_api.py` | Foreign exchange rates and currency conversion across 150+ currencies via Currency-API. |
 | **finance** | `stocks` | `StockAnalysisSkill` | `executeSessionCommand`, `scripts/finance_api.py` | Real-time Yahoo Finance stock quotes, fundamentals, and market sweeps. |
 | **genealogy** | `family-analysis` | `FamilyAnalysisSkill` | `executeSessionCommand`, `scripts/family_analyzer.py` | Kinship path calculation, MRCA discovery, shared DNA (cM), and pedigree charts. |
 | **genealogy** | `gedcom` | `GedcomSkill` | `executeSessionCommand`, `saveMemory`, `scripts/gedcom_tool.py` | GEDCOM 5.5/7.0 parsing, tree validation, anomaly checks, and RAG memory extraction. |
 | **genealogy** | `record-matching` | `RecordMatchingSkill` | `executeSessionCommand`, `scripts/record_matcher.py` | Historical record matching (Census, SSDI, Find A Grave) and Soundex scoring. |
 | **geo** | `alltrails` | `AllTrailsSkill` | `executeSessionCommand` | Trail discovery, distance/elevation analysis, and outdoor trek matching. |
 | **geo** | `aviation` | `AviationSkill` | `trackPlanes`, `startContinuousPlaneTracking`, `stopContinuousPlaneTracking`, `getPlaneTrackingStatus` | Regional live aircraft radar sweeps via OpenSky Network. |
+| **geo** | `earthquakes-hazards` | `EarthquakesHazardsSkill` | `showMap`, `setFlag`, `executeSessionCommand`, `scripts/usgs_hazards.py` | Real-time global USGS earthquakes and US river/stream gauges with World Map plotting. |
 | **geo** | `flight-tracker` | `FlightTrackerSkill` | `trackFlight`, `stopTrackingFlight`, `getTrackedFlightStatus`, `recenterOnTrackedFlight`, `centerMap`, `setMapView`, `storeBriefEntry` | Single-target aircraft/satellite lock, 18% viewport edge auto-recentering, and FAA registry briefings. |
 | **geo** | `location` | `LocationSkill` | `getGeoLocation`, `executeSessionCommand`, `scripts/geocoding.py` | Coordinate resolution, IP geolocation, and reverse geocoding. |
 | **geo** | `map` | `MapSkill` | `centerMap`, `setMapView`, `showMap`, `clearMap` | Interactive World Map viewport control and geospatial plotting. |
@@ -156,8 +178,10 @@ nadia-skills/
 | **productivity** | `spreadsheets` | `SpreadsheetsSkill` | `executeSessionCommand` (`gws sheets`) | Google Sheets reading, row appending, and tabular formulas. |
 | **productivity** | `tasks` | `TasksSkill` | `executeSessionCommand` (`gws tasks`) | Google Tasks list and action item management. |
 | **research** | `blogwatcher` | `BlogWatcherSkill` | `watchBlog`, `storeBriefEntry` | Automated RSS/Atom tech and competitor blog monitoring. |
+| **research** | `chronicling-america` | `ChroniclingAmericaSkill` | `executeSessionCommand`, `scripts/historical_archive.py` | Library of Congress Chronicling America historic US newspapers (1770–1963) & Internet Archive search. |
 | **research** | `database` | `DatabaseSkill` | `executeSqlQuery`, `listDatabaseTables`, `describeDatabaseTable` | Relational & PGVector database schema inspection and read-only SQL queries. |
 | **research** | `dossier` | `DossierSkill` | `executeSessionCommand`, `searchMemory`, `saveMemory`, `scripts/dossier_helper.py` | Deep-dive subject dossiers stored in `~/.nadia/session/brain/`. |
+| **research** | `news-wire` | `NewsWireSkill` | `executeSessionCommand`, `scripts/news_wire.py` (`nadia.prop.newsdata.apiKey`, `nadia.prop.gnews.apiKey`) | Breaking news and tech wire stories via HackerNews, NewsData.io, and GNews. |
 | **research** | `web-research` | `WebResearchSkill` | `executeSessionCommand`, `searchMemory`, `saveMemory`, `storeBriefEntry` | Multi-source web research, cross-verification, and cited summaries. |
 | **system** | `datetime` | `DateTimeSkill` | `getCurrentDateTime` | System clock queries, timezone conversion, and timestamp generation. |
 | **system** | `docker` | `DockerSkill` | `dockerListContainers`, `dockerStartContainer`, `dockerStopContainer`, `dockerContainerLogs`, `dockerInspectContainer` | Docker container, image, volume, and network management. |
