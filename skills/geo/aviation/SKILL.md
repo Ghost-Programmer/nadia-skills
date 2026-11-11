@@ -10,6 +10,7 @@ metadata:
   display-name: AviationSkill
 allowed-tools: trackPlanes startContinuousPlaneTracking stopContinuousPlaneTracking getPlaneTrackingStatus showMap clearMap
 tools: [trackPlanes, startContinuousPlaneTracking, stopContinuousPlaneTracking, getPlaneTrackingStatus, showMap, clearMap]
+properties: [nadia.prop.opensky.username, nadia.prop.opensky.password]
 ---
 
 # Aviation Skill
@@ -22,7 +23,7 @@ Provides capabilities to query live aircraft locations, configure automatic flig
   - World Map Viewer window must be active (call `showMap()` or open Map tab in Nadia).
 - **OpenSky Network Access**:
   - Outbound internet access to OpenSky Network API (`https://opensky-network.org/api`).
-  - Optional: Set `OPENSKY_USERNAME` and `OPENSKY_PASSWORD` in `application.yml` for higher authenticated rate limits. Anonymous requests are subject to public rate limits.
+  - Optional: Configure `nadia.prop.opensky.username` and `nadia.prop.opensky.password` in `~/.nadia/nadia.properties` (via the **Settings ➔ Properties** view or `setNadiaProperty`) for higher authenticated rate limits. Anonymous requests are subject to public rate limits.
 - **Recommended Intervals**:
   - Continuous tracking intervals should be set to 15–30 seconds to avoid HTTP 429 rate limit throttling.
 

@@ -181,6 +181,7 @@ Every skill directory contains a required `SKILL.md` file with YAML frontmatter 
 | **`metadata`** | Optional | String key-value map (`author`, `version`, `category`, `display-name`). |
 | **`allowed-tools`** | Optional | Space-delimited list of pre-approved tools per `agentskills.io` (merged and deduplicated with `tools`). |
 | **`tools`** | Optional | YAML array of bound Nadia `@NadiaTool` names. |
+| **`properties`** | Optional | YAML array of required `nadia.prop.*` configuration property keys (e.g., `[nadia.prop.n2yo.apiKey]`). Registered automatically with `NadiaPropertiesService` when the skill loads so the Settings UI displays them. |
 
 ```yaml
 ---
@@ -195,6 +196,7 @@ metadata:
   display-name: ExampleSkill
 allowed-tools: toolName1 toolName2
 tools: [toolName1, toolName2]
+properties: []
 ---
 
 # Example Skill Title
@@ -206,6 +208,15 @@ Overview and high-level directives explaining when and how the agent should util
 1. **Step 1**: Context and parameter validation...
 2. **Step 2**: Tool or bundled script execution...
 ```
+
+---
+
+## ⚙️ Skill & Tool Properties (`nadia.prop.*`)
+
+All configuration settings, API keys, credentials, and parameters required by procedural skills or tools are stored in `~/.nadia/nadia.properties` using the **`nadia.prop.`** prefix (for example: `nadia.prop.n2yo.apiKey`, `nadia.prop.opensky.username`, `nadia.prop.opensky.password`, `nadia.prop.webcams.windy.api-key`, `nadia.prop.windy.api-key`).
+
+- **UI Configuration**: Users can view, add, edit, or delete any `nadia.prop.*` property in the **Settings ➔ Properties** tab (`SettingsWindowView`).
+- **Agent & Tool Access**: Skills and agents can query or update `nadia.prop.*` settings via the `NadiaPropertiesTool` functions (`getNadiaProperty`, `setNadiaProperty`, `listNadiaProperties`, `deleteNadiaProperty`), and Java services/tools resolve them via `NadiaPropertiesService` or `@Value("${nadia.prop.<name>:}")`.
 
 ---
 

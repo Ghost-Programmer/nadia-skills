@@ -10,6 +10,7 @@ metadata:
   display-name: MapSkill
 allowed-tools: showMap plotObject setFlag clearMap
 tools: [showMap, plotObject, setFlag, clearMap]
+properties: [nadia.prop.windy.api-key, nadia.prop.webcams.windy.api-key]
 ---
 
 # Map Skill
@@ -24,6 +25,8 @@ Provides capabilities to view coordinates of objects and flags on an interactive
   - Outbound internet access to map tile providers (Google Maps / OpenStreetMap) on port 80/443.
 - **Tool Registrations**:
   - `showMap`, `plotObject`, `setFlag`, and `clearMap` registered in `ToolRegistry`.
+- **Windy Layers & Webcams Properties (`nadia.prop.*`)**:
+  - Configure `nadia.prop.windy.api-key` and `nadia.prop.webcams.windy.api-key` in `~/.nadia/nadia.properties` (via the **Settings ➔ Properties** view or `setNadiaProperty`).
 
 ---
 

@@ -8,8 +8,8 @@ metadata:
   version: "1.0"
   category: development
   display-name: CreateSkillSkill
-allowed-tools: createSelfGeneratedSkill synthesizeSkillFromProblemSolution listSelfGeneratedSkills executeSessionCommand
-tools: [createSelfGeneratedSkill, synthesizeSkillFromProblemSolution, listSelfGeneratedSkills, executeSessionCommand]
+allowed-tools: createSelfGeneratedSkill synthesizeSkillFromProblemSolution listSelfGeneratedSkills getNadiaProperty setNadiaProperty listNadiaProperties executeSessionCommand
+tools: [createSelfGeneratedSkill, synthesizeSkillFromProblemSolution, listSelfGeneratedSkills, getNadiaProperty, setNadiaProperty, listNadiaProperties, executeSessionCommand]
 ---
 
 # Procedural Skill Creation Guide (`agentskills.io` Open Standard)
@@ -54,6 +54,7 @@ Every `SKILL.md` file begins with YAML frontmatter enclosed in triple hyphens (`
 | **`metadata`** | Optional | String key-value map for custom attributes (`author`, `version`, `category`, `display-name`). |
 | **`allowed-tools`** | Optional | Space-delimited list of pre-approved tools per `agentskills.io` (e.g., `executeSessionCommand storeBriefEntry`). |
 | **`tools`** | Optional | YAML array of bound Nadia tool names (e.g., `[executeSessionCommand, storeBriefEntry]`). |
+| **`properties`** | Optional | YAML array of required `nadia.prop.*` configuration property keys (e.g., `[nadia.prop.n2yo.apiKey]`). Registered automatically with `NadiaPropertiesService` so the Settings UI displays them. |
 
 ---
 
@@ -72,6 +73,7 @@ metadata:
   display-name: ExampleSkill
 allowed-tools: toolName1 toolName2 executeSessionCommand storeBriefEntry searchMemory saveMemory
 tools: [toolName1, toolName2, executeSessionCommand, storeBriefEntry, searchMemory, saveMemory]
+properties: []
 ---
 
 # Example Skill Title
@@ -82,7 +84,8 @@ Provide a concise overview of this procedural skill's purpose, domain scope, and
 
 ## 1. Prerequisites & Progressive Disclosure Resources (`agentskills.io`)
 
-- **Required Environment / Tools**: List any required Spring AI `@NadiaTool` bindings, CLI utilities, or environment variables.
+- **Required Environment / Tools**: List any required Spring AI `@NadiaTool` bindings or CLI utilities.
+- **Configuration Properties (`nadia.prop.*`)**: Store any settings, API keys, credentials, or parameters required by the skill or its tools in `~/.nadia/nadia.properties` using the `nadia.prop.<name>` prefix (configured in **Settings ➔ Properties** or via `getNadiaProperty` / `setNadiaProperty` / `listNadiaProperties`).
 - **Bundled Skill Resources (Optional)**:
   - `scripts/`: Deterministic helper scripts (e.g., Python, Bash) executed via `executeSessionCommand`.
   - `references/`: Detailed API schemas or reference documentation loaded on demand.

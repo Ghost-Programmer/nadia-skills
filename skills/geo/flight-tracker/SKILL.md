@@ -10,6 +10,7 @@ metadata:
   display-name: FlightTrackerSkill
 allowed-tools: trackFlight stopTrackingFlight getTrackedFlightStatus recenterOnTrackedFlight centerMap setMapView storeBriefEntry appendBriefEntry getBriefEntries showMap clearMap
 tools: [trackFlight, stopTrackingFlight, getTrackedFlightStatus, recenterOnTrackedFlight, centerMap, setMapView, storeBriefEntry, appendBriefEntry, getBriefEntries, showMap, clearMap]
+properties: [nadia.prop.opensky.username, nadia.prop.opensky.password, nadia.prop.n2yo.apiKey]
 ---
 
 # Flight Tracker Skill

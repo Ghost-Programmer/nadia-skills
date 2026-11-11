@@ -10,6 +10,7 @@ metadata:
   display-name: ExampleSkill
 allowed-tools: toolName1 toolName2 executeSessionCommand storeBriefEntry searchMemory saveMemory
 tools: [toolName1, toolName2, executeSessionCommand, storeBriefEntry, searchMemory, saveMemory]
+properties: []
 ---
 
 # Example Skill Title
@@ -20,7 +21,8 @@ Provide a concise overview of this procedural skill's purpose, domain scope, and
 
 ## 1. Prerequisites & Progressive Disclosure Resources (`agentskills.io`)
 
-- **Required Environment / Tools**: List any required Spring AI `@NadiaTool` bindings, CLI utilities, or environment variables.
+- **Required Environment / Tools**: List any required Spring AI `@NadiaTool` bindings or CLI utilities.
+- **Configuration Properties (`nadia.prop.*`)**: Any settings, API keys, credentials, or parameters required by this skill or its tools MUST be stored in `~/.nadia/nadia.properties` with the `nadia.prop.` prefix (e.g., `nadia.prop.<skill>.<setting>`), configured in the **Settings ➔ Properties** view or accessed via `getNadiaProperty`, `setNadiaProperty`, and `listNadiaProperties`.
 - **Bundled Skill Resources (Optional)**:
   - `scripts/`: Deterministic helper scripts (e.g., Python, Bash) executed via `executeSessionCommand`.
   - `references/`: Detailed API schemas or reference documentation loaded on demand.

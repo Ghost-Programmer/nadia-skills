@@ -10,6 +10,7 @@ metadata:
   display-name: SatelliteSkill
 allowed-tools: trackSatellites startContinuousSatelliteTracking stopContinuousSatelliteTracking getSatelliteTrackingStatus getSatelliteCategories showMap clearMap
 tools: [trackSatellites, startContinuousSatelliteTracking, stopContinuousSatelliteTracking, getSatelliteTrackingStatus, getSatelliteCategories, showMap, clearMap]
+properties: [nadia.prop.n2yo.apiKey]
 ---
 
 # Satellite Skill
@@ -22,7 +23,7 @@ Provides capabilities to query live satellite locations, configure automatic orb
   - World Map Viewer window must be active (call `showMap()` or open Map tab in Nadia).
 - **N2YO API Integration**:
   - Outbound internet access to N2YO API (`https://api.n2yo.com/rest/v1/satellite/`).
-  - Configure `N2YO_API_KEY` in `application.yml` under `nadia.satellite.n2yo-api-key` or via system environment variables.
+  - Configure `nadia.prop.n2yo.apiKey` in `~/.nadia/nadia.properties` (via the **Settings ➔ Properties** view or `setNadiaProperty`).
 - **Tracking Rate Limits**:
   - Continuous tracking intervals should be configured for 30+ seconds to respect N2YO query quotas.
 
