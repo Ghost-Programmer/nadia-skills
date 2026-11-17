@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: system
   display-name: MemorySkill
 allowed-tools: saveMemory searchMemory getMemoryById updateMemory deleteMemory listMemories
@@ -15,6 +15,22 @@ tools: [saveMemory, searchMemory, getMemoryById, updateMemory, deleteMemory, lis
 # RAG Knowledge & Memory Management Skill
 
 This skill guides the agent in managing enduring knowledge, project rules, user preferences, technical constraints, and domain facts stored within Nadia's vector RAG knowledge base.
+
+---
+
+## Setup Instructions
+
+### External App & Integration Setup
+
+1. **Vector Store Backend (Choose One in Setup Wizard or ⚙️ System Settings)**:
+   - **PostgreSQL + `pgvector` (Recommended)**: Start the bundled container using Docker Compose from your Nadia directory:
+     ```bash
+     docker compose up -d
+     ```
+     (`pgvector/pgvector:pg16` automatically exposes port `5432`; `PgVectorSchemaAlignmentService` aligns vector dimensions automatically).
+   - **Zero-Container Local Fallback**: Select **Simple / In-Memory Vector Store** (with SQLite/H2 relational storage) in the Setup Wizard for lightweight local operation without Docker.
+2. **Embedding Model Provider**:
+   - Configure an active embedding model in **⚙️ System Settings ➔ AI & LLM Providers** (for example, local Ollama `ollama pull nomic-embed-text` or OpenAI `text-embedding-3-small`).
 
 ---
 
@@ -111,26 +127,3 @@ When presenting recalled or managed memories to the user, format them clearly in
   > User prefers Gradle with Kotlin DSL and Java 23 for all new Spring Boot modules.
   *(Updated: 2026-09-02T09:20:00Z)*
 ```
-
-## Setup Instructions
-
-### 1. Prerequisites & Vector Database
-- **PostgreSQL with PGVector**: PostgreSQL 15+ with the `vector` extension enabled:
-  ```sql
-  CREATE EXTENSION IF NOT EXISTS vector;
-  ```
-- **Embedding Model**: Active embedding provider (e.g. `text-embedding-3-small` via Spring AI OpenAI, or Ollama `nomic-embed-text`) configured for vector calculations.
-- **Spring AI VectorStore**: Ensure `spring-ai-pgvector-store-spring-boot-starter` or compatible vector store starter is in `build.gradle`.
-
-### 2. Application Configuration
-- Configure PGVector properties in `application.yml`:
-  ```yaml
-  spring:
-    ai:
-      vectorstore:
-        pgvector:
-          index-type: HNSW
-          distance-type: COSINE_DISTANCE
-          dimensions: 1536
-  ```
-- **CRUD Tool Registration**: The `MemoryTool` suite (`saveMemory`, `searchMemory`, `getMemoryById`, `updateMemory`, `deleteMemory`, `listMemories`) is auto-registered into the Spring AI context.

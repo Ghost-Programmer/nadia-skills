@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: productivity
   display-name: DocumentsSkill
 allowed-tools: executeSessionCommand
@@ -16,10 +16,29 @@ tools: [executeSessionCommand]
 
 This skill instructs the agent on how to see, create, edit, and delete Google Docs using the `gws` command-line utility.
 
-## Prerequisites
+---
 
-- The `gws` CLI must be installed and authenticated.
-- Always use the `executeSessionCommand` tool to execute `gws` commands.
+## Setup Instructions
+
+### External App & Integration Setup (`gws` Google Workspace CLI)
+
+1. **Install Node.js & Google Workspace CLI (`gws`)**:
+   - Install **Node.js 20+** (`https://nodejs.org/`), then install `@googleworkspace/cli` globally and ensure `gws` is on system `PATH`:
+     ```bash
+     npm install -g @googleworkspace/cli
+     gws --version
+     ```
+2. **Enable Google Docs API & Google Drive API in Google Cloud Console**:
+   - Open [Google Cloud Console — API Library](https://console.cloud.google.com/apis/library), select or create a project, and enable **Google Docs API & Google Drive API** (scope: `https://www.googleapis.com/auth/documents, https://www.googleapis.com/auth/drive`).
+   - Under **APIs & Services ➔ Credentials**, create an **OAuth 2.0 Client ID** (*Desktop app*)—or run `gws auth setup` if `gcloud` CLI is installed to provision credentials automatically.
+3. **Authenticate & Verify**:
+   - Sign in from a terminal so OAuth tokens are cached for `executeSessionCommand`:
+     ```bash
+     gws auth login
+     gws drive files list --params '{"pageSize": 3}' --format table
+     ```
+
+---
 
 ## 1. Creating Documents (Create Operations)
 
@@ -122,22 +141,3 @@ gws drive files delete --params '{"fileId": "<DOCUMENT_ID>"}'
 ```bash
 gws drive files delete --params '{"fileId": "doc_id_12345"}'
 ```
-
-## Setup Instructions
-
-### 1. Prerequisites & CLI Installation
-- **gws CLI**: The Google Workspace CLI utility (`gws`) must be installed and accessible on system `PATH`.
-- **Runtime**: Ensure Node.js or the native runtime required by `gws` is available.
-
-### 2. Google Workspace Authentication & Permissions
-- **Google Cloud APIs**: Enable both the **Google Docs API** (`https://www.googleapis.com/auth/documents`) and **Google Drive API** (`https://www.googleapis.com/auth/drive`) in Google Cloud Console.
-- **Authentication**:
-  1. Authenticate `gws` with your Google account:
-     ```bash
-     gws auth login
-     ```
-  2. Verify document creation or retrieval access:
-     ```bash
-     gws docs documents create --json '{"title": "Test Doc"}'
-     ```
-- **Drive Deletion Permissions**: Google Docs files are stored in Google Drive; deletion operations require full Google Drive API write permissions.

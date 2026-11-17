@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: collaboration
   display-name: AskMeSkill
 tools: []
@@ -15,11 +15,11 @@ tools: []
 
 Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.
 
+---
+
 ## Setup Instructions
 
-- **Prerequisites**: Ensure an active Nadia interactive chat session with multi-turn conversation support.
-- **Configuration**: No external binaries, third-party libraries, or API credentials required.
-- **Workflow Mode**: Operates directly through conversational prompts and structured question rounds; uses system chat memory to track the decision frontier.
+- **External Applications & Integrations**: None required. Operates natively inside Nadia's interactive multi-turn chat session using built-in conversational memory to track the design decision frontier.
 
 ---
 

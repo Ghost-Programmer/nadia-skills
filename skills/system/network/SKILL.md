@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: system
   display-name: NetworkSkill
 allowed-tools: checkNetworkApproval approveCurrentNetwork listApprovedNetworks getNetworkTopology traceRoute getNodeDetails scanPorts grabBanner getGeoLocation whoisLookup dnsLookup dnsResolve dnsReverseLookup getMacAddress getMacVendor syncMacVendors scanForPrinters getPrinterLiveStats
@@ -15,6 +15,25 @@ tools: [checkNetworkApproval, approveCurrentNetwork, listApprovedNetworks, getNe
 # Network Diagnostics, DNS, and Scanning Guidelines
 
 Use this skill when you need to check network scanning authorization, approve local subnets, resolve hostnames, query DNS records, run WHOIS domain ownership diagnostics, perform network scans, port scanning, trace routing hops, grab service banners, look up or synchronize MAC vendor hardware databases, scan for 2D and 3D network printers, inspect real-time printing jobs and toner levels, or determine the physical location of public IP addresses.
+
+---
+
+## Setup Instructions
+
+### External App & Integration Setup
+
+1. **Zero-Trust Network Authorization (Required Before Active Subnet Scans)**:
+   - Connect the host machine to an active Ethernet/Wi-Fi LAN.
+   - Open **View ➔ 🌐 Network Engineer** and click **Approve Current Network** (or invoke `approveCurrentNetwork()`) to authorize ARP/ping topology sweeps and 2D/3D printer discovery on the current subnet.
+2. **Nmap CLI (Optional — Enhanced Port & OS Discovery)**:
+   - Install [Nmap](https://nmap.org/download.html) on system `PATH` if advanced Nmap scanning is desired alongside Nadia's native Java socket/ARP/mDNS/SSDP scanners:
+     - **Windows**: `winget install Insecure.Nmap`
+     - **macOS**: `brew install nmap`
+     - **Linux**: `sudo apt install nmap`
+3. **IEEE OUI MAC Vendor Registry**:
+   - Call `syncMacVendors()` once while online to populate/refresh local hardware vendor prefixes.
+
+---
 
 ## Guidelines
 
@@ -81,16 +100,3 @@ Use this skill when you need to check network scanning authorization, approve lo
 
 16. **Printer Live Telemetry & Status Query (`getPrinterLiveStats`)**:
     - Use `getPrinterLiveStats` with a specific printer IP to check if it is currently printing, view ink/toner levels, check queued job counts, or monitor extruder temperatures.
-
-## Setup Instructions
-
-### 1. Zero-Trust Network Approval & Safety
-
-- **Network Authorization**: Full subnet ping sweeps and ARP scans require explicit approval recorded in the `approved_network` table via `approveCurrentNetwork`. Unapproved subnets only allow single-target queries and baseline gateway/local IP inspections.
-- **Local Network Interfaces**: Host machine must have an active local network interface (Ethernet/Wi-Fi) connected to target subnets.
-- **Port Permissions**: Banner grabbing, printer discovery (IPP 631, JetDirect 9100, LPD 515), WHOIS (port 43), and port scanning require unobstructed socket access.
-
-### 2. MAC Vendor Database & External APIs
-
-- **Nmap MAC Database**: The MAC vendor lookup tool references the local IEEE/Nmap prefix registry. Run `syncMacVendors` to refresh the local definitions file from upstream sources.
-- **Geolocation API**: IP Geolocation utilizes public IP-API endpoints. Ensure outbound HTTP/HTTPS traffic is allowed.

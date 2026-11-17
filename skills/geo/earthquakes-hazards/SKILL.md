@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: geo
   display-name: EarthquakesHazardsSkill
 allowed-tools: showMap plotObject setFlag clearMap executeSessionCommand storeBriefEntry searchMemory saveMemory
@@ -21,10 +21,17 @@ This skill enables the cognitive agent (`@Scoutmaster`, `@Researcher`, `@Network
 
 ## Setup Instructions
 
-- **Python Runtime**: Python 3.10+ (uses standard library only).
-- **Bundled Script**: `./skills/geo/earthquakes-hazards/scripts/usgs_hazards.py`.
-- **Network Access**: Outbound HTTPS access to `https://earthquake.usgs.gov` and `https://waterservices.usgs.gov`.
-- **Configuration Properties (`nadia.prop.*`)**: Keyless (`properties: []`).
+### External App & Integration Setup
+
+1. **World Map Viewer PF4J Plugin (`world-map-viewer`)**:
+   - In Nadia, open **⚙️ System Settings ➔ Plugins**.
+   - Click **Install from URL...** and enter `https://github.com/Ghost-Programmer/nadia-plugins` (or click **Install from Disk...** to select `world-map-viewer-<version>.jar`, or place the JAR directly in `~/.nadia/plugins/`).
+   - Verify `world-map-viewer` shows **STARTED / Enabled**, then open **View ➔ 🗺️ World Map** (or invoke `showMap()`).
+   - *Note*: The `world-map-viewer` plugin also provides native live USGS earthquake tools (`trackEarthquakes`, `trackGlobalEarthquakes`, `setEarthquakeLookbackDays` for 1–7 days, and `startContinuousEarthquakeTracking`) plus a built-in toolbar day selector.
+2. **Python 3.10+ Runtime (for `usgs_hazards.py` & River Gauges)**:
+   - Install Python 3.10+ on system `PATH` (uses standard library only; script at `~/.nadia/skills/geo/earthquakes-hazards/scripts/usgs_hazards.py`).
+3. **USGS Hazard Feeds (Keyless)**:
+   - Requires outbound HTTPS access to [USGS Earthquake Hazards](https://earthquake.usgs.gov/fdsnws/event/1/) and [USGS Water Services](https://waterservices.usgs.gov/). No API keys are required (`properties: []`).
 
 ---
 
@@ -64,4 +71,3 @@ python ~/.nadia/skills/geo/earthquakes-hazards/scripts/usgs_hazards.py water --s
 
 1. Always present earthquake results in a Markdown table with columns: `Magnitude`, `Location / Place`, `Depth (km)`, `Coordinates (Lat, Lon)`, `Time (UTC)`, and `Tsunami Alert`.
 2. When plotting on the World Map, confirm the number of seismic markers placed and highlight the strongest event.
-

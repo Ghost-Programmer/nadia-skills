@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: collaboration
   display-name: QuestionnaireSkill
 allowed-tools: storeBriefEntry appendBriefEntry
@@ -16,11 +16,14 @@ tools: [storeBriefEntry, appendBriefEntry]
 
 Turn something you cannot answer alone into a **discovery questionnaire**: a structured Markdown document to hand to a specific person to fill in asynchronously, or to work through together during a meeting. The recipient holds knowledge the user lacks; the questionnaire extracts it cleanly and efficiently.
 
+---
+
 ## Setup Instructions
 
-- **Prerequisites**: Ensure `storeBriefEntry` and `appendBriefEntry` tools are registered in Nadia's `ToolRegistry`.
-- **Configuration**: Active session workspace folder or project directory with write permissions for storing `to-questionnaire-<slug>.md` files.
-- **Brief Integration**: System Briefing database table or in-memory brief service configured to record pending discovery questionnaires.
+- **External Applications & Integrations**: None required.
+- **Nadia Runtime Prerequisites**:
+  - Built-in `storeBriefEntry` and `appendBriefEntry` tools registered in `ToolRegistry` (backed by Nadia's relational database configured in the First-Boot Setup Wizard or **⚙️ System Settings ➔ Database Connection**).
+  - Writable session/project workspace (`~/.nadia/session/`) for saving `to-questionnaire-<slug>.md` artifacts.
 
 ---
 

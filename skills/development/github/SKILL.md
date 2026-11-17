@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: development
   display-name: GitHubCLI
 allowed-tools: executeSessionCommand
@@ -18,15 +18,28 @@ This skill provides references and instructions for managing GitHub repositories
 
 All commands are executed inside the `./session` sandbox environment using the `executeSessionCommand` tool (running via Windows `cmd.exe`).
 
+---
+
 ## Setup Instructions
 
-- **GitHub CLI Installation**:
-  - GitHub CLI (`gh`) must be installed and accessible on system `PATH`.
-- **Authentication**:
-  - Authenticate using `gh auth login` or export `GITHUB_TOKEN` / `GH_TOKEN` with `repo`, `workflow`, and `read:org` scopes.
-  - Verify auth state with `gh auth status`.
-- **Git Config**:
-  - Ensure standard Git user email and name are configured (`git config --global user.name "..."`, `git config --global user.email "..."`).
+### External App & Integration Setup
+
+1. **Install Git & GitHub CLI (`gh`)**:
+   - Install **Git** (`https://git-scm.com/`) and **GitHub CLI** (`https://cli.github.com/`):
+     - **Windows**: `winget install Git.Git GitHub.cli`
+     - **macOS**: `brew install git gh`
+     - **Linux**: `sudo apt install git gh`
+2. **Configure Git Identity**:
+   ```bash
+   git config --global user.name "Your Name"
+   git config --global user.email "you@example.com"
+   ```
+3. **Authenticate GitHub CLI**:
+   - Run interactive login (or export `GH_TOKEN` / `GITHUB_TOKEN` with `repo`, `workflow`, and `read:org` scopes):
+     ```bash
+     gh auth login
+     gh auth status
+     ```
 
 ---
 

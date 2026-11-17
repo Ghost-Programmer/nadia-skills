@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: development
   display-name: UIDesignerSkill
 allowed-tools: generateDiagram renderMermaidDiagram getWhiteboardDiagramState clusterWhiteboardNodes createSpikeBranch startProject listProjects executeSessionCommand storeBriefEntry appendBriefEntry getBriefEntries searchMemory saveMemory updateMemory getCurrentDateTime getKanbanBoard createKanbanCard updateKanbanCard
@@ -16,15 +16,17 @@ tools: [generateDiagram, renderMermaidDiagram, getWhiteboardDiagramState, cluste
 
 This skill guides agents in translating product specifications and user requirements into state-of-the-art **User Interface designs** across **Android**, **JavaFX**, and **Angular**, using Nadia's interactive **Whiteboard** (`.whiteboard`) and diagramming tools to generate visual wireframes, component layouts, screen flow mockups, design tokens, and state transition maps.
 
+---
+
 ## Setup Instructions
 
-- **Whiteboard & Diagram Tools**:
-  - `generateDiagram`, `renderMermaidDiagram`, `getWhiteboardDiagramState`, and `clusterWhiteboardNodes` registered in `ToolRegistry`.
-  - JavaFX Whiteboard canvas enabled in the Nadia UI.
-- **Antigravity CLI**:
-  - Antigravity CLI (`agy`) binary installed on `PATH` for programmatic `.whiteboard` JSON wireframe model generation.
-- **Project Sandbox**:
-  - Active project sandbox directory `./session/projects/<projectName>/` writable for `<projectName>-ui-design.whiteboard` files.
+### External App & Integration Setup
+
+- **Nadia Generative 2D Whiteboard**:
+  - Built into Nadia (**View ➔ 🎨 Whiteboard**); no external wireframing software is required to author `.whiteboard` screen models or Mermaid flow diagrams.
+- **Optional External Tools**:
+  - **Antigravity CLI (`agy`)**: Install `agy` on `PATH` when generating multi-file UI stylesheets/components in `~/.nadia/session/projects/<projectName>/`.
+  - **Python 3.10+**: Install Python 3.10+ on `PATH` if pairing with the `design-assets` skill (`design_assets.py`) to fetch Iconify SVG icons and Colormind palettes.
 
 ---
 

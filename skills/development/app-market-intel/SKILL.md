@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: development
   display-name: AppMarketIntelSkill
 allowed-tools: startProject createKanbanCard storeBriefEntry executeSessionCommand searchMemory saveMemory getNadiaProperty setNadiaProperty
@@ -21,10 +21,18 @@ This skill powers `@Product Manager` in discovering trending mobile/desktop appl
 
 ## Setup Instructions
 
-- **Python Runtime**: Python 3.10+ (uses standard library only).
-- **Bundled Script**: `./skills/development/app-market-intel/scripts/app_market.py`.
-- **Configuration Properties (`nadia.prop.*`)**:
-  - Requires `nadia.prop.appgoat.apiKey` in `~/.nadia/nadia.properties` (configure via **Settings ➔ Properties** or `setNadiaProperty`).
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **AppGoat API Key (`nadia.prop.appgoat.apiKey`)**:
+  - Apple App Store Search queries work keyless out-of-the-box.
+  - For extended AppGoat market intelligence and rankings, generate an API key from your AppGoat developer dashboard and configure `nadia.prop.appgoat.apiKey` in **⚙️ System Settings ➔ Properties** (`~/.nadia/nadia.properties`) or via `setNadiaProperty`.
+- **Bundled Script**: `~/.nadia/skills/development/app-market-intel/scripts/app_market.py`.
 
 ---
 
@@ -43,4 +51,3 @@ Fetch detailed metadata, supported devices, genres, and version history for an a
 ```bash
 python ~/.nadia/skills/development/app-market-intel/scripts/app_market.py lookup --app-id "284882215"
 ```
-

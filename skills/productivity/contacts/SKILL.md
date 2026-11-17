@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: productivity
   display-name: ContactsSkill
 allowed-tools: executeSessionCommand
@@ -16,10 +16,29 @@ tools: [executeSessionCommand]
 
 This skill instructs the agent on how to list, search, read, create, update, and delete Google Contacts using the `gws` command-line utility.
 
-## Prerequisites
+---
 
-- The `gws` CLI must be installed and authenticated.
-- Always use the `executeSessionCommand` tool to execute `gws` commands.
+## Setup Instructions
+
+### External App & Integration Setup (`gws` Google Workspace CLI)
+
+1. **Install Node.js & Google Workspace CLI (`gws`)**:
+   - Install **Node.js 20+** (`https://nodejs.org/`), then install `@googleworkspace/cli` globally and ensure `gws` is on system `PATH`:
+     ```bash
+     npm install -g @googleworkspace/cli
+     gws --version
+     ```
+2. **Enable Google People API in Google Cloud Console**:
+   - Open [Google Cloud Console — API Library](https://console.cloud.google.com/apis/library), select or create a project, and enable **Google People API** (scope: `https://www.googleapis.com/auth/contacts`).
+   - Under **APIs & Services ➔ Credentials**, create an **OAuth 2.0 Client ID** (*Desktop app*)—or run `gws auth setup` if `gcloud` CLI is installed to provision credentials automatically.
+3. **Authenticate & Verify**:
+   - Sign in from a terminal so OAuth tokens are cached for `executeSessionCommand`:
+     ```bash
+     gws auth login
+     gws people connections list --params '{"resourceName": "people/me", "personFields": "names"}' --format table
+     ```
+
+---
 
 ## 1. Listing Contacts (List Operations)
 
@@ -140,22 +159,3 @@ gws people people deleteContact --params '{"resourceName": "people/<id>"}'
   ```bash
   gws people people deleteContact --params '{"resourceName": "people/c8976543210123456789"}'
   ```
-
-## Setup Instructions
-
-### 1. Prerequisites & CLI Installation
-- **gws CLI**: The Google Workspace CLI utility (`gws`) must be installed and available on system `PATH`.
-- **Runtime**: Ensure Node.js or the native runtime for `gws` is installed.
-
-### 2. Google Workspace Authentication & Permissions
-- **Google Cloud API**: Enable the **People API** (`https://www.googleapis.com/auth/contacts`) in the Google Cloud Console.
-- **Authentication**:
-  1. Authenticate `gws` with your Google account:
-     ```bash
-     gws auth login
-     ```
-  2. Verify contact listing permission:
-     ```bash
-     gws people connections list --params '{"resourceName": "people/me", "personFields": "names"}' --format table
-     ```
-- **ETag Handling**: Contact update operations require querying the latest ETag via `gws people people get` prior to dispatching `updateContact` commands.

@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: geo
   display-name: MaritimeAisSkill
 allowed-tools: showMap setMapNauticalView plotObject setFlag clearMap executeSessionCommand storeBriefEntry searchMemory saveMemory getNadiaProperty setNadiaProperty
@@ -21,10 +21,17 @@ This skill extends Nadia's aviation and satellite tracking capabilities to marit
 
 ## Setup Instructions
 
-- **Python Runtime**: Python 3.10+ (uses standard library only).
-- **Bundled Script**: `./skills/geo/maritime-ais/scripts/maritime_ais.py`.
-- **Configuration Properties (`nadia.prop.*`)**:
-  - Requires `nadia.prop.aistrail.apiKey` in `~/.nadia/nadia.properties` (configure via **Settings ➔ Properties** or `setNadiaProperty`).
+### External App & Integration Setup
+
+1. **World Map Viewer PF4J Plugin (`world-map-viewer`)**:
+   - In Nadia, open **⚙️ System Settings ➔ Plugins**.
+   - Click **Install from URL...** and enter `https://github.com/Ghost-Programmer/nadia-plugins` (or click **Install from Disk...** to select `world-map-viewer-<version>.jar`, or place the JAR directly in `~/.nadia/plugins/`).
+   - Verify `world-map-viewer` shows **STARTED / Enabled**, then open **View ➔ 🗺️ World Map** (or invoke `showMap()`).
+2. **Python 3.10+ Runtime**:
+   - Install Python 3.10+ on system `PATH` (uses standard library only; script at `~/.nadia/skills/geo/maritime-ais/scripts/maritime_ais.py`).
+3. **AIS Trail API Key (`nadia.prop.aistrail.apiKey`)**:
+   - Digitraffic Baltic/Nordic Marine AIS feeds work keyless out-of-the-box.
+   - For global AIS Trail vessel tracking, generate an API key from your AIS Trail account and save `nadia.prop.aistrail.apiKey` in **⚙️ System Settings ➔ Properties** (`~/.nadia/nadia.properties`).
 
 ---
 
@@ -50,4 +57,3 @@ python ~/.nadia/skills/geo/maritime-ais/scripts/maritime_ais.py bbox --min-lat 5
 
 1. Call `showMap()` and `setMapNauticalView(true)` to enable the OpenSeaMap nautical seamarks overlay.
 2. Call `plotObject(name, latitude, longitude)` for each vessel to render its position and track on the map.
-

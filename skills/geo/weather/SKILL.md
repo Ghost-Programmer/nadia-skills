@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: geo
   display-name: WeatherSkill
 allowed-tools: run_command
@@ -18,19 +18,22 @@ This skill instructs the agent on how to retrieve the current weather and hourly
 
 The weather service is implemented as a Python script located at `./skills/weather/scripts/weather.py`. It integrates with the geocoding service at `./skills/location/scripts/geocoding.py` to resolve address queries into coordinates and look up the country code to dynamically select Fahrenheit (°F) or Celsius (°C).
 
+---
+
 ## Setup Instructions
 
-- **Python Runtime & Dependencies**:
-  - Python 3.10+ installed and on system `PATH`.
-  - Install required Python package:
-    ```bash
-    pip install requests
-    ```
-- **Script Location**:
-  - Weather script located at `./skills/weather/scripts/weather.py` (or `./skills/geo/weather/scripts/weather.py`).
-- **Network & API Access**:
-  - Open-Meteo public API (`https://api.open-meteo.com`) requires no API key.
-  - Outbound internet access on port 80/443.
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **Open-Meteo Weather API (Keyless)**:
+  - Outbound HTTPS access to [Open-Meteo](https://api.open-meteo.com/) requires no account or API key.
+- **Companion Skill**: Automatically uses `geocoding.py` from `~/.nadia/skills/geo/location/scripts/` when resolving city/place names to coordinates (ensure the `location` skill is installed).
+- **Bundled Script**: `~/.nadia/skills/geo/weather/scripts/weather.py`.
 
 ---
 

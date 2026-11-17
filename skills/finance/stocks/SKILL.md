@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: finance
   display-name: FinanceSkill
 allowed-tools: executeSessionCommand searchMemory saveMemory
@@ -16,21 +16,23 @@ tools: [executeSessionCommand, searchMemory, saveMemory]
 
 This skill instructs the agent on how to look up financial data, retrieve ticker symbols, get latest quotes, pull historical prices using the Yahoo Finance API, and persist user company interests in long-term RAG memory.
 
-The finance service is implemented as a Python script located at `./skills/finance/scripts/finance_api.py`.
+The finance service is implemented as a Python script located at `~/.nadia/skills/finance/stocks/scripts/finance_api.py`.
+
+---
 
 ## Setup Instructions
 
-- **Python Runtime & Dependencies**:
-  - Python 3.10+ installed and on system `PATH`.
-  - Install required Python dependencies:
-    ```bash
-    pip install requests
-    ```
-- **Script Location**:
-  - Script located at `./skills/finance/scripts/finance_api.py`.
-- **API & Network**:
-  - Outbound internet access to Yahoo Finance query APIs (`https://query1.finance.yahoo.com`).
-  - Optional: Set `YAHOO_FINANCE_API_KEY` if using private or proxy finance gateways.
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **Yahoo Finance Market Data (Keyless)**:
+  - Requires outbound HTTPS access to Yahoo Finance query endpoints (`https://query1.finance.yahoo.com`). No API key is required for standard quote, search, and historical OHLCV lookups.
+- **Bundled Script**: `~/.nadia/skills/finance/stocks/scripts/finance_api.py`.
 
 ---
 
@@ -41,20 +43,20 @@ When the user requests stock prices, market quotes, or historical financial char
 1. **Step 1: Resolve the Ticker Symbol**: First run the `resolve` command to find the correct ticker symbol:
 
    ```bash
-   python ../skills/finance/scripts/finance_api.py resolve --company "<company_name>"
+   python .~/.nadia/skills/finance/stocks/scripts/finance_api.py resolve --company "<company_name>"
    ```
 
 2. **Step 2: Fetch the Price or Chart Data**: Immediately use the resolved ticker symbol to fetch the actual financial data:
    - For current prices/quotes, run `latest`:
 
      ```bash
-     python ../skills/finance/scripts/finance_api.py latest --symbol "<resolved_symbol>"
+     python .~/.nadia/skills/finance/stocks/scripts/finance_api.py latest --symbol "<resolved_symbol>"
      ```
 
    - For historical prices/charts, run `historical`:
 
      ```bash
-     python ../skills/finance/scripts/finance_api.py historical --symbol "<resolved_symbol>" --start "<start_date>" --end "<end_date>"
+     python .~/.nadia/skills/finance/stocks/scripts/finance_api.py historical --symbol "<resolved_symbol>" --start "<start_date>" --end "<end_date>"
      ```
 
 3. **Step 3: Present the Results**: Display the resolved symbol, company name, latest price, change, volume, or historical table to the user. **Do not stop or return after only resolving the ticker symbol.**
@@ -68,13 +70,13 @@ Call the `run_command` tool to run the finance Python script.
 Finds the closest matching ticker symbol and full company name for a search query.
 
 ```bash
-python ../skills/finance/scripts/finance_api.py resolve --company "[company_name]"
+python .~/.nadia/skills/finance/stocks/scripts/finance_api.py resolve --company "[company_name]"
 ```
 
 *Example:*
 
 ```bash
-python ../skills/finance/scripts/finance_api.py resolve --company "Apple"
+python .~/.nadia/skills/finance/stocks/scripts/finance_api.py resolve --company "Apple"
 ```
 
 *Response JSON returned:*
@@ -91,13 +93,13 @@ python ../skills/finance/scripts/finance_api.py resolve --company "Apple"
 Gets the most recent trading price, change, previous close, high/low, and daily volume.
 
 ```bash
-python ../skills/finance/scripts/finance_api.py latest --symbol "[ticker_symbol]"
+python .~/.nadia/skills/finance/stocks/scripts/finance_api.py latest --symbol "[ticker_symbol]"
 ```
 
 *Example:*
 
 ```bash
-python ../skills/finance/scripts/finance_api.py latest --symbol "AAPL"
+python .~/.nadia/skills/finance/stocks/scripts/finance_api.py latest --symbol "AAPL"
 ```
 
 *Response JSON returned:*
@@ -125,13 +127,13 @@ python ../skills/finance/scripts/finance_api.py latest --symbol "AAPL"
 Pulls daily historical quotes (Open, High, Low, Close, Adjusted Close, Volume) over a specific date range.
 
 ```bash
-python ../skills/finance/scripts/finance_api.py historical --symbol "[ticker_symbol]" --start "[YYYY-MM-DD]" --end "[YYYY-MM-DD]"
+python .~/.nadia/skills/finance/stocks/scripts/finance_api.py historical --symbol "[ticker_symbol]" --start "[YYYY-MM-DD]" --end "[YYYY-MM-DD]"
 ```
 
 *Example:*
 
 ```bash
-python ../skills/finance/scripts/finance_api.py historical --symbol "AAPL" --start "2026-08-01" --end "2026-08-20"
+python .~/.nadia/skills/finance/stocks/scripts/finance_api.py historical --symbol "AAPL" --start "2026-08-01" --end "2026-08-20"
 ```
 
 *Response JSON returned:*

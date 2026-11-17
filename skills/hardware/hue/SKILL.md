@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: hardware
   display-name: PhilipsHueSmartLightingSkill
 allowed-tools: discoverHueBridges pairHueBridge listHueLights setHueLightState listHueRooms setHueRoomState flashHueAlert
@@ -16,17 +16,20 @@ tools: [discoverHueBridges, pairHueBridge, listHueLights, setHueLightState, list
 
 Use this skill when interacting with smart home lighting, managing Philips Hue Bridges, adjusting room illumination, setting scene colors, or triggering visual alert flashes for build notifications, alarms, and focus modes.
 
+---
+
 ## Setup Instructions
 
-- **Bridge Network Connectivity & Approval**:
-  - Philips Hue Bridge connected to the same local subnet as Nadia.
-  - HTTP port 80 / HTTPS port 443 open on the Bridge.
-  - **Zero-Trust Network Approval**: Local subnet ARP sweeps for discovering Hue Bridges require the active network to be approved in Nadia's zero-trust database. When approving a network via `approveCurrentNetwork` (from `NetworkSkill`), Nadia automatically detects and persists the Hue Bridge IP and hardware ID (`hasHueBridge`, `hueBridgeIp`, `hueBridgeId`).
-- **Initial Pairing**:
-  - Call `discoverHueBridges` to locate the bridge IP.
-  - Press the physical link button on top of the bridge, then invoke `pairHueBridge(bridgeIp)` within 30 seconds to generate and persist the `HUE_APPLICATION_KEY`.
-- **Configuration**:
-  - Credentials saved in `~/.nadia/config.json` or `application.yml` under `nadia.hue.application-key`.
+### External App & Integration Setup
+
+1. **Connect Philips Hue Bridge to Local LAN**:
+   - Plug your Philips Hue Bridge into the same local router/subnet as Nadia via Ethernet and ensure lights/rooms are configured in the official **Philips Hue** mobile app.
+   - Ensure local LAN HTTP/HTTPS ports `80` and `443` on the Hue Bridge are reachable from the Nadia host.
+2. **Approve Local Subnet (Zero-Trust Guard)**:
+   - Open **View ➔ 🌐 Network Engineer** and approve the active network (or call `approveCurrentNetwork()` from `NetworkSkill`), which also auto-detects local Hue Bridges via ARP/mDNS.
+3. **Pair Nadia with the Hue Bridge (One-Time Physical Button Press)**:
+   - Run `discoverHueBridges()` (or open **View ➔ 🌐 Network Engineer ➔ Philips Hue**).
+   - Press the large round **physical Link Button** on top of your Philips Hue Bridge, then invoke `pairHueBridge(bridgeIp)` (or click **Pair Bridge** in the UI) within **30 seconds**. Nadia persists the generated application key automatically in its database.
 
 ---
 

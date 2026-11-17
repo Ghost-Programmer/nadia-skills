@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: productivity
   display-name: BriefSkill
 allowed-tools: storeBriefEntry appendBriefEntry getBriefEntries deleteBriefEntry clearBriefEntries
@@ -15,6 +15,17 @@ tools: [storeBriefEntry, appendBriefEntry, getBriefEntries, deleteBriefEntry, cl
 # Brief Reporting and Summary Skill
 
 This skill guides the agent in managing temporary briefs and compiling them into polished Markdown summaries. Use this skill when the user asks for a brief, summary report, or status report of stored information, or when automated background tasks (like weather, quotes, blog monitoring, email triage) log information.
+
+---
+
+## Setup Instructions
+
+### External App & Integration Setup
+
+- **External Applications & Integrations**: None required for core brief storage—entries are persisted automatically in Nadia's relational database (`brief_entry` table via **⚙️ System Settings ➔ Database Connection**).
+- **Automated Scheduled Briefings (Optional)**:
+  - Configure recurring morning/evening brief prompts in **View ➔ 🕒 Scheduled Jobs** (`PromptSchedulerService`) or via a staff specialist's `~/.nadia/staff/<StaffName>/cron.json`.
+  - To aggregate external feeds into daily briefs, complete setup for any desired feeder skills (`email`, `calendar`, `weather`, `stocks`, `blogwatcher`).
 
 ---
 
@@ -97,13 +108,3 @@ Use the following layout structure to compile multi-domain executive briefs:
 - **Database**: Connected (PostgreSQL, 1.2 ms latency)
 - **Fleet**: 3D Printer Idle (100% Ready)
 ```
-
-## Setup Instructions
-
-### 1. Prerequisites & Storage
-- **Nadia Persistence**: Brief entries are stored in Nadia's internal `brief_entry` relational database table managed automatically by Spring Data JPA / `BriefService`.
-- **Spring AI Tools**: The tools `storeBriefEntry`, `appendBriefEntry`, `getBriefEntries`, `deleteBriefEntry`, and `clearBriefEntries` are registered in the Spring AI tool registry by default.
-
-### 2. Scheduled Briefings (Optional)
-- **Morning Brief Cron**: To automate executive briefs, configure a scheduled cron trigger in Nadia or `application.yml` (e.g., `cron: "0 0 8 * * *"`).
-- **Domain Feed Ingestion**: Ensure peripheral skills (e.g. `blogwatcher`, `weather`, `stocks`, `email`) are configured if aggregated briefings across domains are desired.

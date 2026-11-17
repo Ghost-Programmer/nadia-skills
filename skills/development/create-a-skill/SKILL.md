@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: development
   display-name: CreateSkillSkill
 allowed-tools: createSelfGeneratedSkill synthesizeSkillFromProblemSolution listSelfGeneratedSkills getNadiaProperty setNadiaProperty listNadiaProperties executeSessionCommand
@@ -18,10 +18,11 @@ This skill guides the agent in authoring, structuring, validating, and packaging
 
 ## Setup Instructions
 
-- **Prerequisites**: Target skills directory `~/.nadia/skills/` exists and has write permissions.
-- **Official Base Template**: A starter template is maintained at [`skills/TEMPLATE.md`](file:///c:/Users/jeff/Source/nadia-skills/skills/TEMPLATE.md) (and `~/.nadia/skills/TEMPLATE.md`).
+- **External Applications & Integrations**: None required for authoring pure Markdown skills. If authoring a skill with bundled Python helper scripts (`scripts/*.py`), install **Python 3.10+** on system `PATH`.
+- **Target Directory & Permissions**: Ensure `~/.nadia/skills/` exists and is writable (managed automatically by Nadia).
+- **Official Base Template**: Scaffold new skills from `~/.nadia/skills/TEMPLATE.md` (`skills/TEMPLATE.md` in `nadia-skills`), always documenting any external app/CLI/API/plugin setup requirements clearly.
 - **Open Standard Compliance**: Every skill authored or exported by Nadia follows the [agentskills.io](https://agentskills.io) specification so community-built skills can be imported directly and agent-generated skills can be shared across compatible platforms.
-- **Skill Reloading**: After writing or modifying a `SKILL.md`, call `SkillRegistry.reloadSkills()` or save in the Skill Editor to re-index active skills.
+- **Skill Reloading**: After writing or modifying a `SKILL.md`, save in Nadia's **Skill Editor** (or click **Reload Skills** in the Left Side Panel) to re-index active skills immediately.
 
 ---
 
@@ -82,10 +83,10 @@ Provide a concise overview of this procedural skill's purpose, domain scope, and
 
 ---
 
-## 1. Prerequisites & Progressive Disclosure Resources (`agentskills.io`)
+## 1. External App & Integration Setup (`agentskills.io`)
 
-- **Required Environment / Tools**: List any required Spring AI `@NadiaTool` bindings or CLI utilities.
-- **Configuration Properties (`nadia.prop.*`)**: Store any settings, API keys, credentials, or parameters required by the skill or its tools in `~/.nadia/nadia.properties` using the `nadia.prop.<name>` prefix (configured in **Settings ➔ Properties** or via `getNadiaProperty` / `setNadiaProperty` / `listNadiaProperties`).
+- **External Applications, CLIs & Plugins**: Document step-by-step installation and authentication for any required external CLIs, runtimes, MCP servers (**⚙️ System Settings ➔ MCP Servers**), PF4J plugins (**⚙️ System Settings ➔ Plugins**), or LAN hardware devices.
+- **Configuration Properties (`nadia.prop.*`)**: Store any settings, API keys, credentials, or parameters required by the skill or its tools in `~/.nadia/nadia.properties` using the `nadia.prop.<name>` prefix (configured in **⚙️ System Settings ➔ Properties** or via `getNadiaProperty` / `setNadiaProperty` / `listNadiaProperties`).
 - **Bundled Skill Resources (Optional)**:
   - `scripts/`: Deterministic helper scripts (e.g., Python, Bash) executed via `executeSessionCommand`.
   - `references/`: Detailed API schemas or reference documentation loaded on demand.

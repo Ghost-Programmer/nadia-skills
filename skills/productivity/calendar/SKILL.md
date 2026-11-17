@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: productivity
   display-name: CalendarSkill
 allowed-tools: executeSessionCommand
@@ -16,10 +16,30 @@ tools: [executeSessionCommand]
 
 This skill instructs the agent on how to manage Google Calendar events and compile agenda schedules using the `gws` command-line utility.
 
-## Prerequisites
+---
 
-- The `gws` CLI must be installed and authenticated.
-- Always use the `executeSessionCommand` tool to execute `gws` commands.
+## Setup Instructions
+
+### External App & Integration Setup (`gws` Google Workspace CLI)
+
+1. **Install Node.js & Google Workspace CLI (`gws`)**:
+   - Install **Node.js 20+** (`https://nodejs.org/`), then install `@googleworkspace/cli` globally and ensure `gws` is on system `PATH`:
+     ```bash
+     npm install -g @googleworkspace/cli
+     gws --version
+     ```
+2. **Enable Google Calendar API in Google Cloud Console**:
+   - Open [Google Cloud Console — API Library](https://console.cloud.google.com/apis/library), select or create a project, and enable **Google Calendar API** (scope: `https://www.googleapis.com/auth/calendar`).
+   - Under **APIs & Services ➔ Credentials**, create an **OAuth 2.0 Client ID** (*Desktop app*)—or run `gws auth setup` if `gcloud` CLI is installed to provision credentials automatically.
+3. **Authenticate & Verify**:
+   - Sign in from a terminal so OAuth tokens are cached for `executeSessionCommand`:
+     ```bash
+     gws auth login
+     gws calendar +agenda --today
+     ```
+- **Pre-Meeting Alarms**: Nadia's `CalendarAlarmSchedulerService` automatically schedules local 10-minute pre-meeting notifications for upcoming calendar events.
+
+---
 
 ## 1. Retrieving Agendas (Read Operations)
 
@@ -149,23 +169,3 @@ gws calendar events delete --params '{"calendarId": "primary", "eventId": "<EVEN
   ```bash
   gws calendar events delete --params '{"calendarId": "primary", "eventId": "a1b2c3d4e5"}'
   ```
-
-## Setup Instructions
-
-### 1. Prerequisites & CLI Installation
-- **gws CLI**: The Google Workspace CLI utility (`gws`) must be installed and added to the system `PATH`.
-- **Node.js / Go / Binary Runtime**: Ensure the runtime required by your installed `gws` distribution is present.
-
-### 2. Google Workspace Authentication & API Configuration
-- **Google Cloud Project**: Enable the **Google Calendar API** (`https://www.googleapis.com/auth/calendar`) in the Google Cloud Console.
-- **Credentials Setup**:
-  1. Generate an OAuth 2.0 Client ID or Service Account key with Calendar read/write scopes.
-  2. Authenticate the CLI by running:
-     ```bash
-     gws auth login
-     ```
-  3. Verify authentication status and default calendar access:
-     ```bash
-     gws calendar +agenda --today
-     ```
-- **Timezone**: Ensure the system or CLI timezone is configured (e.g. `America/New_York` or UTC) to ensure accurate event scheduling.

@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: media
   display-name: YouTubeMusicSkill
 allowed-tools: executeSessionCommand
@@ -14,28 +14,45 @@ tools: [executeSessionCommand]
 
 # YouTube Music CLI Skill
 
-This skill instructs the agent on how to interact with YouTube Music by executing the helper script `ytmusic_cli.py` located in `./skills/ytmusic/scripts/`.
+This skill instructs the agent on how to interact with YouTube Music by executing the helper script `ytmusic_cli.py` located in `~/.nadia/skills/media/ytmusic/scripts/`.
 
 It supports both:
 
 1. **Public/Authenticated Library Queries**: Search, fetching playlists, getting song lyrics, and managing playlists (requires authentication file).
 2. **Global Media Playback Controls**: Playing specific tracks/playlists in the browser and sending global Windows media keyboard keys (Play/Pause, Stop, Skip).
 
-## Setup & Authentication (Optional)
+---
 
-If the user requests actions involving their private library (like listing playlists, creating playlists, or getting private favorites):
+## Setup Instructions
 
-1. The user must generate an authorization file `oauth.json` using the `ytmusicapi oauth` terminal setup process.
-2. The agent should pass the path of the generated file via `--auth ./skills/ytmusic/oauth.json`.
+### External App & Integration Setup
 
-If `--auth` is not passed, the script automatically accesses public YouTube Music content (such as search, charts, public albums/artists, and lyrics).
+1. **Install Python 3.10+ & `ytmusicapi`**:
+   - Ensure `python` is on system `PATH` and install the `ytmusicapi` package:
+     ```bash
+     pip install ytmusicapi
+     ```
+2. **Public vs. Private YouTube Music Authentication**:
+   - **Public Content (Zero Auth)**: Searching tracks/albums/artists, charts, lyrics, and browser playback (`--action play`) work immediately without authentication.
+   - **Private Library & Playlists (`oauth.json`)**:
+     1. Create a TV/Limited-Input OAuth Client ID in [Google Cloud Console](https://console.cloud.google.com/apis/credentials) with **YouTube Data API v3** enabled (per [ytmusicapi OAuth docs](https://ytmusicapi.readthedocs.io/en/stable/setup/oauth.html)).
+     2. Run interactive setup in a terminal and save `oauth.json`:
+        ```bash
+        ytmusicapi oauth --file ~/.nadia/skills/media/ytmusic/oauth.json
+        ```
+     3. Pass `--auth ~/.nadia/skills/media/ytmusic/oauth.json` when invoking private playlist actions.
+3. **OS Media Transport Keys**:
+   - Hardware media key actions (`pause`, `stop`, `next`, `prev`) use Windows `user32` Virtual-Key codes (`VK_MEDIA_*`); API queries work on Windows, macOS, and Linux.
+- **Bundled Script**: `~/.nadia/skills/media/ytmusic/scripts/ytmusic_cli.py`.
+
+---
 
 ## CLI Command Actions
 
 Invoke the helper script using the `executeSessionCommand` tool:
 
 ```bash
-python ../skills/ytmusic/scripts/ytmusic_cli.py --action <action> [options]
+python ../skills/media/ytmusic/scripts/ytmusic_cli.py --action <action> [options]
 ```
 
 ### Supported Actions
@@ -66,51 +83,29 @@ python ../skills/ytmusic/scripts/ytmusic_cli.py --action <action> [options]
 ### 1. Searching for a Song
 
 ```bash
-python ../skills/ytmusic/scripts/ytmusic_cli.py --action search --query "Bohemian Rhapsody" --filter songs
+python ../skills/media/ytmusic/scripts/ytmusic_cli.py --action search --query "Bohemian Rhapsody" --filter songs
 ```
 
 ### 2. Getting Lyrics for a Song
 
 ```bash
-python ../skills/ytmusic/scripts/ytmusic_cli.py --action get_lyrics --video-id "fJ9rUzIMcZQ"
+python ../skills/media/ytmusic/scripts/ytmusic_cli.py --action get_lyrics --video-id "fJ9rUzIMcZQ"
 ```
 
 ### 3. Playing a Playlist
 
 ```bash
-python ../skills/ytmusic/scripts/ytmusic_cli.py --action play --playlist-id "PL7P1pWc1gGg6H2b1z"
+python ../skills/media/ytmusic/scripts/ytmusic_cli.py --action play --playlist-id "PL7P1pWc1gGg6H2b1z"
 ```
 
 ### 4. Pausing Playback
 
 ```bash
-python ../skills/ytmusic/scripts/ytmusic_cli.py --action pause
+python ../skills/media/ytmusic/scripts/ytmusic_cli.py --action pause
 ```
 
 ### 5. Fetching Library Playlists
 
 ```bash
-python ../skills/ytmusic/scripts/ytmusic_cli.py --auth ./skills/ytmusic/oauth.json --action get_playlists
+python ../skills/media/ytmusic/scripts/ytmusic_cli.py --auth ~/.nadia/skills/media/ytmusic/oauth.json --action get_playlists
 ```
-
-## Setup Instructions
-
-### 1. Prerequisites
-- **Python Runtime**: Python 3.10 or higher installed and on `PATH`.
-- **Dependencies**: Install `ytmusicapi`:
-  ```bash
-  pip install ytmusicapi
-  ```
-- **OS Support**: Windows is required for media key simulation actions (`pause`, `stop`, `next`, `prev` using Windows Virtual-Key codes). Public and authenticated API queries work cross-platform.
-- **Script Location**: Ensure `ytmusic_cli.py` is present at `./skills/ytmusic/scripts/ytmusic_cli.py`.
-
-### 2. Authentication Setup (Private Library Access)
-Public actions (searching tracks, getting song info, viewing public playlists/artists, fetching lyrics) do not require authentication.
-For private library actions (user playlists, liked songs):
-1. In the terminal, run the interactive OAuth setup utility:
-   ```bash
-   ytmusicapi oauth
-   ```
-2. Follow the browser prompt to log in to YouTube Music with your Google account.
-3. Save the resulting OAuth token JSON file as `oauth.json` in `./skills/ytmusic/oauth.json`.
-4. Ensure the file path is provided via the `--auth` argument during CLI calls.

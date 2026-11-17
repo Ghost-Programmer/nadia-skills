@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: geo
   display-name: AviationSkill
 allowed-tools: trackPlanes startContinuousPlaneTracking stopContinuousPlaneTracking getPlaneTrackingStatus showMap clearMap
@@ -17,15 +17,26 @@ properties: [nadia.prop.opensky.username, nadia.prop.opensky.password]
 
 Provides capabilities to query live aircraft locations, configure automatic flight tracking loops, and plot plane trajectories on the World Map.
 
+---
+
 ## Setup Instructions
 
-- **Map Viewer Prerequisite**:
-  - World Map Viewer window must be active (call `showMap()` or open Map tab in Nadia).
-- **OpenSky Network Access**:
-  - Outbound internet access to OpenSky Network API (`https://opensky-network.org/api`).
-  - Optional: Configure `nadia.prop.opensky.username` and `nadia.prop.opensky.password` in `~/.nadia/nadia.properties` (via the **Settings ➔ Properties** view or `setNadiaProperty`) for higher authenticated rate limits. Anonymous requests are subject to public rate limits.
-- **Recommended Intervals**:
-  - Continuous tracking intervals should be set to 15–30 seconds to avoid HTTP 429 rate limit throttling.
+### External App & Integration Setup
+
+1. **World Map Viewer PF4J Plugin (`world-map-viewer`)**:
+   - In Nadia, open **⚙️ System Settings ➔ Plugins**.
+   - Click **Install from URL...** and enter `https://github.com/Ghost-Programmer/nadia-plugins` (or click **Install from Disk...** to select `world-map-viewer-<version>.jar`, or place the JAR directly in `~/.nadia/plugins/`).
+   - Verify `world-map-viewer` shows **STARTED / Enabled**, then open **View ➔ 🗺️ World Map** (or invoke `showMap()`).
+2. **OpenSky Network Account Setup (Optional — Higher Rate Limits)**:
+   - Anonymous queries to `https://opensky-network.org/api` work out-of-the-box with stricter public rate limits.
+   - For higher authenticated request quotas:
+     1. Create a free account at [OpenSky Network](https://opensky-network.org/).
+     2. Open **⚙️ System Settings ➔ Properties** in Nadia (or call `setNadiaProperty`) and configure:
+        ```properties
+        nadia.prop.opensky.username=your_opensky_username
+        nadia.prop.opensky.password=your_opensky_password
+        ```
+3. **Recommended Polling Cadence**: Use 15–30 second intervals for continuous tracking to avoid HTTP 429 throttling.
 
 ---
 

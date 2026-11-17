@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: geo
   display-name: SatelliteSkill
 allowed-tools: trackSatellites startContinuousSatelliteTracking stopContinuousSatelliteTracking getSatelliteTrackingStatus getSatelliteCategories showMap clearMap
@@ -17,15 +17,23 @@ properties: [nadia.prop.n2yo.apiKey]
 
 Provides capabilities to query live satellite locations, configure automatic orbit tracking loops, and plot satellite trajectories on the World Map.
 
+---
+
 ## Setup Instructions
 
-- **Map Viewer Prerequisite**:
-  - World Map Viewer window must be active (call `showMap()` or open Map tab in Nadia).
-- **N2YO API Integration**:
-  - Outbound internet access to N2YO API (`https://api.n2yo.com/rest/v1/satellite/`).
-  - Configure `nadia.prop.n2yo.apiKey` in `~/.nadia/nadia.properties` (via the **Settings ➔ Properties** view or `setNadiaProperty`).
-- **Tracking Rate Limits**:
-  - Continuous tracking intervals should be configured for 30+ seconds to respect N2YO query quotas.
+### External App & Integration Setup
+
+1. **World Map Viewer PF4J Plugin (`world-map-viewer`)**:
+   - In Nadia, open **⚙️ System Settings ➔ Plugins**.
+   - Click **Install from URL...** and enter `https://github.com/Ghost-Programmer/nadia-plugins` (or click **Install from Disk...** to select `world-map-viewer-<version>.jar`, or place the JAR directly in `~/.nadia/plugins/`).
+   - Verify `world-map-viewer` shows **STARTED / Enabled**, then open **View ➔ 🗺️ World Map** (or invoke `showMap()`).
+2. **N2YO Satellite API Key (`nadia.prop.n2yo.apiKey` — Required)**:
+   - Register for a free account at [N2YO.com](https://www.n2yo.com/login/), navigate to **Your Profile**, and generate an **API Key**.
+   - Open **⚙️ System Settings ➔ Properties** in Nadia (or call `setNadiaProperty`) and set:
+     ```properties
+     nadia.prop.n2yo.apiKey=XXXXXX-XXXXXX-XXXXXX-XXXX
+     ```
+3. **Rate Limits**: Use continuous tracking intervals of **30+ seconds** to stay well within N2YO's hourly transaction quotas.
 
 ---
 

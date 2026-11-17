@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: research
   display-name: DatabaseQuerySkill
 allowed-tools: getDatabaseConnectionsList getDatabaseSchema executeDatabaseQuery
@@ -16,6 +16,24 @@ tools: [getDatabaseConnectionsList, getDatabaseSchema, executeDatabaseQuery]
 
 This skill allows the agent to discover configured database connections and execute schema inspections and SQL queries against them (supporting PostgreSQL, MySQL, MariaDB, SQLite, or H2).
 
+---
+
+## Setup Instructions
+
+### External App & Integration Setup
+
+1. **Supported Relational Databases**:
+   - Nadia ships with built-in JDBC drivers for **PostgreSQL**, **MySQL**, **MariaDB**, **SQLite**, and **H2** (no extra driver JAR installation needed).
+2. **Register External Database Connections in Nadia**:
+   - Open **⚙️ System Settings ➔ Database Connection**.
+   - Click **New / Add Connection** and enter:
+     - **Connection Name** (used when calling `getDatabaseSchema` / `executeDatabaseQuery`)
+     - **Driver / Engine** (`PostgreSQL`, `MySQL`, `MariaDB`, `SQLite`, or `H2`)
+     - **Host, Port, Database Name, Username & Password** (using a dedicated **read-only** database user is strongly recommended for analytics/inspection).
+   - Click **Test Connection** to verify network reachability and credentials, then click **Save**.
+
+---
+
 ## Execution Guidelines
 
 1. **Discover Connections First**: If you do not know which database connections are available, call the `getDatabaseConnectionsList` tool. This lists the connection names and a note explaining what each database contains. Choose the connection name that is relevant to the user's request.
@@ -24,28 +42,3 @@ This skill allows the agent to discover configured database connections and exec
 4. **Read-Only Focus**: Prefer read-only SQL queries (`SELECT`) where possible to prevent accidental data modification.
 5. **Paging and Filtering**: When query results could be large, make sure to add `LIMIT` or filter clauses to fetch only necessary records. Although execution outputs are capped to 100 rows by the tool to avoid context window flooding, you should still practice query hygiene.
 6. **Driver Dialect**: Adapt your SQL queries to the target driver type (visible in the connections list) to handle dialect differences.
-
-## Setup Instructions
-
-### 1. Prerequisites & JDBC Drivers
-- **Classpath Drivers**: Ensure JDBC drivers for target database engines (e.g., `org.postgresql:postgresql`, `com.mysql:mysql-connector-j`, `org.xerial:sqlite-jdbc`, `com.h2database:h2`) are present in `build.gradle` or application runtime.
-- **Spring AI Tools**: `getDatabaseConnectionsList`, `getDatabaseSchema`, and `executeDatabaseQuery` are auto-configured by Nadia.
-
-### 2. Configuring Database Connections
-- **Application Configuration**: Define named connection pools in `application.yml`:
-  ```yaml
-  nadia:
-    database:
-      connections:
-        primary-pg:
-          url: jdbc:postgresql://localhost:5432/nadia
-          username: nadia_user
-          password: ${DB_PASSWORD}
-          driver-class-name: org.postgresql.Driver
-          description: "Primary relational application database"
-        analytics-sqlite:
-          url: jdbc:sqlite:./session/analytics.db
-          driver-class-name: org.sqlite.JDBC
-          description: "Local read-only analytics snapshot"
-  ```
-- **Permission Scopes**: For security, configure dedicated read-only database credentials when only schema inspection and analytics queries are required.

@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: genealogy
   display-name: GedcomSkill
 allowed-tools: executeSessionCommand searchMemory saveMemory
@@ -18,16 +18,21 @@ This skill instructs the agent on how to parse, inspect, query, and validate GED
 
 The GEDCOM parser tool is implemented as a Python script located at `~/.nadia/skills/genealogy/gedcom/scripts/gedcom_tool.py` (or `./skills/genealogy/gedcom/scripts/gedcom_tool.py`).
 
+---
+
 ## Setup Instructions
 
-- **Python Runtime & Dependencies**:
-  - Python 3.10+ installed and available on system `PATH`.
-  - Built with pure Python standard library modules (`argparse`, `json`, `re`, `pathlib`, `collections`). No external pip dependencies required.
-- **Script Location**:
-  - `~/.nadia/skills/genealogy/gedcom/scripts/gedcom_tool.py`
-  - Workspace relative path: `./skills/genealogy/gedcom/scripts/gedcom_tool.py` or `../skills/genealogy/gedcom/scripts/gedcom_tool.py`
-- **File System Permissions**:
-  - Read access to target `.ged` or `.gedcom` files within session directories or attached project folders.
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **Exporting GEDCOM Files (`.ged`) from Genealogy Platforms**:
+  - Export your family tree in GEDCOM 5.5, 5.5.1, or 7.0 format from **Ancestry.com** (*Tree Settings ➔ Export tree*), **MyHeritage** (*Manage trees ➔ Export to GEDCOM*), **FamilySearch** (via third-party sync tools such as RootsMagic/Ancestral Quest), **Gramps**, or **Legacy Family Tree**, and save it into `~/.nadia/session/`.
+- **Bundled Script**: `~/.nadia/skills/genealogy/gedcom/scripts/gedcom_tool.py`.
 
 ---
 

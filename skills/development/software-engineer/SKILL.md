@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: development
   display-name: SoftwareEngineerSkill
 allowed-tools: startProject stopProject listProjects switchProjectBranch executeSessionCommand dockerListContainers dockerContainerLogs dockerStartContainer dockerStopContainer dockerRestartContainer dockerRunContainer dockerCheckContainers storeBriefEntry appendBriefEntry getBriefEntries searchMemory saveMemory updateMemory getCurrentDateTime getKanbanBoard createKanbanCard moveKanbanCard updateKanbanCard
@@ -16,17 +16,20 @@ tools: [startProject, stopProject, listProjects, switchProjectBranch, executeSes
 
 This skill guides agents in implementing complete, full-stack features, components, and applications across **Android**, **JavaFX**, **Angular**, and **Java / Spring Boot** within Nadia's sandboxed project workspaces, adhering to specifications from `@Product Manager`, wireframes from `@UI Designer`, and architecture contracts from `@Software Architect`.
 
+---
+
 ## Setup Instructions
 
-- **SDK & Build Toolchains**:
-  - JDK 21+ / 23+ configured on system `PATH` with `JAVA_HOME` set.
-  - Gradle (`./gradlew` / `gradlew.bat`) or Maven (`mvn`) available.
-  - Node.js 18+ and npm installed for Angular/TypeScript frontends.
-  - Android SDK (or `android` CLI tool) configured for Android Gradle builds.
-- **Antigravity CLI**:
-  - Antigravity CLI (`agy`) binary available on `PATH` for multi-file generation and refactoring.
-- **Docker Environment (Optional)**:
-  - Docker daemon running if services require containerized databases or backend microservices.
+### External App & Integration Setup
+
+1. **Polyglot SDKs & Build Toolchains** (install for your target project stack):
+   - **Java / Spring Boot / JavaFX**: Install **JDK 21+ / 25** (`https://adoptium.net/`), configure `JAVA_HOME`, and ensure `java`, Gradle (`./gradlew`), or Maven (`mvn`) are on `PATH`.
+   - **Angular / TypeScript**: Install **Node.js 20+** (`https://nodejs.org/`) and `npm` (`npm install -g @angular/cli` optional).
+   - **Android**: Install **Android Studio / Android SDK** and set `ANDROID_HOME` with `platform-tools` (`adb`) on `PATH`.
+2. **Git, GitHub CLI & Antigravity CLI**:
+   - Install `git`, `gh` (`gh auth login`), and `agy` (`agy auth login`) on system `PATH` for branch management and multi-file code generation.
+3. **Docker Desktop / Engine (Optional)**:
+   - Start Docker Desktop or Linux Docker Engine when running containerized databases or backend services.
 
 ---
 

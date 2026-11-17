@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: system
   display-name: DockerSkill
 allowed-tools: dockerListContainers dockerContainerLogs dockerStartContainer dockerStopContainer dockerRestartContainer dockerRemoveContainer dockerListImages dockerInspectContainer dockerRunContainer dockerCheckContainers
@@ -15,6 +15,24 @@ tools: [dockerListContainers, dockerContainerLogs, dockerStartContainer, dockerS
 # Docker Container & Infrastructure Skill
 
 This skill outlines how the agent interacts with the Docker engine and manages containerized infrastructure via the `DockerTool` suite.
+
+---
+
+## Setup Instructions
+
+### External App & Integration Setup
+
+1. **Install & Start Docker**:
+   - **Windows / macOS**: Install and launch [Docker Desktop](https://www.docker.com/products/docker-desktop/) (on Windows, enable the WSL 2 backend and ensure the `//./pipe/docker_engine` named pipe is active).
+   - **Linux**: Install Docker Engine (`https://docs.docker.com/engine/install/`), start the service (`sudo systemctl enable --now docker`), and grant your user access to `/var/run/docker.sock`:
+     ```bash
+     sudo usermod -aG docker "$USER"
+     ```
+2. **Verify CLI & Daemon Connectivity**:
+   - Ensure the `docker` CLI is on system `PATH` and verify daemon health:
+     ```bash
+     docker info
+     ```
 
 ---
 
@@ -133,16 +151,3 @@ Use `dockerRunContainer` to launch a new container in detached (`-d`) mode:
 │    dockerRestartContainer     │ ──► Restart or fix via dockerRunContainer
 └───────────────────────────────┘
 ```
-
-## Setup Instructions
-
-### 1. Prerequisites & Docker Daemon
-- **Docker Engine / Desktop**: Docker must be installed and running on the host machine.
-- **Daemon Socket / Pipe Configuration**:
-  - **Linux / macOS**: Ensure the Unix socket at `/var/run/docker.sock` is accessible with appropriate read/write permissions for the Nadia process.
-  - **Windows**: Ensure the Windows named pipe `//./pipe/docker_engine` is enabled or TCP daemon listening on `tcp://localhost:2375`.
-- **Nadia Docker Client**: Nadia utilizes standard Docker Java client libraries (`DockerTool`) to communicate with the daemon.
-
-### 2. Permissions & Container Resource Constraints
-- **User Groups**: On Linux environments, ensure the running user is added to the `docker` user group (`sudo usermod -aG docker $USER`).
-- **Resource Allocations**: Ensure Docker Engine has sufficient CPU, memory, and disk space allocated for running development sandboxes, databases, and microservices.

@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: writing
   display-name: LexiconSkill
 allowed-tools: executeSessionCommand searchMemory saveMemory
@@ -21,9 +21,17 @@ This skill empowers `@Journalist` and `@Researcher` with instant dictionary defi
 
 ## Setup Instructions
 
-- **Python Runtime**: Python 3.10+ (uses standard library only).
-- **Bundled Script**: `./skills/writing/lexicon/scripts/lexicon_lookup.py`.
-- **Configuration Properties (`nadia.prop.*`)**: Keyless (`properties: []`).
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **Dictionary & Literary APIs (Keyless)**:
+  - Requires outbound HTTPS access to [Free Dictionary API](https://dictionaryapi.dev/) and [PoetryDB](https://poetrydb.org/). No accounts or API keys are required (`properties: []`).
+- **Bundled Script**: `~/.nadia/skills/writing/lexicon/scripts/lexicon_lookup.py`.
 
 ---
 
@@ -42,4 +50,3 @@ Search poems by author, title, or line text via PoetryDB:
 ```bash
 python ~/.nadia/skills/writing/lexicon/scripts/lexicon_lookup.py poetry --author "Emily Dickinson" --limit 5
 ```
-

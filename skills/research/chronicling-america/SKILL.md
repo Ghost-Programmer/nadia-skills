@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: research
   display-name: ChroniclingAmericaSkill
 allowed-tools: executeSessionCommand storeBriefEntry searchMemory saveMemory
@@ -21,10 +21,17 @@ This skill empowers `@Genealogist`, `@Researcher`, and `@Journalist` to search m
 
 ## Setup Instructions
 
-- **Python Runtime**: Python 3.10+ (uses standard library only).
-- **Bundled Script**: `./skills/research/chronicling-america/scripts/historical_archive.py`.
-- **Network Access**: Outbound HTTPS access to `https://www.loc.gov` and `https://archive.org`.
-- **Configuration Properties (`nadia.prop.*`)**: Keyless (`properties: []`).
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **Historical Archive APIs (Keyless)**:
+  - Requires outbound HTTPS access to the [Library of Congress (`loc.gov`)](https://www.loc.gov/apis/) and [Internet Archive (`archive.org`)](https://archive.org/developers/). Works out-of-the-box with no API keys (`properties: []`).
+- **Bundled Script**: `~/.nadia/skills/research/chronicling-america/scripts/historical_archive.py`.
 
 ---
 
@@ -60,4 +67,3 @@ python ~/.nadia/skills/research/chronicling-america/scripts/historical_archive.p
    - Location (City / State) and Publication Date
    - Direct Library of Congress or `Archive.org` permalink URL
 2. **Persist Key Discoveries**: Store verified ancestral or historical findings in episodic memory using `saveMemory`.
-

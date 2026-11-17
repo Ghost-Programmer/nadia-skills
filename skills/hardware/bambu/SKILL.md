@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: hardware
   display-name: BambuSkill
 allowed-tools: listPrinters getPrinterStats startPrinterMonitor startPrintJob stopPrintJob pausePrintJob resumePrintJob
@@ -16,19 +16,24 @@ tools: [listPrinters, getPrinterStats, startPrinterMonitor, startPrintJob, stopP
 
 This skill guides the agent in listing local Bambu printers, fetching telemetry and print metrics, analyzing HMS diagnostic hardware alerts, controlling active print jobs (start, stop, pause, resume), and initiating live visual dashboard monitor windows in the Nadia workspace.
 
+---
+
 ## Setup Instructions
 
-- **Network & Connectivity**:
-  - Bambu 3D Printer (X1-Carbon, P1P, P1S, A1) powered on and connected to the local LAN.
-  - MQTT port 8883 (TLS) accessible from host to printer IP.
-  - **Zero-Trust Network Approval Requirement**: To prevent rogue or untrusted network interactions, Nadia strictly enforces zero-trust network safety. **If on an unapproved network, Bambu integrations will NOT attempt to connect** (no MQTT connections on port 8883, no UDP SSDP discovery broadcasts, no TLS camera video streams, and no print job commands). Configured printers on unapproved subnets are reported with status `"unapproved_network"`.
-  - The local subnet must be connected and authorized in Nadia's database (`checkNetworkApproval` / `approveCurrentNetwork` from `NetworkSkill`).
-  - Approval **requires an active network connection** and will fail if the host machine has no network (disconnected/offline, loopback-only, or unknown gateway).
-- **Printer Configuration**:
-  - Configure printer IP Address, Serial Number, and Access Code (available on printer LCD under Settings -> Network).
-  - Set `BAMBU_PRINTER_IP` and `BAMBU_ACCESS_CODE` in `application.yml` or `~/.nadia/config.json`.
-- **LAN Only Mode**:
-  - Optional: Enable "LAN Only Mode" on the printer for 100% cloud-free local control.
+### External App & Integration Setup
+
+1. **Prepare Your Bambu Lab 3D Printer (X1C, P1S, P1P, A1, A1 mini)**:
+   - Power on the printer and connect it to the **same local Wi-Fi/LAN subnet** as Nadia.
+   - On the printer touchscreen, navigate to **Settings (⚙️) ➔ Network / LAN Only Mode** and record:
+     1. **IP Address** (assigning a DHCP reservation on your router is recommended)
+     2. **Device Serial Number** (also visible in Bambu Studio / Bambu Handy under *Device ➔ Update / SN*)
+     3. **8-Digit LAN Access Code**
+   - *(Optional)* Enable **LAN Only Mode** for 100% local, cloud-free operation. Ensure local firewall allows outbound **TCP `8883`** (MQTT TLS), **TCP `6000` / `322`** (chamber camera video), and **UDP `1900` / `2021`** (SSDP discovery).
+2. **Authorize Local Network (Zero-Trust Guard)**:
+   - Nadia blocks all 3D printer MQTT, SSDP, and camera connections on unapproved networks (`status: "unapproved_network"`).
+   - Open **View ➔ 🌐 Network Engineer** and click **Approve Current Network** (or invoke `approveCurrentNetwork()` from `NetworkSkill`).
+3. **Register Printer in Nadia**:
+   - Open **⚙️ System Settings ➔ Bambu 3D Printers**, enter the printer **Name**, **IP Address**, **Serial Number**, and **Access Code**, and click **Save**.
 
 ---
 

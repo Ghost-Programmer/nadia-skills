@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: research
   display-name: DossierSkill
 allowed-tools: web_search web_scrape searchMemory saveMemory storeBriefEntry appendBriefEntry executeSessionCommand getCurrentDateTime
@@ -15,6 +15,24 @@ tools: [web_search, web_scrape, searchMemory, saveMemory, storeBriefEntry, appen
 # Person Dossier & Intelligence Gathering Skill
 
 This skill guides the agent in compiling a thorough, multi-source intelligence report and background dossier on an individual by leveraging the **Researcher** staff workflow, public web footprint lookups, email and handle profiling, Gravatar resolution, Google Contacts, internal episodic memory, and the **Ask-Me** interview protocol to resolve ambiguities and verify target identity.
+
+---
+
+## Setup Instructions
+
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **Google Chrome / Chromium (Optional — Dynamic Web Page Inspection)**:
+  - Install Google Chrome or Chromium on the host if inspecting client-rendered pages via Nadia's Chrome DevTools Protocol (`ChromeDevToolsService`, port `9222`).
+- **Google Contacts via `gws` CLI (Optional)**:
+  - To cross-reference personal/corporate address books, install `@googleworkspace/cli` (`npm install -g @googleworkspace/cli`) and authenticate via `gws auth login` (see `contacts` skill).
+- **Bundled Script**: `~/.nadia/skills/research/dossier/scripts/dossier_helper.py` (outputs saved under `~/.nadia/session/brain/`).
 
 ---
 
@@ -255,15 +273,3 @@ Present the final intelligence report adhering strictly to this standard Markdow
        "text": "- **Dossier Completed**: Compiled intelligence report for [Name] ([Company]). Profile verified across [Platforms]."
      }
      ```
-
-## Setup Instructions
-
-### 1. Prerequisites & Script Dependencies
-- **Python Runtime**: Python 3.8 or higher installed on system `PATH`.
-- **Dossier Helper CLI**: Ensure `dossier_helper.py` exists at `./skills/research/dossier/scripts/dossier_helper.py`.
-- **Standard Libraries**: Uses Python built-in modules (`hashlib`, `argparse`, `json`, `urllib.request`).
-
-### 2. External API & Integration Configuration
-- **Web Search & Scraping**: Ensure the `web_search` and `web_scrape` tools are configured with valid search provider bindings.
-- **Google Contacts (Optional)**: If querying local address books, ensure the `gws` CLI is authenticated (`gws auth login`).
-- **Memory & Brief Persistence**: Requires initialized PGVector / episodic memory store and brief relational tables.

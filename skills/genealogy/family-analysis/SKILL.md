@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: genealogy
   display-name: FamilyAnalysisSkill
 allowed-tools: executeSessionCommand searchMemory saveMemory
@@ -18,16 +18,25 @@ This skill instructs the agent on how to calculate precise genealogical relation
 
 The family analysis tool is implemented as a Python script located at `~/.nadia/skills/genealogy/family-analysis/scripts/family_analyzer.py` (or `./skills/genealogy/family-analysis/scripts/family_analyzer.py`).
 
+---
+
 ## Setup Instructions
 
-- **Python Runtime & Dependencies**:
-  - Python 3.10+ installed and available on system `PATH`.
-  - Built with pure Python standard library modules (`argparse`, `json`, `collections`, `typing`, `pathlib`). No external pip dependencies required.
-- **Script Location**:
-  - `~/.nadia/skills/genealogy/family-analysis/scripts/family_analyzer.py`
-  - Workspace relative path: `./skills/genealogy/family-analysis/scripts/family_analyzer.py` or `../skills/genealogy/family-analysis/scripts/family_analyzer.py`
-- **Dependencies**:
-  - Automatically interfaces with `gedcom_tool.py` located under `../gedcom/scripts/`.
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **Exporting Family Trees from External Genealogy Apps**:
+  - Export a standard `.ged` (GEDCOM 5.5.1 or 7.0) file from your genealogy software or service:
+    - **Ancestry.com**: *Trees ➔ Tree Settings ➔ Tree Info ➔ Export tree* (`.ged`).
+    - **MyHeritage**: *Family tree ➔ Manage trees ➔ Export to GEDCOM*.
+    - **Gramps / RootsMagic / Family Tree Maker**: *File ➔ Export ➔ GEDCOM*.
+  - Place the `.ged` file in `~/.nadia/session/` (or `~/.nadia/session/inbox/`) for analysis.
+- **Companion Skill Dependency**: Automatically imports `gedcom_tool.py` from `~/.nadia/skills/genealogy/gedcom/scripts/` (ensure the `gedcom` skill is also installed).
 
 ---
 

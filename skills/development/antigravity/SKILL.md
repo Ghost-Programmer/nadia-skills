@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: development
   display-name: AntigravitySkill
 allowed-tools: executeSessionCommand
@@ -18,16 +18,22 @@ This skill provides guidelines and instructions for delegating complex coding, r
 
 All `agy` commands are executed inside the `./session` sandbox directory (or active project folder under `./session/projects/...`) using the `executeSessionCommand` tool.
 
+---
+
 ## Setup Instructions
 
-- **Antigravity CLI Binary**:
-  - Install the Antigravity CLI (`agy`) binary and ensure it is available on system `PATH`.
-  - Typical installation paths: `~/.antigravity/bin/agy` or `C:\Users\<user>\.gemini\antigravity-ide\bin\agy.cmd`.
-- **Permissions & Sandbox**:
-  - Ensure execution permissions for running sub-processes via `executeSessionCommand`.
-  - Target project sandbox directory `./session/` must exist and be writable.
-- **Authentication**:
-  - Verify AGY CLI authentication (`agy auth login` or active Google Cloud / DeepMind credentials profile).
+### External App & Integration Setup
+
+1. **Install Google Antigravity CLI (`agy`)**:
+   - Install Google Antigravity IDE / CLI and ensure the `agy` executable is available on system `PATH` (typical locations: `%USERPROFILE%\.gemini\antigravity-ide\bin\agy.cmd` on Windows or `~/.antigravity/bin/agy` on macOS/Linux).
+   - Verify CLI installation:
+     ```bash
+     agy --version
+     ```
+2. **Authenticate Antigravity**:
+   - Sign in through the Antigravity IDE or run `agy auth login` in a terminal so headless CLI invocations via `executeSessionCommand` have active model credentials.
+3. **Nadia Sandbox Workspace**:
+   - Ensure `~/.nadia/session/` is writable and optionally select `Antigravity CLI` or your preferred provider in **⚙️ System Settings ➔ AI & LLM Providers**.
 
 ---
 

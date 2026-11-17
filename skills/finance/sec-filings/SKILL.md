@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: finance
   display-name: SecFilingsSkill
 allowed-tools: executeSessionCommand storeBriefEntry searchMemory saveMemory getNadiaProperty setNadiaProperty
@@ -21,11 +21,23 @@ This skill enables the cognitive agent (`@Stock Broker`, `@Researcher`, `@Produc
 
 ## Setup Instructions
 
-- **Python Runtime**: Python 3.10+ (uses standard library only).
-- **Bundled Script**: `./skills/finance/sec-filings/scripts/sec_edgar.py`.
-- **Configuration Properties (`nadia.prop.*`)**:
-  - `nadia.prop.sec.userAgent`: SEC EDGAR requires a descriptive User-Agent header in the format `Sample Company Name AdminContact@<sample company domain>.com`.
-  - `nadia.prop.arkleon.apiKey`: API key for Arkleon SEC structured financials.
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **SEC EDGAR Fair-Access User-Agent (`nadia.prop.sec.userAgent` — Required)**:
+  - Per [SEC EDGAR Developer Guidelines](https://www.sec.gov/os/webmaster-faq#developers), all automated requests to `data.sec.gov` must declare a contact `User-Agent` in the format `CompanyOrAppName ContactEmail@domain.com`.
+  - In Nadia, open **⚙️ System Settings ➔ Properties** and set:
+    ```properties
+    nadia.prop.sec.userAgent=MyCompanyName admin@mycompany.com
+    ```
+- **Arkleon API Key (`nadia.prop.arkleon.apiKey` — Optional)**:
+  - If querying Arkleon structured financial endpoints, set `nadia.prop.arkleon.apiKey` in **⚙️ System Settings ➔ Properties**.
+- **Bundled Script**: `~/.nadia/skills/finance/sec-filings/scripts/sec_edgar.py`.
 
 ---
 
@@ -53,4 +65,3 @@ python ~/.nadia/skills/finance/sec-filings/scripts/sec_edgar.py facts --ticker "
 
 1. Present SEC filings in a Markdown table with columns: `Form`, `Filing Date`, `Report Period`, `Accession Number`, `Description`, and direct clickable `SEC Document URL`.
 2. When summarizing `10-K` or `10-Q` metrics for `@Stock Broker`, include both YoY and QoQ comparisons.
-

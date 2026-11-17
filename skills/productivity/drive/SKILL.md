@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: productivity
   display-name: DriveSkill
 allowed-tools: executeSessionCommand
@@ -16,10 +16,29 @@ tools: [executeSessionCommand]
 
 This skill instructs the agent on how to list, search, download, and export files and folders from Google Drive using the `gws` command-line utility.
 
-## Prerequisites
+---
 
-- The `gws` CLI must be installed and authenticated.
-- Always use the `executeSessionCommand` tool to execute `gws` commands.
+## Setup Instructions
+
+### External App & Integration Setup (`gws` Google Workspace CLI)
+
+1. **Install Node.js & Google Workspace CLI (`gws`)**:
+   - Install **Node.js 20+** (`https://nodejs.org/`), then install `@googleworkspace/cli` globally and ensure `gws` is on system `PATH`:
+     ```bash
+     npm install -g @googleworkspace/cli
+     gws --version
+     ```
+2. **Enable Google Drive API in Google Cloud Console**:
+   - Open [Google Cloud Console — API Library](https://console.cloud.google.com/apis/library), select or create a project, and enable **Google Drive API** (scope: `https://www.googleapis.com/auth/drive`).
+   - Under **APIs & Services ➔ Credentials**, create an **OAuth 2.0 Client ID** (*Desktop app*)—or run `gws auth setup` if `gcloud` CLI is installed to provision credentials automatically.
+3. **Authenticate & Verify**:
+   - Sign in from a terminal so OAuth tokens are cached for `executeSessionCommand`:
+     ```bash
+     gws auth login
+     gws drive files list --params '{"pageSize": 5, "trashed": false}' --format table
+     ```
+
+---
 
 ## 1. Listing & Searching Files (List Operations)
 
@@ -148,22 +167,3 @@ gws drive +upload <local_file_path> [flags]
 ```bash
 gws drive +upload "./data.csv" --parent "folder_id_12345" --name "Q3 Sales Data.csv"
 ```
-
-## Setup Instructions
-
-### 1. Prerequisites & CLI Installation
-- **gws CLI**: The Google Workspace CLI (`gws`) must be installed and executable on system `PATH`.
-- **Runtime**: Node.js or native executable for the `gws` CLI.
-
-### 2. Google Drive API Configuration
-- **Google Cloud Console**: Enable the **Google Drive API** (`https://www.googleapis.com/auth/drive` or `https://www.googleapis.com/auth/drive.file`).
-- **OAuth Authentication**:
-  1. Authenticate with Google Drive scopes:
-     ```bash
-     gws auth login
-     ```
-  2. Verify Drive access by listing recent active files:
-     ```bash
-     gws drive files list --params '{"pageSize": 5, "trashed": false}' --format table
-     ```
-- **Export Formats**: Standard MIME types (`text/plain`, `application/pdf`, `text/csv`, `text/html`) are supported for Google Docs, Sheets, and Slides exports.

@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: development
   display-name: QualityEngineerSkill
 allowed-tools: startProject listProjects executeSessionCommand dockerListContainers dockerContainerLogs dockerCheckContainers storeBriefEntry appendBriefEntry getBriefEntries searchMemory saveMemory updateMemory getCurrentDateTime getKanbanBoard createKanbanCard updateKanbanCard moveKanbanCard
@@ -16,17 +16,18 @@ tools: [startProject, listProjects, executeSessionCommand, dockerListContainers,
 
 This skill guides agents in creating comprehensive **Test Plans** in `doc/test/` or `TEST_PLAN.md`, generating automated test suites, running test executions across **Android**, **JavaFX**, **Angular**, and **Java / Spring Boot** within project sandboxes, diagnosing test failures, and managing bug triage.
 
+---
+
 ## Setup Instructions
 
-- **Build Tools & Runtimes**:
-  - JDK 21+ / 23+ configured on system `PATH` with `JAVA_HOME` set.
-  - Gradle (`./gradlew` / `gradlew.bat`) or Maven (`mvn`) available in project repositories.
-  - Node.js 18+ and npm installed for Angular/web projects.
-  - Android SDK (or `android` CLI plugin) configured if running Android instrumented/unit tests.
-- **Docker & Testcontainers (Optional)**:
-  - Docker Desktop / Engine running for Testcontainers integration tests.
-- **Project Sandbox**:
-  - Sandbox directory `./session/projects/` writable for test reports in `doc/test/` and `build/reports/`.
+### External App & Integration Setup
+
+1. **Language & Build Toolchains** (install for your target project stack):
+   - **Java / Spring / JavaFX**: Install **JDK 21+ / 25** (`https://adoptium.net/`), set `JAVA_HOME`, and ensure `java` plus Gradle (`./gradlew`) or Maven (`mvn`) are on `PATH`.
+   - **Angular / Web**: Install **Node.js 20+** (`https://nodejs.org/`) and `npm` (plus Chrome/Chromium for Karma/Playwright headless browser tests).
+   - **Android**: Install **Android Studio / Android SDK** (`ANDROID_HOME` set, `adb` and `emulator` on `PATH`).
+2. **Docker Desktop / Engine (Optional)**:
+   - Install and start [Docker Desktop](https://www.docker.com/products/docker-desktop/) when executing Testcontainers-backed integration suites.
 
 ---
 

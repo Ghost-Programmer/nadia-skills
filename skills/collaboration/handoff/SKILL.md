@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: collaboration
   display-name: HandoffSkill
 allowed-tools: openHandoffChatWindow
@@ -16,11 +16,14 @@ tools: [openHandoffChatWindow]
 
 This skill provides instructions for compacting and summarizing an ongoing conversation or task into a structured handoff document and opening a new chat window with the document attached for a subsequent agent session to continue without loss of context.
 
+---
+
 ## Setup Instructions
 
-- **Prerequisites**: Ensure the `openHandoffChatWindow` tool is registered in Nadia's `ToolRegistry`.
-- **File Permissions**: Write permissions enabled for the OS temporary directory (`%TEMP%` on Windows, `/tmp` on Linux/macOS, or JVM system property `java.io.tmpdir`).
-- **Configuration**: Ensure multi-window or dockable workspace support is enabled in the JavaFX Workspace Canvas (`WorkspaceCanvas`).
+- **External Applications & Integrations**: None required.
+- **Nadia Runtime Prerequisites**:
+  - Built-in `openHandoffChatWindow` tool active in Nadia's `ToolRegistry` and BentoFX `WorkspaceCanvas`.
+  - Write access to the OS temporary directory (`%TEMP%` on Windows, `/tmp` on macOS/Linux) for staging handoff Markdown attachments.
 
 ---
 

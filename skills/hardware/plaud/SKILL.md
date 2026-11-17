@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: hardware
   display-name: PlaudSkill
 allowed-tools: executeSessionCommand
@@ -16,20 +16,28 @@ tools: [executeSessionCommand]
 
 This skill allows the agent to interact with a Plaud voice recorder to retrieve voice recording details, transcripts, and summaries of recorded meetings by executing the Plaud CLI script directly.
 
+---
+
 ## Setup Instructions
 
-- **Python Runtime**:
-  - Python 3.10+ installed and on system `PATH`.
-  - Script located at `./skills/plaud/scripts/plaud_cli.py`.
-- **Authentication**:
-  - Log in to the [Plaud Developer Portal](https://platform-us.plaud.ai/) and create an Embedded SDK Application.
-  - Set `PLAUD_CLIENT_ID` and `PLAUD_API_KEY` in your environment or `.env` file in the workspace root:
-    ```env
-    PLAUD_CLIENT_ID=your_client_id_here
-    PLAUD_API_KEY=your_api_key_here
-    ```
-- **Simulation Fallback**:
-  - If credentials are not configured, the script automatically executes in realistic Simulation Mode.
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **Plaud Note Cloud & Developer SDK Credentials**:
+  1. Sync your Plaud Note / Plaud NotePin recordings via the **PLAUD** mobile app so transcripts/summaries are uploaded to Plaud Cloud.
+  2. Sign in to the [Plaud Developer Portal](https://platform-us.plaud.ai/), create an Embedded SDK Application, and copy your **Client ID** and **API Key**.
+  3. Export `PLAUD_CLIENT_ID` and `PLAUD_API_KEY` in the host environment before launching Nadia:
+     ```bash
+     export PLAUD_CLIENT_ID="your_client_id_here"
+     export PLAUD_API_KEY="your_api_key_here"
+     ```
+  4. *(Fallback)* When credentials are unset, `plaud_cli.py` runs safely in realistic Simulation Mode.
+- **Bundled Script**: `~/.nadia/skills/hardware/plaud/scripts/plaud_cli.py`.
 
 ---
 
@@ -40,7 +48,7 @@ When the user asks to see their audio files, voice recordings, or Plaud transcri
 1. Call the `executeSessionCommand` tool passing the exact command line:
 
    ```bash
-   python ./skills/plaud/scripts/plaud_cli.py list
+   python ~/.nadia/skills/hardware/plaud/scripts/plaud_cli.py list
    ```
 
 2. Parse the returned JSON array of recordings.
@@ -58,7 +66,7 @@ When the user wants to read a transcript, review meeting notes, or retrieve summ
 1. Call the `executeSessionCommand` tool passing the exact command line:
 
    ```bash
-   python ./skills/plaud/scripts/plaud_cli.py fetch --id [recordingId]
+   python ~/.nadia/skills/hardware/plaud/scripts/plaud_cli.py fetch --id [recordingId]
    ```
 
 2. Parse the returned JSON object.

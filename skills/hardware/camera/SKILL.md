@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: hardware
   display-name: CameraSkill
 allowed-tools: listCameras discoverCameras addRemoteIpCamera removeCamera connectCamera disconnectCamera takePhoto startRecording stopRecording getCameraCapabilities openCameraViewer
@@ -15,6 +15,24 @@ tools: [listCameras, discoverCameras, addRemoteIpCamera, removeCamera, connectCa
 # Camera & Visual Inspection Skill
 
 Provides procedural instructions for discovering, connecting, streaming, capturing high-resolution still photos, and recording video from local USB/integrated webcams, LAN/WAN IP cameras (MJPEG, RTSP, HTTP Snapshot, ONVIF), and Bambu Lab 3D printer chamber cameras (`cam-bambu-<ip>`).
+
+---
+
+## Setup Instructions
+
+### External App & Integration Setup
+
+1. **USB / Integrated UVC Webcams & EMEET Pixy AI PTZ Camera**:
+   - Plug the camera into a host USB port and grant OS camera permissions to Java/Nadia:
+     - **Windows**: *Settings ➔ Privacy & security ➔ Camera ➔ Let desktop apps access your camera (On)*.
+     - **macOS**: *System Settings ➔ Privacy & Security ➔ Camera*.
+     - **Linux**: Ensure your user belongs to the `video` group (`sudo usermod -aG video $USER`).
+   - **EMEET Pixy AI PTZ**: Works natively over USB UVC + USB HID (`hid4java`) for hardware AI tracking, pan-tilt-zoom actuation, and DSP audio modes without third-party vendor software.
+2. **ONVIF / RTSP / MJPEG Network IP Cameras**:
+   - In your IP camera's admin web interface, enable **ONVIF** and/or **RTSP** streaming and create a camera username/password.
+   - Approve the local LAN subnet in **View ➔ 🌐 Network Engineer** (`approveCurrentNetwork`), then run `discoverCameras()` or register the stream URL via `addRemoteIpCamera` / **View ➔ 📷 Camera Monitor**.
+3. **Bambu Lab 3D Printer Chamber Cameras (`cam-bambu-<ip>`)**:
+   - Configure the printer in **⚙️ System Settings ➔ Bambu 3D Printers** on an approved network; Nadia automatically registers its TLS chamber feed (`port 6000` / `322`) as `cam-bambu-<ip>`.
 
 ---
 
@@ -53,4 +71,3 @@ Provides procedural instructions for discovering, connecting, streaming, capturi
   3. **Stringing & Oozing**
   4. **First-Layer Detachment & Warping**
 - If any defect is detected, the print is immediately paused (`pausePrintJob`) and an alert is dispatched to the Slack Alert channel (`sendSlackNotification`).
-

@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: research
   display-name: NewsWireSkill
 allowed-tools: executeSessionCommand storeBriefEntry searchMemory saveMemory getNadiaProperty setNadiaProperty
@@ -21,14 +21,20 @@ This skill enables `@Journalist`, `@Researcher`, `@Product Manager`, and `@Perso
 
 ## Setup Instructions
 
-- **Python Runtime**: Python 3.10+ (uses standard library only).
-- **Bundled Script**: `./skills/research/news-wire/scripts/news_wire.py`.
-- **Configuration Properties (`nadia.prop.*`)**:
-  - **Keyless Out-of-the-Box**: `hn-top` and `search` (via HackerNews Firebase & Algolia APIs) require no API key.
-  - **Global News Wire Properties (Optional)**:
-    - `nadia.prop.newsdata.apiKey`: API key for **[NewsData.io](https://newsdata.io/docs)** (`headlines` command).
-    - `nadia.prop.gnews.apiKey`: API key for **[GNews.io](https://gnews.io/)** (`headlines` fallback/provider).
-    - Both properties are automatically registered in **Settings ➔ Properties** (`~/.nadia/nadia.properties`).
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **HackerNews Feeds (Keyless Out-of-the-Box)**:
+  - `hn-top` and `search` query the public HackerNews Firebase & Algolia APIs with zero configuration.
+- **Global Breaking News Wire API Keys (Optional — `headlines` Command)**:
+  1. **NewsData.io**: Sign up at [NewsData.io](https://newsdata.io/) to get a free API key, then set `nadia.prop.newsdata.apiKey` in **⚙️ System Settings ➔ Properties**.
+  2. **GNews**: Sign up at [GNews.io](https://gnews.io/) to get an API token, then set `nadia.prop.gnews.apiKey` in **⚙️ System Settings ➔ Properties**.
+- **Bundled Script**: `~/.nadia/skills/research/news-wire/scripts/news_wire.py`.
 
 ---
 
@@ -61,4 +67,3 @@ python ~/.nadia/skills/research/news-wire/scripts/news_wire.py headlines --categ
 
 1. **Source Attribution**: Always cite the original publication source, publication timestamp, and article URL for every story.
 2. **Living Stories & Daily Brief**: When `@Journalist` or `@Personal Assistant` discovers high-priority breaking news, log a concise summary via `storeBriefEntry` under category `"news"`.
-

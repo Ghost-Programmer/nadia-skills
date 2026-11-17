@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: productivity
   display-name: SpreadsheetsSkill
 allowed-tools: executeSessionCommand
@@ -16,10 +16,29 @@ tools: [executeSessionCommand]
 
 This skill instructs the agent on how to see, create, append, edit, and delete Google Sheets using the `gws` command-line utility.
 
-## Prerequisites
+---
 
-- The `gws` CLI must be installed and authenticated.
-- Always use the `executeSessionCommand` tool to execute `gws` commands.
+## Setup Instructions
+
+### External App & Integration Setup (`gws` Google Workspace CLI)
+
+1. **Install Node.js & Google Workspace CLI (`gws`)**:
+   - Install **Node.js 20+** (`https://nodejs.org/`), then install `@googleworkspace/cli` globally and ensure `gws` is on system `PATH`:
+     ```bash
+     npm install -g @googleworkspace/cli
+     gws --version
+     ```
+2. **Enable Google Sheets API & Google Drive API in Google Cloud Console**:
+   - Open [Google Cloud Console — API Library](https://console.cloud.google.com/apis/library), select or create a project, and enable **Google Sheets API & Google Drive API** (scope: `https://www.googleapis.com/auth/spreadsheets, https://www.googleapis.com/auth/drive`).
+   - Under **APIs & Services ➔ Credentials**, create an **OAuth 2.0 Client ID** (*Desktop app*)—or run `gws auth setup` if `gcloud` CLI is installed to provision credentials automatically.
+3. **Authenticate & Verify**:
+   - Sign in from a terminal so OAuth tokens are cached for `executeSessionCommand`:
+     ```bash
+     gws auth login
+     gws drive files list --params '{"q": "mimeType=\x27application/vnd.google-apps.spreadsheet\x27", "pageSize": 3}' --format table
+     ```
+
+---
 
 ## 1. Seeing/Reading Values (Read Operations)
 
@@ -144,22 +163,3 @@ gws drive files delete --params '{"fileId": "<SPREADSHEET_ID>"}'
 ```bash
 gws drive files delete --params '{"fileId": "1a2b3c4d5e"}'
 ```
-
-## Setup Instructions
-
-### 1. Prerequisites & CLI Installation
-- **gws CLI**: The Google Workspace CLI utility (`gws`) must be installed and available on system `PATH`.
-- **Runtime**: Ensure Node.js or the required executable for `gws` is installed.
-
-### 2. Google Sheets API Configuration
-- **Google Cloud APIs**: Enable the **Google Sheets API** (`https://www.googleapis.com/auth/spreadsheets`) and **Google Drive API** (`https://www.googleapis.com/auth/drive`) in Google Cloud Console.
-- **Authentication**:
-  1. Authenticate `gws` with your Google account:
-     ```bash
-     gws auth login
-     ```
-  2. Verify access by creating or reading a spreadsheet:
-     ```bash
-     gws sheets spreadsheets create --json '{"properties": {"title": "Test Sheet"}}'
-     ```
-- **Formulas vs Raw Strings**: Set `valueInputOption: "USER_ENTERED"` when updating values to ensure formulas (e.g. `=SUM(A1:A10)`) and numeric types are interpreted correctly.

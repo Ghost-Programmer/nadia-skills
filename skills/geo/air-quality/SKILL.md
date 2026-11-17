@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: geo
   display-name: AirQualitySkill
 allowed-tools: showMap setMapAirQualityView setFlag plotObject executeSessionCommand storeBriefEntry searchMemory saveMemory getNadiaProperty setNadiaProperty
@@ -21,11 +21,17 @@ This skill enables `@Scoutmaster`, `@Personal Assistant`, and `@Researcher` to r
 
 ## Setup Instructions
 
-- **Python Runtime**: Python 3.10+ (uses standard library only).
-- **Bundled Script**: `./skills/geo/air-quality/scripts/air_quality.py`.
-- **Configuration Properties (`nadia.prop.*`)**:
-  - `nadia.prop.airnow.apiKey`: US EPA AirNow API key.
-  - `nadia.prop.aqicn.apiKey`: World Air Quality Index (AQICN) token.
+### External App & Integration Setup
+
+1. **World Map Viewer PF4J Plugin (`world-map-viewer`)**:
+   - In Nadia, open **⚙️ System Settings ➔ Plugins**.
+   - Click **Install from URL...** and enter `https://github.com/Ghost-Programmer/nadia-plugins` (or click **Install from Disk...** to select `world-map-viewer-<version>.jar`, or place the JAR directly in `~/.nadia/plugins/`).
+   - Verify `world-map-viewer` shows **STARTED / Enabled**, then open **View ➔ 🗺️ World Map** (or invoke `showMap()`).
+2. **Python 3.10+ Runtime**:
+   - Install Python 3.10+ on system `PATH` (uses standard library only; script at `~/.nadia/skills/geo/air-quality/scripts/air_quality.py`).
+3. **AirNow & AQICN API Keys (`nadia.prop.*`)**:
+   - **US EPA AirNow**: Register for a free account at [AirNow API Account Request](https://docs.airnowapi.org/account/request/) to obtain an API key, then set `nadia.prop.airnow.apiKey` in **⚙️ System Settings ➔ Properties**.
+   - **World Air Quality Index (AQICN)**: Request a free API token at [AQICN Data Platform Token](https://aqicn.org/data-platform/token/), then set `nadia.prop.aqicn.apiKey` in **⚙️ System Settings ➔ Properties**.
 
 ---
 
@@ -55,4 +61,3 @@ python ~/.nadia/skills/geo/air-quality/scripts/air_quality.py airnow --lat 37.77
 ## 2. World Map Integration
 
 1. When reporting air quality for a region, call `showMap()`, `setMapAirQualityView(true)`, and place a color-coded marker via `setFlag(latitude, longitude, color)` (`green` for AQI 0–50, `yellow` for 51–100, `orange` for 101–150, `red` for 151+).
-

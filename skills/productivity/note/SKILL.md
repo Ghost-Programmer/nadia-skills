@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: productivity
   display-name: NoteSkill
 tools: []
@@ -14,6 +14,14 @@ tools: []
 # Note-Taking and Action Report Skill
 
 This skill allows the agent to ingest unstructured or structured text and format it into a professional markdown report template. Use this skill when the user asks to summarize notes, document a task description, or format incoming information into a structured action plan.
+
+---
+
+## Setup Instructions
+
+- **External Applications & Integrations**: None required. Operates in-memory as a structured GitHub-Flavored Markdown (GFM) synthesis pattern rendered directly in Nadia's chat and Markdown studio.
+
+---
 
 ## Report Template Structure
 
@@ -33,9 +41,3 @@ When creating a note report, use the following template format:
 #### 💡 Considerations & Risks
 - **Consideration 1**: Details...
 - **Consideration 2**: Details...
-
-## Setup Instructions
-
-### 1. Prerequisites & Storage
-- **No External Services Required**: The Note formatting skill operates entirely in-memory as a markdown formatting and synthesis pattern.
-- **Renderer**: Rendered note outputs are formatted in GitHub-Flavored Markdown (GFM) compatible with the JavaFX chat stream and markdown viewers.

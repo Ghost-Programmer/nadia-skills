@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: development
   display-name: ProductManagerSkill
 allowed-tools: startProject stopProject listProjects storeBriefEntry appendBriefEntry getBriefEntries searchMemory saveMemory updateMemory getCurrentDateTime executeSessionCommand getKanbanBoard createKanbanCard updateKanbanCard moveKanbanCard generateDiagram renderMermaidDiagram
@@ -16,16 +16,18 @@ tools: [startProject, stopProject, listProjects, storeBriefEntry, appendBriefEnt
 
 This skill guides agents in discovering market trends, conducting deep product teardowns for applications and games, formulating comprehensive **Product Specifications (PRDs / App Specs)** in `doc/spec/`, and orchestrating the software development backlog across the Software Development Group (`@UI Designer`, `@Software Architect`, `@Software Engineer`, `@Quality Engineer`).
 
+---
+
 ## Setup Instructions
 
-- **Project Sandbox & Permissions**:
-  - Project sandbox directory `./session/projects/` writable.
-  - Sub-process execution permissions enabled for `executeSessionCommand`.
-- **Kanban Board & Briefs**:
-  - `KanbanTool` (`createKanbanCard`, `moveKanbanCard`, `getKanbanBoard`) registered in `ToolRegistry`.
-  - `storeBriefEntry` registered for recording project discovery logs and TODOs.
-- **Nightly Cron (Optional)**:
-  - Scheduled job `recurring-4d82e19f` configured in `ScheduledJobManager` for automated trending product discovery sweeps.
+### External App & Integration Setup
+
+- **App Market Intelligence (Optional)**:
+  - If running automated mobile/desktop app store discovery sweeps via `app-market-intel`, install **Python 3.10+** on `PATH` and optionally configure `nadia.prop.appgoat.apiKey` in **⚙️ System Settings ➔ Properties**.
+- **Git & Antigravity CLI (Optional)**:
+  - Install `git`, `gh` (`gh auth login`), and `agy` on `PATH` when scaffolding new product repositories under `~/.nadia/session/projects/`.
+- **Nadia Kanban & Briefs**:
+  - Uses Nadia's built-in **📋 Kanban Board**, **Briefs**, and **🕒 Scheduled Jobs** (`cron.json` / `PromptSchedulerService`); no external task tracker setup is required.
 
 ---
 

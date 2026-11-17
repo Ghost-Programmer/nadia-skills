@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: communication
   display-name: NotificationSkill
 allowed-tools: flashHueAlert setHueLightState sendSlackNotification getSlackNotificationChannel storeBriefEntry appendBriefEntry
@@ -16,18 +16,31 @@ tools: [flashHueAlert, setHueLightState, sendSlackNotification, getSlackNotifica
 
 This skill provides a unified interface for notifying the User of system events, task completions, scheduled job runs, or critical errors across digital channels (Chat, Slack, Briefs) and physical smart environments (Philips Hue Smart Lighting).
 
+---
+
 ## Setup Instructions
 
-- **Slack Integration**:
-  - Set `SLACK_BOT_TOKEN` or `SLACK_WEBHOOK_URL` in your environment or `~/.nadia/config.json`.
-  - Ensure the bot is invited to target notification channels (e.g. `/invite @Nadia`).
-  - Configure default channel in `application.yml` via `nadia.slack.default-channel` (defaults to `#notifications`).
-- **Philips Hue Smart Lighting**:
-  - Configure Hue Bridge IP in `application.yml` under `nadia.hue.bridge-ip` or via discovery.
-  - Set `HUE_APPLICATION_KEY` or pair with the bridge by pressing the physical link button during initial setup.
-  - Verify local LAN connectivity to the bridge on port 80/443.
-- **Briefs & Database**:
-  - Ensure Nadia Brief repository database is initialized (configured in `application.yml`).
+### External App & Integration Setup
+
+1. **Slack Socket Mode App Setup (Optional — Remote & Mobile Alerts)**:
+   - Open [Slack API Apps](https://api.slack.com/apps) ➔ **Create New App ➔ From scratch** and select your workspace.
+   - **Enable Socket Mode**: Navigate to **Settings ➔ Socket Mode**, toggle **Enable Socket Mode** ON, and generate an **App-Level Token** (`xapp-...`) with the `connections:write` scope.
+   - **Configure Bot Scopes**: Navigate to **Features ➔ OAuth & Permissions** and add Bot Token Scopes: `chat:write`, `channels:read`, `channels:history`, `groups:history`, `im:history`, and `app_mentions:read`. Click **Install to Workspace** and copy the **Bot User OAuth Token** (`xoxb-...`).
+   - **Invite Bot**: In Slack, invite the bot to your alert channel (e.g., `/invite @Nadia` in `#notifications`).
+   - **Configure in Nadia**: Open **⚙️ System Settings ➔ Slack Integration** (or edit `~/.nadia/nadia.properties`):
+     ```properties
+     nadia.slack.enabled=true
+     nadia.slack.bot-token=xoxb-...
+     nadia.slack.app-token=xapp-...
+     nadia.slack.allowed-users=U0123456789
+     nadia.slack.notification-channel=#notifications
+     ```
+2. **Philips Hue Smart Bridge Setup (Optional — Ambient Visual Alerts)**:
+   - Connect your Philips Hue Bridge to the same local subnet as Nadia (HTTP/HTTPS ports `80`/`443`).
+   - Authorize the local network in **View ➔ 🌐 Network Engineer** (or call `approveCurrentNetwork()`).
+   - Press the physical round **Link Button** on top of the Hue Bridge, then pair within 30 seconds in the **🌐 Network Engineer ➔ Philips Hue** panel (or call `pairHueBridge(bridgeIp)`).
+3. **Nadia Briefs**:
+   - Backed automatically by Nadia's configured relational database (**⚙️ System Settings ➔ Database Connection**).
 
 ---
 

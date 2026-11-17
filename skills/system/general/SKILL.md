@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: system
   display-name: GeneralAssistant
 tools: []
@@ -20,9 +20,15 @@ tools: []
 - **Correctness**:
   - Do not make up facts. If information is not available in the context or episodic memory, ask for clarification or search if a search tool is available.
 
+---
+
 ## Setup Instructions
 
-### 1. Prerequisites & Orchestrator Configuration
-- **Base Persona**: The base conversational persona and parameters are configured in `SOUL.md` located in the root repository.
-- **Model Inferences**: Ensure active Chat Model bindings (e.g., Ollama, OpenAI, Anthropic Claude, or Google Gemini) are defined in `application.yml` or Spring AI environment properties.
-- **Zero External Dependencies**: General conversational interactions do not require special external hardware or API tokens beyond standard LLM endpoints.
+### External App & Integration Setup
+
+- **LLM Provider Setup**:
+  - Configure at least one foundation model provider in Nadia's **First-Boot Setup Wizard** or **⚙️ System Settings ➔ AI & LLM Providers**:
+    - **Ollama (Local)**: Install [Ollama](https://ollama.com/) and pull a chat model (`ollama pull gemma4:26b`).
+    - **Cloud Frontier APIs**: Enter an API key for **OpenAI**, **Anthropic Claude**, or **Google Gemini**.
+    - **Antigravity CLI**: Install `agy` on `PATH` and run `agy auth login`.
+- **Root Persona**: Loaded automatically from `~/.nadia/SOUL.md` or `./SOUL.md`.

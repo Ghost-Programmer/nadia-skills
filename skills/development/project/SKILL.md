@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: development
   display-name: ProjectSkill
 allowed-tools: startProject stopProject deleteProject listProjects
@@ -16,11 +16,16 @@ tools: [startProject, stopProject, deleteProject, listProjects]
 
 This skill guides the agent in managing multiple project workspaces, sandboxing commands, and switching active directories.
 
+---
+
 ## Setup Instructions
 
-- **Prerequisites**: Ensure `startProject`, `stopProject`, `deleteProject`, and `listProjects` tools are registered in `ToolRegistry`.
-- **Directory Permissions**: Sandbox root directory `./session/projects/` (or `~/.nadia/session/projects/`) must have read, write, and directory creation permissions.
-- **Database Tracking**: Relational database connection active if project metadata persistence is enabled in `application.yml`.
+### External App & Integration Setup
+
+- **Git (Optional — Repository Cloning & Branching)**:
+  - Install **Git** (`https://git-scm.com/`) on system `PATH` (and `gh auth login` for private GitHub repositories) when cloning remote repositories into a project workspace.
+- **Nadia Sandbox & Database**:
+  - Project sandboxes are isolated automatically under `~/.nadia/session/projects/<projectName>/` and tracked in Nadia's relational database (**⚙️ System Settings ➔ Database Connection**).
 
 ---
 

@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: research
   display-name: WikipediaWikidataSkill
 allowed-tools: executeSessionCommand storeBriefEntry searchMemory saveMemory
@@ -21,9 +21,17 @@ This skill enables `@Researcher`, `@Journalist`, and `@Genealogist` to retrieve 
 
 ## Setup Instructions
 
-- **Python Runtime**: Python 3.10+ (uses standard library only).
-- **Bundled Script**: `./skills/research/wikipedia-wikidata/scripts/wiki_lookup.py`.
-- **Configuration Properties (`nadia.prop.*`)**: Keyless (`properties: []`).
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **Wikimedia REST & Wikidata APIs (Keyless)**:
+  - Requires outbound HTTPS access to `https://en.wikipedia.org/api/rest_v1` and `https://www.wikidata.org/w/api.php`. No API keys are required (`properties: []`).
+- **Bundled Script**: `~/.nadia/skills/research/wikipedia-wikidata/scripts/wiki_lookup.py`.
 
 ---
 
@@ -56,4 +64,3 @@ Retrieve historical events, births, or deaths for a specific month and day:
 ```bash
 python ~/.nadia/skills/research/wikipedia-wikidata/scripts/wiki_lookup.py onthisday --month 11 --day 11 --limit 10
 ```
-

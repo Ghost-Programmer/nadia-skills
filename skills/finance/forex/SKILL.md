@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: finance
   display-name: ForexSkill
 allowed-tools: executeSessionCommand storeBriefEntry searchMemory saveMemory
@@ -21,10 +21,17 @@ This skill enables the cognitive agent (`@Stock Broker`, `@Personal Assistant`, 
 
 ## Setup Instructions
 
-- **Python Runtime**: Python 3.10+ (uses standard library only).
-- **Bundled Script**: `./skills/finance/forex/scripts/forex_api.py`.
-- **Network Access**: Outbound HTTPS access to `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest` (with automatic failover to `https://latest.currency-api.pages.dev`).
-- **Configuration Properties (`nadia.prop.*`)**: Keyless (`properties: []`).
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **Currency-API Access (Keyless)**:
+  - Requires outbound HTTPS access to `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest` (with automatic failover to `https://latest.currency-api.pages.dev`). No account or API key is required (`properties: []`).
+- **Bundled Script**: `~/.nadia/skills/finance/forex/scripts/forex_api.py`.
 
 ---
 
@@ -62,4 +69,3 @@ python ~/.nadia/skills/finance/forex/scripts/forex_api.py currencies --search "f
 
 1. Present foreign exchange tables with columns: `Base Currency`, `Target Currency`, `Exchange Rate`, `Converted Amount`, and `Rate Date`.
 2. Always include at least 4 decimal places for FX exchange rates and 2 decimal places for converted fiat amounts.
-

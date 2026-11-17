@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: geo
   display-name: AllTrailsSkill
 tools: []
@@ -15,13 +15,18 @@ tools: []
 
 This skill provides instructions for the agent when users query outdoor trails, hiking paths, backpacking routes, trail difficulty, elevation profiles, trail reviews, and current route conditions.
 
+---
+
 ## Setup Instructions
 
-- **AllTrails MCP Server Connection**:
-  - Configure the AllTrails MCP server endpoint in `application.yml` or `mcp_config.json` (defaults to `https://www.alltrails.com/mcp` or local MCP sidecar).
-  - Outbound internet access to AllTrails endpoints.
-- **Optional API Credentials**:
-  - Set `ALLTRAILS_API_KEY` or MCP bearer token if using authenticated premium features.
+### External App & Integration Setup
+
+1. **Configure AllTrails MCP Server in Nadia**:
+   - Open **⚙️ System Settings ➔ MCP Servers** in Nadia (persisted in `~/.nadia/mcp_config.json`).
+   - Add a new MCP server named `alltrails`:
+     - **Transport**: `http` (Streamable HTTP) pointing to `https://www.alltrails.com/mcp` (or `stdio` if running a local AllTrails MCP adapter).
+     - **Authentication (Optional)**: If using authenticated AllTrails Plus/Peak features, store your token in **⚙️ System Settings ➔ Properties** (e.g., `nadia.prop.alltrails.token`) and add header `Authorization=Bearer ${nadia.prop.alltrails.token}` in the MCP server configuration.
+   - Click **Test & Discover Tools** and **Save** so `mcp_alltrails_*` tools are bridged into Nadia's `ToolRegistry`.
 
 ---
 

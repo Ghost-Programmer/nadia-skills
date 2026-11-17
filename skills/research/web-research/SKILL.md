@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: research
   display-name: ResearchSkill
 allowed-tools: web_search web_scrape browser_navigate browser_snapshot storeBriefEntry appendBriefEntry getBriefEntries searchMemory saveMemory updateMemory getCurrentDateTime
@@ -15,6 +15,17 @@ tools: [web_search, web_scrape, browser_navigate, browser_snapshot, storeBriefEn
 # Internet Research & Information Synthesis Skill
 
 This skill guides the agent in conducting thorough, multi-source online investigations, fact-checking, and structured summarization by delegating to and adopting the **Researcher** staff workflow.
+
+---
+
+## Setup Instructions
+
+### External App & Integration Setup
+
+- **Google Chrome / Chromium (Chrome DevTools Protocol Automation)**:
+  - Install **Google Chrome** or **Chromium** on the host machine. When JavaScript-rendered DOM navigation or snapshots are required, Nadia's `ChromeDevToolsService` automatically connects to `127.0.0.1:9222` or spawns a local headless Chrome instance.
+- **Artifact & Memory Storage**:
+  - Research reports are written to `~/.nadia/session/brain/` and indexed into Nadia's episodic vector store (**⚙️ System Settings ➔ AI & LLM Providers**).
 
 ---
 
@@ -161,13 +172,3 @@ Deliver a polished Markdown report structured as follows:
 2. **Zero Speculation**: Do not invent facts or extrapolate beyond what was retrieved from search and scrape operations.
 3. **No Conversational Filler**: Immediately execute tools without preamble.
 4. **Clean Markdown**: Use standard Markdown headings, lists, tables, and callouts (`> [!NOTE]`, `> [!TIP]`).
-
-## Setup Instructions
-
-### 1. Prerequisites & Tool Configuration
-- **Search Provider**: Ensure search backend connectivity (e.g., SearxNG, DuckDuckGo, Google Custom Search, or Spring AI search tool bindings) is configured in Nadia environment or `application.yml`.
-- **Browser Automation (Optional Fallback)**: For JavaScript-heavy pages requiring DOM snapshots, ensure Playwright / Chromium or Selenium binaries are configured.
-
-### 2. Output Storage
-- **Artifacts Directory**: Research reports saved via `write_to_file` should be placed in `./session/brain/` (e.g. `./session/brain/<topic_report>.md`).
-- **Memory & Briefs**: Requires active PostgreSQL / PGVector connection for long-term fact storage and relational brief tables.

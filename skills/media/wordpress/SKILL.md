@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "2.0"
+  version: "2.1"
   category: media
   display-name: WordPressSkill
 allowed-tools: listMcpServers, listMcpServerTools, callMcpServerTool, listMcpServerResources, readMcpServerResource, getWordpressSitesList, executeSessionCommand
@@ -15,6 +15,26 @@ tools: [listMcpServers, listMcpServerTools, callMcpServerTool, listMcpServerReso
 # WordPress CMS Skill (MCP Primary & REST CLI Fallback)
 
 This skill instructs the agent on how to inspect, draft, publish, and manage WordPress websites using **Model Context Protocol (MCP)** as the primary integration path, with the standalone Python CLI script (`wordpress_api.py`) as a fallback for legacy non-MCP sites.
+
+---
+
+## Setup Instructions
+
+### External App & Integration Setup
+
+1. **Primary Path — WordPress Model Context Protocol (MCP) Server**:
+   - Install and activate an MCP server plugin on your WordPress site (for example, **Easy MCP AI**, which exposes Streamable HTTP at `https://<your-site>/wp-json/easy-mcp-ai/v1/mcp`).
+   - In Nadia, open **⚙️ System Settings ➔ MCP Servers** (stored in `~/.nadia/mcp_config.json`):
+     1. Set **Name** to `wordpress` and **Transport** to `http`.
+     2. Enter your WordPress MCP endpoint URL.
+     3. Authenticate via **OAuth 2.0 PKCE** or add an `Authorization=Bearer ${nadia.prop.wordpress.token}` header (saving `nadia.prop.wordpress.token` in **⚙️ System Settings ➔ Properties**).
+     4. Click **Test & Discover Tools** and **Save** so `mcp_wordpress_*` tools register in Nadia.
+2. **Fallback Path — WordPress REST API & Application Password (`wordpress_api.py`)**:
+   - Install **Python 3.10+** and required HTTP client libraries:
+     ```bash
+     pip install requests urllib3
+     ```
+   - In your WordPress Admin Dashboard, navigate to **Users ➔ Profile ➔ Application Passwords**, enter `Nadia AI`, click **Add New Application Password**, and copy the generated 24-character password for use with `wordpress_api.py` (`~/.nadia/skills/media/wordpress/scripts/wordpress_api.py`).
 
 ---
 

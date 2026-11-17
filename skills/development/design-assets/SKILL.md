@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: development
   display-name: DesignAssetsSkill
 allowed-tools: executeSessionCommand generateDiagram renderMermaidDiagram storeBriefEntry searchMemory saveMemory
@@ -21,9 +21,17 @@ This skill equips `@UI Designer` and `@Software Engineer` with instant access to
 
 ## Setup Instructions
 
-- **Python Runtime**: Python 3.10+ (uses standard library only).
-- **Bundled Script**: `./skills/development/design-assets/scripts/design_assets.py`.
-- **Configuration Properties (`nadia.prop.*`)**: Keyless (`properties: []`).
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **External Design APIs (Keyless)**:
+  - Requires outbound HTTP/HTTPS access to [Iconify API](https://api.iconify.design) (200k+ open-source SVG icons), [Colormind API](http://colormind.io/api/) (AI 5-color palettes), and [DummyImage](https://dummyimage.com). No API keys or accounts are required (`properties: []`).
+- **Bundled Script**: `~/.nadia/skills/development/design-assets/scripts/design_assets.py`.
 
 ---
 
@@ -56,4 +64,3 @@ Create custom-sized placeholder graphic URLs for wireframes and mockups:
 ```bash
 python ~/.nadia/skills/development/design-assets/scripts/design_assets.py placeholder --width 800 --height 450 --bg "1e293b" --fg "f8fafc" --text "Miller Software Solutions LLC"
 ```
-

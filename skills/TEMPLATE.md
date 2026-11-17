@@ -19,10 +19,11 @@ Provide a concise overview of this procedural skill's purpose, domain scope, and
 
 ---
 
-## 1. Prerequisites & Progressive Disclosure Resources (`agentskills.io`)
+## 1. External App & Integration Setup (`agentskills.io`)
 
-- **Required Environment / Tools**: List any required Spring AI `@NadiaTool` bindings or CLI utilities.
-- **Configuration Properties (`nadia.prop.*`)**: Any settings, API keys, credentials, or parameters required by this skill or its tools MUST be stored in `~/.nadia/nadia.properties` with the `nadia.prop.` prefix (e.g., `nadia.prop.<skill>.<setting>`), configured in the **Settings ➔ Properties** view or accessed via `getNadiaProperty`, `setNadiaProperty`, and `listNadiaProperties`.
+- **External Applications, CLIs & Plugins**: Document step-by-step installation and authentication instructions for any required external CLIs (e.g., `gws`, `gh`, `agy`), runtimes (e.g., Python 3.10+ and `pip` packages), MCP servers (**⚙️ System Settings ➔ MCP Servers**), PF4J plugins (**⚙️ System Settings ➔ Plugins**), or LAN hardware devices (including Zero-Trust network approval via **🌐 Network Engineer**).
+- **API Keys & Configuration Properties (`nadia.prop.*`)**: List where to register/generate third-party API keys and specify exact `~/.nadia/nadia.properties` keys (`nadia.prop.<skill>.<setting>`), configured in **⚙️ System Settings ➔ Properties** or via `getNadiaProperty` / `setNadiaProperty` / `listNadiaProperties`.
+- **Required Nadia Tools**: List any required `@NadiaTool` or bridged `mcp_*` bindings.
 - **Bundled Skill Resources (Optional)**:
   - `scripts/`: Deterministic helper scripts (e.g., Python, Bash) executed via `executeSessionCommand`.
   - `references/`: Detailed API schemas or reference documentation loaded on demand.

@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: finance
   display-name: MacroEconomicsSkill
 allowed-tools: executeSessionCommand storeBriefEntry searchMemory saveMemory getNadiaProperty setNadiaProperty
@@ -21,10 +21,22 @@ This skill equips the cognitive agent (`@Stock Broker`, `@Product Manager`, `@Re
 
 ## Setup Instructions
 
-- **Python Runtime**: Python 3.10+ (uses standard library only).
-- **Bundled Script**: `./skills/finance/macro-economics/scripts/macro_economics.py`.
-- **Configuration Properties (`nadia.prop.*`)**:
-  - Requires `nadia.prop.fred.apiKey` in `~/.nadia/nadia.properties` (configure via **Settings ➔ Properties** or `setNadiaProperty`).
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **FRED API Key Setup (`nadia.prop.fred.apiKey`)**:
+  1. Register for a free account at [Federal Reserve Bank of St. Louis (FRED)](https://fredaccount.stlouisfed.org/apikeys) and click **Request API Key**.
+  2. In Nadia, open **⚙️ System Settings ➔ Properties** (or call `setNadiaProperty`) and set:
+     ```properties
+     nadia.prop.fred.apiKey=your_32_character_fred_api_key
+     ```
+  3. US Bureau of Labor Statistics (BLS) public v1 series work without an API key.
+- **Bundled Script**: `~/.nadia/skills/finance/macro-economics/scripts/macro_economics.py`.
 
 ---
 
@@ -64,4 +76,3 @@ python ~/.nadia/skills/finance/macro-economics/scripts/macro_economics.py bls --
 
 1. Present macroeconomic observations in a Markdown table with columns: `Series ID`, `Indicator Title`, `Latest Date`, `Value`, `Units / Frequency`, and `Prior Period Comparison`.
 2. When assisting `@Stock Broker`, correlate yield curve spreads (`T10Y2Y`) and Fed rate shifts (`FEDFUNDS`) with equity sector performance.
-

@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: research
   display-name: BlogWatcherSkill
 allowed-tools: watchBlog
@@ -15,6 +15,19 @@ tools: [watchBlog]
 # BlogWatcher Skill
 
 This skill allows the agent to automatically monitor any blog, discover its feed (RSS/Atom or WordPress API), detect new posts, summarize them in plain English, and store them in the briefs system.
+
+---
+
+## Setup Instructions
+
+### External App & Integration Setup
+
+- **External Applications & Integrations**: No third-party accounts or API keys are required—Nadia's built-in `watchBlog` tool natively discovers and parses public RSS 2.0 and Atom XML feeds over HTTP/HTTPS.
+- **State & Brief Persistence**:
+  - Seen post GUIDs (`blog_watcher_state`) and article summaries are stored automatically in Nadia's episodic vector store and relational brief database.
+  - To monitor blogs on a recurring schedule, add a cron job in **View ➔ 🕒 Scheduled Jobs**.
+
+---
 
 ## State Tracking (RAG Memory)
 
@@ -29,13 +42,3 @@ The tool saves check state facts inside the episodic (RAG) memory under the `blo
    - Logs the summary as a brief entry under the `news` category.
    - Updates RAG memory with the new latest post ID.
 4. Report the summary of the check results to the user.
-
-## Setup Instructions
-
-### 1. Prerequisites & Outbound Connectivity
-- **Network Access**: Nadia requires outbound HTTP/HTTPS access to probe target websites and fetch RSS/Atom XML feeds.
-- **RAG & Brief Storage**: Ensure episodic memory (PGVector or local vector store) and relational brief tables are initialized.
-
-### 2. Feed State Tracking
-- **Automatic State Storage**: The `watchBlog` tool automatically creates and updates `blog_watcher_state` memory records tracking the latest post GUIDs. No manual configuration is required.
-- **Scheduled Checks**: If recurring monitoring is desired, register a cron trigger in Nadia (e.g., every 6 hours).

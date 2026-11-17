@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: productivity
   display-name: TasksSkill
 allowed-tools: executeSessionCommand
@@ -16,10 +16,29 @@ tools: [executeSessionCommand]
 
 This skill instructs the agent on how to manage Google Task Lists (tasklists) and individual Tasks using the `gws` command-line utility.
 
-## Prerequisites
+---
 
-- The `gws` CLI must be installed and authenticated.
-- Always use the `executeSessionCommand` tool to execute `gws` commands.
+## Setup Instructions
+
+### External App & Integration Setup (`gws` Google Workspace CLI)
+
+1. **Install Node.js & Google Workspace CLI (`gws`)**:
+   - Install **Node.js 20+** (`https://nodejs.org/`), then install `@googleworkspace/cli` globally and ensure `gws` is on system `PATH`:
+     ```bash
+     npm install -g @googleworkspace/cli
+     gws --version
+     ```
+2. **Enable Google Tasks API in Google Cloud Console**:
+   - Open [Google Cloud Console — API Library](https://console.cloud.google.com/apis/library), select or create a project, and enable **Google Tasks API** (scope: `https://www.googleapis.com/auth/tasks`).
+   - Under **APIs & Services ➔ Credentials**, create an **OAuth 2.0 Client ID** (*Desktop app*)—or run `gws auth setup` if `gcloud` CLI is installed to provision credentials automatically.
+3. **Authenticate & Verify**:
+   - Sign in from a terminal so OAuth tokens are cached for `executeSessionCommand`:
+     ```bash
+     gws auth login
+     gws tasks tasklists list --format table
+     ```
+
+---
 
 ## 1. Managing Task Lists (Tasklists Operations)
 
@@ -135,22 +154,3 @@ gws tasks tasks move --params '{"tasklist": "<src_list_id>", "task": "<task_id>"
   ```bash
   gws tasks tasks move --params '{"tasklist": "list123", "task": "task456", "destinationTasklist": "list789"}'
   ```
-
-## Setup Instructions
-
-### 1. Prerequisites & CLI Installation
-- **gws CLI**: The Google Workspace CLI (`gws`) must be installed and executable on system `PATH`.
-- **Runtime**: Ensure Node.js or the required executable for `gws` is installed.
-
-### 2. Google Tasks API Configuration
-- **Google Cloud API**: Enable the **Google Tasks API** (`https://www.googleapis.com/auth/tasks`) in Google Cloud Console.
-- **Authentication**:
-  1. Authenticate `gws` with your Google account:
-     ```bash
-     gws auth login
-     ```
-  2. Verify access by listing task lists:
-     ```bash
-     gws tasks tasklists list --format table
-     ```
-- **Due Date Format**: The Google Tasks API strictly requires RFC 3339 formatted date-time strings (e.g., `2026-08-30T12:00:00Z`).

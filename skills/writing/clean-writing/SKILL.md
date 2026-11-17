@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: writing
   display-name: CleanWritingSkill
 tools: []
@@ -14,6 +14,12 @@ tools: []
 # Clean-Writing / Article Shaping Skill
 
 This skill transforms unstructured or messy input—whether a Markdown file, plain text file, HTML file, or raw text pasted directly in chat—into a cohesive, well-structured, and rigorously grounded article through a deliberate, step-by-step shaping session.
+
+---
+
+## Setup Instructions
+
+- **External Applications & Integrations**: None required. Pure editorial and prose-shaping cognitive protocol operating on chat text or local workspace Markdown/HTML/text files.
 
 ---
 
@@ -139,10 +145,3 @@ Weigh format tradeoffs out loud with the user rather than defaulting silently:
 - **Do Not Fabricate Extraneous Facts**: Limit factual claims to what is in the pile or what the user provides in the interactive session.
 - **Do Not Add Unsolicited Boilerplate**: Do not add publishing metadata, unprompted frontmatter, or extraneous platform tags unless requested by the user.
 - **Respect User Edits**: Always re-read the target article file before writing changes to avoid overwriting user edits.
-
-## Setup Instructions
-
-### 1. Prerequisites & Environment
-- **Zero External Dependencies**: The Clean-Writing cognitive workflow is a pure procedural reasoning and article-shaping protocol.
-- **File System Permissions**: Ensure the agent has read access to the input source pile (`.md`, `.txt`, `.html`) and write access to the designated output file location.
-- **GFM Formatting**: Target outputs should follow standard GitHub Flavored Markdown (GFM) conventions.

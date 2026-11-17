@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: geo
   display-name: LocationSkill
 allowed-tools: run_command
@@ -18,16 +18,21 @@ This skill provides the capability to resolve addresses to coordinates (geocodin
 
 These services are implemented as a self-contained, zero-dependency Python script located at `./skills/location/scripts/geocoding.py`.
 
+---
+
 ## Setup Instructions
 
-- **Python Runtime**:
-  - Python 3.10+ installed and on system `PATH`.
-  - Self-contained script using Python standard libraries (optional: `urllib.request` / `json`).
-- **Script Location**:
-  - Ensure `./skills/location/scripts/geocoding.py` (or `./skills/geo/location/scripts/geocoding.py`) exists and is executable.
-- **Network & API Keys**:
-  - Outbound internet access to OpenStreetMap / Nominatim / IP geolocation APIs.
-  - Optional: Set `GEOCODING_API_KEY` or `IPINFO_TOKEN` if using private geocoding providers.
+### External App & Integration Setup
+
+1. **Python 3.10+ Runtime & Optional Plus Codes Package**:
+   - Install Python 3.10+ and ensure `python` is on system `PATH`.
+   - Core forward/reverse geocoding and IP geolocation use Python's standard library only; to enable Google Open Location Code (Plus Codes) encoding/decoding, optionally install:
+     ```bash
+     pip install openlocationcode
+     ```
+2. **Geocoding & IP Geolocation Endpoints**:
+   - Outbound HTTPS access to OpenStreetMap Nominatim (`https://nominatim.openstreetmap.org`) and public IP geolocation endpoints works keyless out-of-the-box.
+- **Bundled Script**: `~/.nadia/skills/geo/location/scripts/geocoding.py`.
 
 ---
 

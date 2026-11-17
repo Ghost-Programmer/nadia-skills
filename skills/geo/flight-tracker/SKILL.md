@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: geo
   display-name: FlightTrackerSkill
 allowed-tools: trackFlight stopTrackingFlight getTrackedFlightStatus recenterOnTrackedFlight centerMap setMapView storeBriefEntry appendBriefEntry getBriefEntries showMap clearMap
@@ -16,6 +16,23 @@ properties: [nadia.prop.opensky.username, nadia.prop.opensky.password, nadia.pro
 # Flight Tracker Skill
 
 Provides specialized procedural guidance for tracking an individual aircraft or satellite on the Nadia World Map, automatically repositioning the viewport when the craft approaches the edge of the visible map, and generating comprehensive flight intelligence briefings in the daily brief.
+
+---
+
+## Setup Instructions
+
+### External App & Integration Setup
+
+1. **World Map Viewer PF4J Plugin (`world-map-viewer`)**:
+   - In Nadia, open **⚙️ System Settings ➔ Plugins**.
+   - Click **Install from URL...** and enter `https://github.com/Ghost-Programmer/nadia-plugins` (or click **Install from Disk...** to select `world-map-viewer-<version>.jar`, or place the JAR directly in `~/.nadia/plugins/`).
+   - Verify `world-map-viewer` shows **STARTED / Enabled**, then open **View ➔ 🗺️ World Map** (or invoke `showMap()`).
+2. **OpenSky Network Credentials (Optional — Aircraft Telemetry)**:
+   - Register at [OpenSky Network](https://opensky-network.org/) and set `nadia.prop.opensky.username` and `nadia.prop.opensky.password` in **⚙️ System Settings ➔ Properties** (`~/.nadia/nadia.properties`) for higher ADS-B polling quotas (anonymous mode is used if unset).
+3. **N2YO API Key (Required for Orbital Satellite Target Tracking)**:
+   - Create a free account at [N2YO.com](https://www.n2yo.com/login/), open **Your Profile** to generate a REST API Key, and set `nadia.prop.n2yo.apiKey` in **⚙️ System Settings ➔ Properties**.
+4. **FAA Aircraft Registry Enrichment**:
+   - Handled automatically by `FaaRegistryService` inside `world-map-viewer`—no external FAA credentials required.
 
 ---
 
@@ -65,4 +82,3 @@ Provides specialized procedural guidance for tracking an individual aircraft or 
 - Aircraft cards and satellite cards in `map.html` feature a **Track with Flight Tracker** action button.
 - When clicked in the UI, the map JavaScript bridge dispatches `trackTarget(name, type)` directly to the `FlightTrackerService`, initiating the single-target tracking loop, centering the viewport, and updating the flight brief synchronously.
 - When tracking is active, the UI button illuminates green as `🎯 Active Flight Tracker` with a click-to-stop option.
-

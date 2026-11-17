@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: system
   display-name: ThreatIntelSkill
 allowed-tools: executeSessionCommand storeBriefEntry searchMemory saveMemory getNadiaProperty setNadiaProperty
@@ -21,12 +21,21 @@ This skill empowers `@Network Engineer` and `@Software Architect` to investigate
 
 ## Setup Instructions
 
-- **Python Runtime**: Python 3.10+ (uses standard library only).
-- **Bundled Script**: `./skills/system/threat-intel/scripts/threat_intel.py`.
-- **Configuration Properties (`nadia.prop.*`)**:
-  - `nadia.prop.abuseipdb.apiKey`: API key for **[AbuseIPDB](https://docs.abuseipdb.com/)**.
-  - `nadia.prop.shodan.apiKey`: API key for **[Shodan](https://developer.shodan.io/)**.
-  - `nadia.prop.virustotal.apiKey`: API key for **[VirusTotal v3](https://docs.virustotal.com/reference/overview)**.
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **Threat Intelligence API Keys (`nadia.prop.*`)**:
+  - **URLhaus Malware Feed** (`abuse.ch`) works keyless out-of-the-box.
+  - Configure one or more of the following in **⚙️ System Settings ➔ Properties** (`~/.nadia/nadia.properties`):
+    1. **AbuseIPDB (`nadia.prop.abuseipdb.apiKey`)**: Create a free account at [AbuseIPDB](https://www.abuseipdb.com/register) and generate a key under *User Account ➔ API*.
+    2. **Shodan (`nadia.prop.shodan.apiKey`)**: Register at [Shodan Account](https://account.shodan.io/) and copy the API key from your Account Overview page.
+    3. **VirusTotal (`nadia.prop.virustotal.apiKey`)**: Sign up at [VirusTotal](https://www.virustotal.com/), click your profile avatar ➔ **API Key**, and copy your v3 API key.
+- **Bundled Script**: `~/.nadia/skills/system/threat-intel/scripts/threat_intel.py`.
 
 ---
 
@@ -54,4 +63,3 @@ python ~/.nadia/skills/system/threat-intel/scripts/threat_intel.py virustotal --
 ```
 
 - Supported `--type` values: `ip_addresses`, `domains`, `files` (pass SHA-256 hash as `--target`).
-

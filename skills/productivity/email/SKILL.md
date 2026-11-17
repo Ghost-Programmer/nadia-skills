@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: productivity
   display-name: EmailSkill
 allowed-tools: executeSessionCommand
@@ -16,10 +16,38 @@ tools: [executeSessionCommand]
 
 This skill instructs the agent on how to list, read, send, reply to, and forward email messages using the `gws` command-line utility.
 
-## Prerequisites
+---
 
-- The `gws` CLI must be installed and authenticated.
-- Always use the `executeSessionCommand` tool to execute `gws` commands.
+## Setup Instructions
+
+### External App & Integration Setup (`gws` Google Workspace CLI)
+
+1. **Install Node.js & Google Workspace CLI (`gws`)**:
+   - Install **Node.js 20+** (`https://nodejs.org/`), then install `@googleworkspace/cli` globally and ensure `gws` is on system `PATH`:
+     ```bash
+     npm install -g @googleworkspace/cli
+     gws --version
+     ```
+2. **Enable Gmail API in Google Cloud Console**:
+   - Open [Google Cloud Console — API Library](https://console.cloud.google.com/apis/library), select or create a project, and enable **Gmail API** (scope: `https://mail.google.com/`).
+   - Under **APIs & Services ➔ Credentials**, create an **OAuth 2.0 Client ID** (*Desktop app*)—or run `gws auth setup` if `gcloud` CLI is installed to provision credentials automatically.
+3. **Authenticate & Verify**:
+   - Sign in from a terminal so OAuth tokens are cached for `executeSessionCommand`:
+     ```bash
+     gws auth login
+     gws gmail +triage --max 5 --format table
+     ```
+4. **Real-Time Gmail IMAP IDLE Push Setup (Optional — Zero-Polling Inbound Triage)**:
+   - In your Google Account ([myaccount.google.com/security](https://myaccount.google.com/security)), enable **2-Step Verification**, then visit [Google App Passwords](https://myaccount.google.com/apppasswords) to generate a 16-character App Password.
+   - In Gmail Settings (*See all settings ➔ Forwarding and POP/IMAP*), ensure **IMAP access** is enabled.
+   - Open **⚙️ System Settings ➔ System Settings** in Nadia (or edit `~/.nadia/nadia.properties`):
+     ```properties
+     gmail.push.enabled=true
+     gmail.username=your.email@gmail.com
+     gmail.password=abcd efgh ijkl mnop
+     ```
+
+---
 
 ## 1. Listing & Triaging Emails (List Operations)
 
@@ -220,32 +248,3 @@ gws gmail users messages modify --params '{"userId": "me", "id": "<message_id>"}
   ```bash
   gws gmail users messages modify --params '{"userId": "me", "id": "18f1a2b3c4d"}' --json '{"addLabelIds": ["STARRED", "LABEL_PROJECT_ID"]}'
   ```
-
-## Setup Instructions
-
-### 1. Prerequisites & CLI Installation
-- **gws CLI**: The Google Workspace CLI utility (`gws`) must be installed and executable on system `PATH`.
-- **Runtime**: Ensure Node.js or the required executable for `gws` is installed.
-
-### 2. Gmail API & IMAP Configuration
-- **Google Cloud API**: Enable the **Gmail API** (`https://mail.google.com/`) in the Google Cloud Console.
-- **Authentication**:
-  1. Authenticate `gws` with your Google account:
-     ```bash
-     gws auth login
-     ```
-  2. Verify triage listing access:
-     ```bash
-     gws gmail +triage --max 5 --format table
-     ```
-- **Optional Direct IMAP/SMTP Push (Nadia IMAP Push Listener)**:
-  - If using direct background IMAP IDLE push intake, configure `application.yml`:
-    ```yaml
-    nadia:
-      mail:
-        imap-host: imap.gmail.com
-        imap-port: 993
-        username: ${GMAIL_USER}
-        password: ${GMAIL_APP_PASSWORD}
-    ```
-  - App Passwords can be generated from **Google Account -> Security -> 2-Step Verification -> App Passwords**.

@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: genealogy
   display-name: RecordMatchingSkill
 allowed-tools: executeSessionCommand searchMemory saveMemory
@@ -18,16 +18,21 @@ This skill instructs the agent on how to compare, evaluate, and correlate histor
 
 The record matching tool is implemented as a Python script located at `~/.nadia/skills/genealogy/record-matching/scripts/record_matcher.py` (or `./skills/genealogy/record-matching/scripts/record_matcher.py`).
 
+---
+
 ## Setup Instructions
 
-- **Python Runtime & Dependencies**:
-  - Python 3.10+ installed and available on system `PATH`.
-  - Built with pure Python standard library modules (`argparse`, `difflib`, `json`, `re`, `collections`, `typing`, `pathlib`). No external pip dependencies required.
-- **Script Location**:
-  - `~/.nadia/skills/genealogy/record-matching/scripts/record_matcher.py`
-  - Workspace relative path: `./skills/genealogy/record-matching/scripts/record_matcher.py` or `../skills/genealogy/record-matching/scripts/record_matcher.py`
-- **Dependencies**:
-  - Inter-operates with `gedcom_tool.py` located under `../gedcom/scripts/`.
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **GEDCOM & Historical Record Inputs**:
+  - Export a `.ged` tree file from **Ancestry**, **MyHeritage**, **Gramps**, or **RootsMagic** into `~/.nadia/session/`, and ensure the companion `gedcom` skill (`~/.nadia/skills/genealogy/gedcom/scripts/gedcom_tool.py`) is installed.
+- **Bundled Script**: `~/.nadia/skills/genealogy/record-matching/scripts/record_matcher.py`.
 
 ---
 

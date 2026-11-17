@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: development
   display-name: ArchitectSkill
 allowed-tools: startProject stopProject listProjects cloneRepository generateDiagram renderMermaidDiagram getWhiteboardDiagramState executeSessionCommand storeBriefEntry getBriefEntries getCurrentDateTime searchMemory saveMemory dockerListContainers dockerContainerLogs dockerStartContainer dockerStopContainer dockerRestartContainer dockerRemoveContainer dockerListImages dockerInspectContainer dockerRunContainer dockerCheckContainers
@@ -16,18 +16,27 @@ tools: [startProject, stopProject, listProjects, cloneRepository, generateDiagra
 
 This skill guides agents in translating technical ideas, system requirements, and feature proposals into formal, fully designed **Architectural Design Documents (ADDs)** stored in `doc/add/` with status `Proposed`, onboarding remote GitHub repositories into isolated project workspaces, and generating rich, interactive Nadia `.whiteboard` architectural diagrams via **Antigravity (`agy`)**, strictly preserving all existing project files and directories.
 
+---
+
 ## Setup Instructions
 
-- **Git & GitHub CLI**:
-  - Git installed and on system `PATH`.
-  - GitHub CLI (`gh`) installed and authenticated (`gh auth status` / `GH_TOKEN`) for private repository creation.
-- **Antigravity CLI**:
-  - Antigravity CLI (`agy`) installed and accessible on `PATH`.
-- **Project Sandbox & Permissions**:
-  - Project sandbox directory `./session/projects/` writable.
-  - Sub-process execution permissions enabled for `executeSessionCommand`.
-- **Whiteboard & Kanban Tools**:
-  - `startProject`, `cloneRepository`, `storeBriefEntry`, and Whiteboard tools registered in `ToolRegistry`.
+### External App & Integration Setup
+
+1. **Git & GitHub CLI (`gh`)**:
+   - Install **Git** (`https://git-scm.com/`) and **GitHub CLI** (`https://cli.github.com/` — `winget install GitHub.cli` / `brew install gh` / `sudo apt install gh`) and ensure both are on `PATH`.
+   - Configure Git author identity and authenticate `gh` with `repo`, `workflow`, and `read:org` scopes:
+     ```bash
+     git config --global user.name "Your Name"
+     git config --global user.email "you@example.com"
+     gh auth login
+     gh auth status
+     ```
+2. **Antigravity CLI (`agy`)**:
+   - Install `agy` on `PATH` and authenticate (`agy auth login`) for automated Architectural Design Document (`doc/add/`) authoring and static codebase analysis.
+3. **Docker Engine / Desktop (Optional)**:
+   - Install and start [Docker Desktop](https://www.docker.com/products/docker-desktop/) (or Linux Docker Engine) when inspecting or orchestrating containerized system components.
+4. **Nadia Sandbox**:
+   - Projects are cloned into `~/.nadia/session/projects/<projectName>/code` with automatic loopback post-commit webhook registration (`127.0.0.1:8085`).
 
 ---
 

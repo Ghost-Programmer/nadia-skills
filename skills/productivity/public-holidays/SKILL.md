@@ -5,7 +5,7 @@ license: Apache-2.0
 compatibility: Compatible with agentskills.io open standard and Nadia Cognitive Agent Platform.
 metadata:
   author: Miller Software Solutions LLC
-  version: "1.0"
+  version: "1.1"
   category: productivity
   display-name: PublicHolidaysSkill
 allowed-tools: executeSessionCommand getCurrentDateTime storeBriefEntry searchMemory saveMemory
@@ -21,9 +21,17 @@ This skill equips `@Personal Assistant` and `@Stock Broker` to query official pu
 
 ## Setup Instructions
 
-- **Python Runtime**: Python 3.10+ (uses standard library only).
-- **Bundled Script**: `./skills/productivity/public-holidays/scripts/public_holidays.py`.
-- **Configuration Properties (`nadia.prop.*`)**: Keyless (`properties: []`).
+### External App & Integration Setup
+
+- **Python 3.10+ Runtime**:
+  - Install Python 3.10+ and ensure `python` is on system `PATH`:
+    - **Windows**: `winget install Python.Python.3.12` (enable *"Add python.exe to PATH"*)
+    - **macOS**: `brew install python`
+    - **Linux**: `sudo apt install python3`
+  - Uses Python's built-in standard library only (no `pip install` packages required).
+- **Nager.Date Public Holidays API (Keyless)**:
+  - Requires outbound HTTPS access to `https://date.nager.at/api/v3`. Works out-of-the-box across 100+ countries with no account or API key (`properties: []`).
+- **Bundled Script**: `~/.nadia/skills/productivity/public-holidays/scripts/public_holidays.py`.
 
 ---
 
@@ -49,4 +57,3 @@ Identify 3-day and 4-day holiday weekends for travel or sprint planning:
 ```bash
 python ~/.nadia/skills/productivity/public-holidays/scripts/public_holidays.py weekends --country "US" --year 2026
 ```
-
